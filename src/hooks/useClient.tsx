@@ -1,8 +1,8 @@
 import {Client, Context as SdkContext, ContextParams} from '@aragon/sdk-client';
 import {
   getLatestNetworkDeployment,
-  SupportedNetworks as SdkSupportedNetworks,
-} from '@aragon/osx-commons-configs';
+  SdkSupportedNetworks,
+} from '../utils/customHelpers';
 
 import {useNetwork} from 'context/network';
 import React, {
@@ -51,6 +51,9 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
   useEffect(() => {
     const translatedNetwork = translateToNetworkishName(network);
 
+    console.log('[CLIENT PROVIDER]::[signer]', {signer});
+    console.log('[CLIENT PROVIDER]::[network]', {translatedNetwork});
+
     // when network not supported by the SDK, don't set network
     if (
       translatedNetwork === 'unsupported' ||
@@ -60,7 +63,7 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
     }
 
     const daoFactoryAddress =
-      getLatestNetworkDeployment(translatedNetwork)?.DAOFactory.address ?? '';
+      getLatestNetworkDeployment(translatedNetwork)?.DAOFactory?.address ?? '';
 
     const contextParams: ContextParams = {
       DAOFactory: daoFactoryAddress,
@@ -71,7 +74,14 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
       graphqlNodes: [{url: SUBGRAPH_API_URL[network]!}],
     };
 
+    console.log('[CLIENT PROVIDER]::[sdk context params]', {contextParams});
+
+    return;
+
+    // HERE THE ERROR IS
     const sdkContext = new SdkContext(contextParams);
+
+    console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
 
     setClient(new Client(sdkContext));
     setContext(sdkContext);

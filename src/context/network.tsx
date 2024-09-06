@@ -27,7 +27,7 @@ type NetworkContext = {
 };
 
 const NetworkContext = createContext<NetworkContext>({
-  network: 'ethereum',
+  network: 'nationsfirst',
   setNetwork: () => {},
   isL2Network: false,
   networkUrlSegment: undefined,
@@ -63,8 +63,8 @@ const determineNetwork = (
     }
   }
 
-  //NETWORK defaults to eth
-  return 'ethereum';
+  //NETWORK defaults to nationsfirst
+  return 'nationsfirst';
 };
 
 /**
@@ -91,6 +91,8 @@ export function NetworkProvider({children}: NetworkProviderProps) {
   const [networkState, setNetworkState] = useState<
     SupportedNetworks | 'unsupported'
   >(determineNetwork(networkUrlSegment, chainId, status));
+
+  console.log('[WAGMI STATUS]', {wagmiStatus, chain});
 
   useEffect(() => {
     /**

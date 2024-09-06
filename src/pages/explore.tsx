@@ -8,7 +8,7 @@ import {DaoExplorer} from 'containers/daoExplorer';
 import Hero from 'containers/hero';
 import {useNetwork} from 'context/network';
 import {translateToNetworkishName} from 'utils/library';
-import {SupportedNetworks} from '@aragon/osx-commons-configs';
+import {SdkSupportedNetworks} from '../utils/customHelpers';
 
 export const Explore: React.FC = () => {
   const {network, setNetwork} = useNetwork();
@@ -17,12 +17,12 @@ export const Explore: React.FC = () => {
     //FIXME: temporarily when network not supported by the SDK, default to ethereum
     const translatedNetwork = translateToNetworkishName(
       network
-    ) as SupportedNetworks;
+    ) as SdkSupportedNetworks;
 
     // when network not supported by the SDK, don't set network
-    if (!Object.values(SupportedNetworks).includes(translatedNetwork)) {
-      console.warn('Unsupported network, defaulting to ethereum');
-      setNetwork('ethereum');
+    if (!Object.values(SdkSupportedNetworks).includes(translatedNetwork)) {
+      console.warn('Unsupported network, defaulting to nationsfirst');
+      setNetwork('nationsfirst');
     }
   }, [network, setNetwork]);
 

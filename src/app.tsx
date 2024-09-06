@@ -45,6 +45,8 @@ export const App: React.FC = () => {
   const {pathname} = useLocation();
   const {methods, status, network, address, provider} = useWallet();
 
+  console.log('[WALLET]', {status, network, address, provider});
+
   useMonitoring();
 
   // Initialize feature flags using the initial URL

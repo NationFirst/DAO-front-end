@@ -7,9 +7,9 @@ import {
 } from './constants';
 import {translateToNetworkishName} from './library';
 import {
-  SupportedNetworks as SdkSupportedNetworks,
+  SdkSupportedNetworks,
   getLatestNetworkDeployment,
-} from '@aragon/osx-commons-configs';
+} from './customHelpers';
 
 class AragonGateway {
   private rpcVersion = '1.0';
@@ -21,14 +21,16 @@ class AragonGateway {
   ): JsonRpcProvider => {
     let network = this.parseNetwork(chainIdOrNetwork);
 
-    // Default provider to ethereum for unsupported networks
+    // Default provider to nationsfirst for unsupported networks
     if (network == null || network === 'unsupported') {
-      network = 'ethereum';
+      network = 'nationsfirst';
     }
 
     const sdkNetwork = translateToNetworkishName(
       network
     ) as SdkSupportedNetworks;
+
+    console.log('TEST123', {network});
 
     const options: Networkish = {
       chainId: CHAIN_METADATA[network].id,
@@ -53,19 +55,19 @@ class AragonGateway {
       return null;
     }
 
-    const {gatewayNetwork} = CHAIN_METADATA[network];
-    const gatewayKey =
-      network === 'zksyncSepolia' || network === 'zksyncMainnet'
-        ? import.meta.env.VITE_GATEWAY_RPC_API_KEY_ALCHEMY
-        : import.meta.env.VITE_GATEWAY_RPC_API_KEY;
-
-    const baseUrl =
-      network === 'zksyncSepolia' || network === 'zksyncMainnet'
-        ? this.baseUrl.replace('app', 'alchemy')
-        : this.baseUrl;
-
-    const rpcUrl = `${baseUrl}/v${this.rpcVersion}/rpc/${gatewayNetwork}/${gatewayKey}`;
-    return rpcUrl;
+    const {publicRpc} = CHAIN_METADATA[network];
+    // const gatewayKey =
+    //   network === 'zksyncSepolia' || network === 'zksyncMainnet'
+    //     ? import.meta.env.VITE_GATEWAY_RPC_API_KEY_ALCHEMY
+    //     : import.meta.env.VITE_GATEWAY_RPC_API_KEY;
+    //
+    // const baseUrl =
+    //   network === 'zksyncSepolia' || network === 'zksyncMainnet'
+    //     ? this.baseUrl.replace('app', 'alchemy')
+    //     : this.baseUrl;
+    //
+    // const rpcUrl = `${baseUrl}/v${this.rpcVersion}/rpc/${gatewayNetwork}/${gatewayKey}`;
+    return publicRpc;
   };
 
   private parseNetwork = (

@@ -75,6 +75,14 @@ export const useWallet = (): IUseWallet => {
     address,
   });
 
+  console.log('[USE WALLET HOOK]', {
+    chainId,
+    signer,
+    address,
+    wagmiStatus,
+    wagmiBalance,
+  });
+
   const {data: ensName} = useEnsName({
     address,
   });

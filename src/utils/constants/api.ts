@@ -21,22 +21,23 @@ export const pinataJSONAPI = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
 export const pinataFileAPI = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
 
 export const SUBGRAPH_API_URL: SubgraphNetworkUrl = {
-  arbitrum:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-arbitrum/version/v1.4.2/api',
+  // arbitrum:
+  //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-arbitrum/version/v1.4.2/api',
+  //
+  // base: 'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-baseMainnet/version/1.4.2/api',
+  //
+  // ethereum:
+  //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-mainnet/version/1.4.3/api',
 
-  base: 'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-baseMainnet/version/1.4.2/api',
-
-  ethereum:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-mainnet/version/1.4.3/api',
-
-  polygon:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-polygon/version/1.4.2/api',
-  sepolia:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-sepolia/version/1.4.2/api',
-  zksyncMainnet:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-zksync-era/version/1.4.3/api',
-  zksyncSepolia:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-zksync-era-sepolia/version/1.4.2/api',
+  // polygon:
+  //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-polygon/version/1.4.2/api',
+  // sepolia:
+  //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-sepolia/version/1.4.2/api',
+  // zksyncMainnet:
+  //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-zksync-era/version/1.4.3/api',
+  // zksyncSepolia:
+  //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-zksync-era-sepolia/version/1.4.2/api',
+  nationsfirst: '',
   unsupported: undefined,
 };
 

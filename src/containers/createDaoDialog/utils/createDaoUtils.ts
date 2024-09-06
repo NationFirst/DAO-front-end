@@ -11,7 +11,7 @@ import {
 } from '@aragon/osx-ethers';
 import {parseUnits} from 'ethers/lib/utils';
 import {PluginInstallItem} from '@aragon/sdk-client-common';
-import {SupportedNetworks as SdkSupportedNetworks} from '@aragon/osx-commons-configs';
+import {SdkSupportedNetworks} from '../../../utils/customHelpers';
 import {
   GaslessPluginVotingSettings,
   GaslessVotingClient,

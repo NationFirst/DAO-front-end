@@ -1,23 +1,23 @@
 import {
   Client,
+  Context as SdkContext,
   DaoMetadata,
   DaoUpdateDecodedParams,
   Erc20TokenDetails,
   MintTokenParams,
   MultisigClient,
   MultisigVotingSettings,
-  Context as SdkContext,
   TokenVotingClient,
   VotingMode,
   WithdrawParams,
 } from '@aragon/sdk-client';
 import {DAO__factory} from '@aragon/osx-ethers';
 import {
+  bytesToHex,
   DaoAction,
   DecodedApplyUpdateParams,
-  Uint8ArraySchema,
-  bytesToHex,
   resolveIpfsCid,
+  Uint8ArraySchema,
 } from '@aragon/sdk-client-common';
 import {getEnsAvatar} from '@wagmi/core';
 import {normalize} from 'viem/ens';
@@ -72,15 +72,15 @@ import {Abi, addABI, decodeMethod} from './abiDecoder';
 import {attachEtherNotice} from './contract';
 import {getTokenInfo} from './tokens';
 import {daoABI} from 'abis/daoABI';
-import {SupportedChainID} from './constants/chains';
+import {SupportedChainID} from './constants';
 import {ipfsService} from 'services/ipfs/ipfsService';
+import {SupportedVersions} from '@aragon/osx-commons-configs';
 import {
-  SupportedNetworks as SdkSupportedNetworks,
-  SupportedVersions,
+  SdkSupportedNetworks,
+  getNetworkNameByAlias,
   getLatestNetworkDeployment,
   getNetworkDeployments,
-  getNetworkNameByAlias,
-} from '@aragon/osx-commons-configs';
+} from './customHelpers';
 
 export function formatUnits(amount: BigNumberish, decimals: number) {
   if (amount.toString().includes('.') || !decimals) {
@@ -572,7 +572,7 @@ export async function decodeOSUpdateActions(
 
   if (translatedNetwork !== 'unsupported') {
     const daoFactoryAddress =
-      getLatestNetworkDeployment(translatedNetwork)?.DAOFactory.address ?? '';
+      getLatestNetworkDeployment(translatedNetwork)?.DAOFactory?.address ?? '';
 
     let daoImplementationAddress: string | undefined;
 
@@ -851,20 +851,22 @@ export const translateToAppNetwork = (
 ): SupportedNetworks => {
   const sdkNetwork = getNetworkNameByAlias(ethersNetwork.name);
   switch (sdkNetwork as SdkSupportedNetworks) {
-    case SdkSupportedNetworks.ARBITRUM:
-      return 'arbitrum';
-    case SdkSupportedNetworks.BASE:
-      return 'base';
-    case SdkSupportedNetworks.MAINNET:
-      return 'ethereum';
-    case SdkSupportedNetworks.POLYGON:
-      return 'polygon';
-    case SdkSupportedNetworks.SEPOLIA:
-      return 'sepolia';
-    case SdkSupportedNetworks.ZKSYNC_SEPOLIA:
-      return 'zksyncSepolia';
-    case SdkSupportedNetworks.ZKSYNC_MAINNET:
-      return 'zksyncMainnet';
+    // case SdkSupportedNetworks.ARBITRUM:
+    //   return 'arbitrum';
+    // case SdkSupportedNetworks.BASE:
+    //   return 'base';
+    // case SdkSupportedNetworks.MAINNET:
+    //   return 'ethereum';
+    // case SdkSupportedNetworks.POLYGON:
+    //   return 'polygon';
+    // case SdkSupportedNetworks.SEPOLIA:
+    //   return 'sepolia';
+    // case SdkSupportedNetworks.ZKSYNC_SEPOLIA:
+    //   return 'zksyncSepolia';
+    // case SdkSupportedNetworks.ZKSYNC_MAINNET:
+    //   return 'zksyncMainnet';
+    case SdkSupportedNetworks.NATIONSFIRST:
+      return 'nationsfirst';
     default:
       return 'unsupported';
   }
@@ -883,31 +885,33 @@ export function translateToNetworkishName(
   }
 
   switch (appNetwork) {
-    case 'arbitrum':
-      return SdkSupportedNetworks.ARBITRUM;
-    case 'arbitrum-goerli':
-      throw new Error('Arbitrum Goerli is not supported by the SDK');
-    case 'base':
-      return SdkSupportedNetworks.BASE;
-    case 'base-goerli':
-      return SdkSupportedNetworks.BASE_GOERLI;
-    case 'ethereum':
-      return SdkSupportedNetworks.MAINNET;
-    case 'goerli':
-      return SdkSupportedNetworks.GOERLI;
-    case 'mumbai':
-      return SdkSupportedNetworks.MUMBAI;
-    case 'polygon':
-      return SdkSupportedNetworks.POLYGON;
-    case 'sepolia':
-      return SdkSupportedNetworks.SEPOLIA;
-    case 'zksyncSepolia':
-      return SdkSupportedNetworks.ZKSYNC_SEPOLIA;
-    case 'zksyncMainnet':
-      return SdkSupportedNetworks.ZKSYNC_MAINNET;
+    // case 'arbitrum':
+    //   return SdkSupportedNetworks.ARBITRUM;
+    // case 'arbitrum-goerli':
+    //   throw new Error('Arbitrum Goerli is not supported by the SDK');
+    // case 'base':
+    //   return SdkSupportedNetworks.BASE;
+    // case 'base-goerli':
+    //   return SdkSupportedNetworks.BASE_GOERLI;
+    // case 'ethereum':
+    //   return SdkSupportedNetworks.MAINNET;
+    // case 'goerli':
+    //   return SdkSupportedNetworks.GOERLI;
+    // case 'mumbai':
+    //   return SdkSupportedNetworks.MUMBAI;
+    // case 'polygon':
+    //   return SdkSupportedNetworks.POLYGON;
+    // case 'sepolia':
+    //   return SdkSupportedNetworks.SEPOLIA;
+    // case 'zksyncSepolia':
+    //   return SdkSupportedNetworks.ZKSYNC_SEPOLIA;
+    // case 'zksyncMainnet':
+    //   return SdkSupportedNetworks.ZKSYNC_MAINNET;
+    case 'nationsfirst':
+      return SdkSupportedNetworks.NATIONSFIRST;
+    default:
+      return 'unsupported';
   }
-
-  return 'unsupported';
 }
 
 /**

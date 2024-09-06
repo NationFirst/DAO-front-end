@@ -39,16 +39,39 @@ import {VocdoniClientProvider} from './hooks/useVocdoniSdk';
 
 import {App} from './app';
 import {aragonGateway} from 'utils/aragonGateway';
-import {HttpTransport} from 'viem';
+import {defineChain, HttpTransport} from 'viem';
+
+const nationsfirst = defineChain({
+  id: 0xa868,
+  name: 'Nationsfirst',
+  testnet: true,
+  nativeCurrency: {
+    name: 'Nationsfirst Coin',
+    symbol: 'NFC',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://api-dev-network.nationsfirst.io/ext/bc/C/rpc'],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: 'Nationsfirst',
+      url: 'https://explorer-dev.nationsfirst.io/',
+    },
+  },
+});
 
 const chains = [
-  mainnet,
-  polygon,
-  base,
-  arbitrum,
-  sepolia,
-  zkSyncSepoliaTestnet,
-  zkSync,
+  nationsfirst,
+  // mainnet,
+  // polygon,
+  // base,
+  // arbitrum,
+  // sepolia,
+  // zkSyncSepoliaTestnet,
+  // zkSync,
 ] as [Chain, ...Chain[]];
 
 const transports = chains.reduce(
@@ -86,9 +109,9 @@ createWeb3Modal({
   themeMode: 'light',
   allWallets: 'SHOW',
   featuredWalletIds: [
-    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '18388be9ac2d02726dbac9777c96efaac06d744b2f6d580fccdd4127a6d01fd1',
+    // 'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+    // '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
+    // '18388be9ac2d02726dbac9777c96efaac06d744b2f6d580fccdd4127a6d01fd1',
   ],
 });
 
@@ -128,6 +151,8 @@ const onLoad = () => {
   }
 };
 onLoad();
+
+console.log('[WAGMI CONFIG]', {wagmiConfig, transports});
 
 const root = createRoot(document.getElementById('root')!);
 

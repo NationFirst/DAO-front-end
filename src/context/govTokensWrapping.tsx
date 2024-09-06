@@ -60,6 +60,12 @@ const GovTokensWrappingProvider: FC<{children: ReactNode}> = ({children}) => {
   const {client} = useClient();
   const pluginClient = usePluginClient(pluginType as PluginTypes);
 
+  console.log('[GOV TOKEN WRAPPER PROVIDER]', {
+    client,
+    pluginType,
+    pluginClient,
+  });
+
   /* Underlying token */
   const {data: daoTokenData, isLoading: isTokenDataLoading} = useDaoToken(
     daoDetails?.plugins?.[0]?.instanceAddress || ''
