@@ -42,7 +42,7 @@ const MobileNavMenu = (props: MobileNavMenuProps) => {
         <div className="space-y-6 px-4 py-6">
           <NavLinks onItemClick={close} />
 
-          <Button
+          {/* <Button
             className="w-full"
             size="lg"
             variant="tertiary"
@@ -50,7 +50,7 @@ const MobileNavMenu = (props: MobileNavMenuProps) => {
             onClick={props.onFeedbackClick}
           >
             {t('navButtons.giveFeedback')}
-          </Button>
+          </Button> */}
         </div>
       </div>
     </BottomSheet>

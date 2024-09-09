@@ -189,7 +189,7 @@ const ExploreWrapper: React.FC = () => (
       <ExploreNav />
       <Outlet />
     </div>
-    <ExploreFooter />
+    {/* <ExploreFooter /> */}
   </>
 );
 
@@ -203,7 +203,7 @@ const DaoWrapper: React.FC = () => {
     <GovTokensWrappingProvider>
       <UpdateBanner />
       <Navbar />
-      <div className="min-h-screen">
+      <div className="min-h-screen mb-16">
         <GridLayout>
           <Outlet />
           <TransferMenu />
@@ -214,7 +214,7 @@ const DaoWrapper: React.FC = () => {
           {isOpen && <TransactionDetail />}
         </GridLayout>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </GovTokensWrappingProvider>
   );
 };

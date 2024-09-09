@@ -101,13 +101,13 @@ const SetupCommunityForm: React.FC = () => {
                 {...(value === 'token' ? {type: 'active'} : {})}
               />
 
-              <CheckboxListItem
+              {/* <CheckboxListItem
                 label={t('createDAO.step3.multisigMembership')}
                 helptext={t('createDAO.step3.multisigMembershipSubtitle')}
                 onClick={() => handleCheckBoxSelected('multisig', onChange)}
                 multiSelect={false}
                 {...(value === 'multisig' ? {type: 'active'} : {})}
-              />
+              /> */}
             </>
           )}
         />

@@ -40,14 +40,14 @@ const ExploreNav: React.FC = () => {
       <Menu>
         <GridLayout>
           <LeftContent>
-            <LogoContainer
+            {/* <LogoContainer
               src={Logo}
               onClick={() => window.open(path, '_blank')}
-            />
+            /> */}
           </LeftContent>
           <RightContent>
             <ActionsWrapper>
-              {isDesktop ? (
+              {/* {isDesktop ? (
                 <Button
                   size="lg"
                   variant="tertiary"
@@ -63,7 +63,7 @@ const ExploreNav: React.FC = () => {
                   iconLeft={IconType.FEEDBACK}
                   onClick={handleFeedbackButtonClick}
                 />
-              )}
+              )} */}
               <ButtonWallet
                 src={ensAvatarUrl || address}
                 onClick={handleWalletButtonClick}
