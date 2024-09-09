@@ -8,4 +8,16 @@
   --ods-dialog-alert-content-z-index: 30;
 
   --ods-dropdown-container-content-z-index: 40;
+
+  --ods-color-primary-50: #c8f9d9 !important;
+  --ods-color-primary-100: #94efb5 !important;
+  --ods-color-primary-200: #40e17d !important;
+  --ods-color-primary-300: #1d8745 !important;
+  --ods-color-primary-400: #0f4925 !important;
+  --ods-color-primary-500: #0a3c1d !important;
+  --ods-color-primary-600: #092f18 !important;
+  --ods-color-primary-700: #0a2515 !important;
+  --ods-color-primary-800: #071b0f !important;
+  --ods-color-primary-900: #021108 !important;
+
 }
