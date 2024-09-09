@@ -104,16 +104,35 @@ export const wagmiConfig = createConfig({
 createWeb3Modal({
   wagmiConfig,
   projectId: walletConnectProjectID,
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
-  enableOnramp: true, // Optional
+  enableAnalytics: false, // Optional - defaults to your Cloud configuration
+  enableOnramp: false, // Optional
+  allowUnsupportedChain: false,
   themeMode: 'light',
-  allWallets: 'SHOW',
-  featuredWalletIds: [
-    // 'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-    // '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    // '18388be9ac2d02726dbac9777c96efaac06d744b2f6d580fccdd4127a6d01fd1',
+  allWallets: 'HIDE',
+  includeWalletIds: [
+    'nationsfirstwallet',
+    'fb6ed96272ec885008e896c6146002048d8dc88c0b7e0e6fa42bcadf052a1569',// Enkrypt
+  ],
+  customWallets: [
+    {
+      id: 'nationsfirstwallet',
+      name: 'Nationsfirst Wallet',
+      homepage: 'https://nationsfirst.webflow.io/', // Optional
+      image_url:
+        'https://cdn.prod.website-files.com/65e9fd8b684fcbb959a3dffc/66a657a5da21c45e2c5efeb7_Untitled%20design%20(6).png', // Optional
+      // mobile_link: 'mobile_link', // Optional - Deeplink or universal
+      // desktop_link: 'desktop_link', // Optional - Deeplink
+
+      webapp_link: 'https://google.com', // Optional
+    },
+  ],
+  excludeWalletIds: [
+    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96', // Metamask
+    'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa', // coinbase
+    'e7c4d26541a7fd84dbdfa9922d3ad21e936e13a7a0e44385d44f006139e44d3b', //walletconnect
   ],
 });
+
 
 // Add toJSON method to BigInt interface to properly serialize bigint types
 // on react-query query keys
