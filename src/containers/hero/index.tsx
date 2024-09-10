@@ -16,9 +16,9 @@ function Hero() {
             <Title>{t('explore.hero.title')}</Title>
             <Subtitle>{t('explore.hero.subtitle1')}</Subtitle>
           </ContentWrapper>
-          <ImageWrapper>
+          {/* <ImageWrapper>
             <StyledImage src={Logo} />
-          </ImageWrapper>
+          </ImageWrapper> */}
           <GradientContainer>
             <GradientWrapper>
               <GradientGreen src={Green} />
