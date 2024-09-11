@@ -719,7 +719,7 @@
         "verificationAlertWarningTitle": "Requires wrapping",
         "verificationAlertCriticalTitle": "Not supported token",
         "verificationAlertWarningDescription": "This token must be wrapped by its holders to participate in your DAO's governance.\n\nToken holders can wrap their tokens within the Aragon App at any time to receive equivalent governance tokens (1 {{tokenSymbol}} = 1 {{gTokenSymbol}}). These can then be used to vote on proposals in your DAO. They can unwrap at any time to receive their original tokens.",
-        "verificationAlertCriticalDescription": "This token is not supported in the Aragon App. Try a different token or specify that you don't have a governance token yet.",
+        "verificationAlertCriticalDescription": "This token is not supported in the DAO App. Try a different token or specify that you don't have a governance token yet.",
         "descriptionLinkURL": "https://aragon.org/how-to/import-existing-tokens",
         "verificationLabelBlockchain": "Blockchain",
         "verificationAlertCriticalBlockchainTitle": "Incorrect blockchain",

@@ -41,7 +41,7 @@ const DefineMetadata: React.FC<DefineMetadataProps> = ({
   const {control, setError, clearErrors, getValues} = useFormContext();
   const {api: provider} = useProviders();
 
-  const supportsENS = true;
+  const supportsENS = ENS_SUPPORTED_NETWORKS.includes(network);
 
   const handleImageError = useCallback(
     (error: {code: string; message: string}) => {
