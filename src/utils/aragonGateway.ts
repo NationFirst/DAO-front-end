@@ -7,9 +7,9 @@ import {
 } from './constants';
 import {translateToNetworkishName} from './library';
 import {
-  SdkSupportedNetworks,
+  SupportedNetworks as SdkSupportedNetworks,
   getLatestNetworkDeployment,
-} from './customHelpers';
+} from '@aragon/osx-commons-configs';
 
 class AragonGateway {
   private rpcVersion = '1.0';

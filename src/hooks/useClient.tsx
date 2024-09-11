@@ -1,8 +1,8 @@
 import {Client, Context as SdkContext, ContextParams} from '@aragon/sdk-client';
 import {
+  SupportedNetworks as SdkSupportedNetworks,
   getLatestNetworkDeployment,
-  SdkSupportedNetworks,
-} from '../utils/customHelpers';
+} from '@aragon/osx-commons-configs';
 
 import {useNetwork} from 'context/network';
 import React, {
@@ -76,14 +76,13 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
 
     console.log('[CLIENT PROVIDER]::[sdk context params]', {contextParams});
 
-    return;
-
-    // HERE THE ERROR IS
     const sdkContext = new SdkContext(contextParams);
+    const sdkClient = new Client(sdkContext);
 
     console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
+    console.log('[CLIENT PROVIDER]::[sdk client]', {sdkClient});
 
-    setClient(new Client(sdkContext));
+    setClient(sdkClient);
     setContext(sdkContext);
   }, [network, signer]);
 

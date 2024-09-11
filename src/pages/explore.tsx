@@ -8,7 +8,7 @@ import {DaoExplorer} from 'containers/daoExplorer';
 import Hero from 'containers/hero';
 import {useNetwork} from 'context/network';
 import {translateToNetworkishName} from 'utils/library';
-import {SdkSupportedNetworks} from '../utils/customHelpers';
+import {SupportedNetworks as SdkSupportedNetworks} from '@aragon/osx-commons-configs';
 
 export const Explore: React.FC = () => {
   const {network, setNetwork} = useNetwork();

@@ -22,7 +22,10 @@ import {
 } from '@aragon/sdk-client';
 import {ProposalMetadata, ProposalStatus} from '@aragon/sdk-client-common';
 import {SupportedVersions} from '@aragon/osx-commons-configs';
-import {SdkSupportedNetworks, getNetworkDeployments} from './customHelpers';
+import {
+  SupportedNetworks as SdkSupportedNetworks,
+  getNetworkDeployments,
+} from '@aragon/osx-commons-configs';
 import {
   GaslessPluginVotingSettings,
   GaslessVotingProposal,

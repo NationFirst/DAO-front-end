@@ -76,11 +76,11 @@ import {SupportedChainID} from './constants';
 import {ipfsService} from 'services/ipfs/ipfsService';
 import {SupportedVersions} from '@aragon/osx-commons-configs';
 import {
-  SdkSupportedNetworks,
+  SupportedNetworks as SdkSupportedNetworks,
   getNetworkNameByAlias,
   getLatestNetworkDeployment,
   getNetworkDeployments,
-} from './customHelpers';
+} from '@aragon/osx-commons-configs';
 
 export function formatUnits(amount: BigNumberish, decimals: number) {
   if (amount.toString().includes('.') || !decimals) {
