@@ -68,7 +68,7 @@
     "source-map-explorer": "^2.5.3",
     "styled-components": "^6.0.8",
     "tiptap-markdown": "^0.8.4",
-    "use-react-router-breadcrumbs": "^3.0.1",
+    "use-react-router-breadcrumbs": "^4.0.1",
     "viem": "^2.9.9",
     "wagmi": "^2.5.18"
   },
