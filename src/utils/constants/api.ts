@@ -1,4 +1,5 @@
 import {SupportedNetworks} from './chains';
+import Logo from '../../assets/images/logoNF.png';
 
 type SubgraphNetworkUrl = Record<SupportedNetworks, string | undefined>;
 
@@ -6,12 +7,10 @@ export const AppVersion =
   import.meta.env.VITE_REACT_APP_DEPLOY_VERSION ?? '0.1.0';
 
 export const AppMetadata = {
-  name: 'Aragon DAO',
-  description: 'Aragon DAO',
-  url: 'https://app.aragon.org/',
-  icons: [
-    'https://assets.website-files.com/5e997428d0f2eb13a90aec8c/635283b535e03c60d5aafe64_logo_aragon_isotype.png',
-  ],
+  name: 'Nationsfirst DAO',
+  description: 'Nationsfirst DAO',
+  url: 'https://dao-dev.nationsfirst.io/',
+  icons: [Logo],
 };
 
 export const FEEDBACK_FORM =
