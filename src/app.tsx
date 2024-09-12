@@ -201,7 +201,7 @@ const DaoWrapper: React.FC = () => {
 
   return (
     <GovTokensWrappingProvider>
-      <UpdateBanner />
+      {/* <UpdateBanner /> */}
       <Navbar />
       <div className="min-h-screen mb-16">
         <GridLayout>
