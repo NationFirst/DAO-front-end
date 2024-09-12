@@ -83,6 +83,9 @@ export const wagmiConfig = createConfig({
 // 3. Create modal
 createWeb3Modal({
   wagmiConfig,
+  chainImages: {
+    0xa868: LogoNF,
+  },
   metadata: AppMetadata,
   projectId: '123',
   enableAnalytics: false, // Optional - defaults to your Cloud configuration
