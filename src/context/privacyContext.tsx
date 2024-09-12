@@ -200,7 +200,7 @@ const PrivacyContextProvider: React.FC<{children: ReactNode}> = ({
   return (
     <PrivacyContext.Provider value={value}>
       {children}
-      {/* <PrivacyPolicy
+      <PrivacyPolicy
         showPolicy={showPolicyMenu}
         onAcceptAll={acceptAll}
         onRejectAll={rejectAll}
@@ -216,7 +216,7 @@ const PrivacyContextProvider: React.FC<{children: ReactNode}> = ({
         onClose={handleCloseCookiesSettings}
         onAcceptClick={setPrivacyPolicy}
         onRejectAllClick={rejectAll}
-      /> */}
+      />
     </PrivacyContext.Provider>
   );
 };
