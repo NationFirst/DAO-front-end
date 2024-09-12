@@ -159,6 +159,7 @@ export const useSendTransaction = (
   }, [txHash, isSuccess]);
 
   const sendTransaction = useCallback(() => {
+    console.log('sendTransaction');
     if (transaction == null) {
       return;
     }
