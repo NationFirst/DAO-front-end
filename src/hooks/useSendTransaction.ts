@@ -105,6 +105,14 @@ export const useSendTransaction = (
     query: {enabled: txHash != null},
   });
 
+  console.log('txHash', txHash);
+  console.log('txReceipt', txReceipt);
+  console.log('waitTransactionError', waitTransactionError);
+  console.log('isSuccess', isSuccess);
+
+  console.log('isEstimateGasError', isEstimateGasError);
+  console.log('estimateGasError', estimateGasError);
+
   // Trigger onSuccess callback on transaction success
   useEffect(() => {
     if (isSuccess && txReceipt) {
