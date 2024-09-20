@@ -69,7 +69,7 @@ export const VersionInfoCard: React.FC<{
       }
     >
       <SettingsCard title={t('setting.versionInfo.title')}>
-        <DescriptionPair>
+        {/* <DescriptionPair>
           <Term>{t('setting.versionInfo.labelApp')}</Term>
           <FlexibleDefinition className="truncate xl:max-w-60">
             <Link
@@ -79,8 +79,8 @@ export const VersionInfoCard: React.FC<{
               href={'https://app.aragon.org'}
             />
           </FlexibleDefinition>
-        </DescriptionPair>
-        <DescriptionPair>
+        </DescriptionPair> */}
+        {/* <DescriptionPair>
           <Term>{t('setting.versionInfo.labelOs')}</Term>
           <FlexibleDefinition className="truncate xl:max-w-60">
             <Link
@@ -93,7 +93,7 @@ export const VersionInfoCard: React.FC<{
               iconRight={IconType.LINK_EXTERNAL}
             />
           </FlexibleDefinition>
-        </DescriptionPair>
+        </DescriptionPair> */}
 
         <DescriptionPair className="border-none">
           <Term>{t('setting.versionInfo.labelGovernance')}</Term>

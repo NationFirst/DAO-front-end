@@ -36,8 +36,7 @@ export const SUBGRAPH_API_URL: SubgraphNetworkUrl = {
   //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-zksync-era/version/1.4.3/api',
   // zksyncSepolia:
   //   'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-zksync-era-sepolia/version/1.4.2/api',
-  nationsfirst:
-    'https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-mainnet/version/1.4.3/api',
+  nationsfirst: 'http://localhost:8000/subgraphs/name/dao-nationsfirst',
   unsupported: undefined,
 };
 
