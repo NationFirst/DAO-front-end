@@ -75,6 +75,8 @@ export const Dashboard: React.FC = () => {
     isFetching: followedDaosFetching,
   } = useFollowedDaosQuery();
 
+  console.log('[FOLLOWED DAOS]', {followedDaos});
+
   const enableFollowing =
     !followedDaosFetching &&
     !addFollowedDaoMutation.isPending &&
@@ -128,7 +130,7 @@ export const Dashboard: React.FC = () => {
     );
     // Temporary restriction to Eth mainnet only as spamming was happening on Polygon
     //const networkInfo = CHAIN_METADATA[network];
-    if (network === 'ethereum') {
+    if (network === 'nationsfirst') {
       // (!networkInfo.isTestnet) {
       open('poapClaim');
     }
@@ -314,6 +316,8 @@ export const Dashboard: React.FC = () => {
           label: link.name,
           href: link.url,
         })) ?? [];
+
+    console.log('[LIVE DAO]', {liveDao});
 
     return (
       <>

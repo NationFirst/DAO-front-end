@@ -62,6 +62,8 @@ async function fetchDaoDetails(
     }
   );
 
+  console.log('[FETCH DAO DETAILS]', {dao});
+
   try {
     const metadata = await ipfsService.getData(dao.metadata);
     daoDetails = toDaoDetails(dao, metadata);

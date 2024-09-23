@@ -42,6 +42,9 @@ export const SUBGRAPH_API_URL: SubgraphNetworkUrl = {
   unsupported: undefined,
 };
 
+export const SUBGRAPH_TOKEN_VOTING_URL: string =
+  'https://subgraph-dev.nationsfirst.io/subgraphs/name/tokenvotingplugin-nationsfirst';
+
 export const walletConnectProjectID = import.meta.env
   .VITE_WALLET_CONNECT_PROJECT_ID as string;
 

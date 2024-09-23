@@ -1,20 +1,24 @@
 import {Client, Context as SdkContext, ContextParams} from '@aragon/sdk-client';
 import {
-  SupportedNetworks as SdkSupportedNetworks,
   getLatestNetworkDeployment,
+  SupportedNetworks as SdkSupportedNetworks,
 } from '@aragon/osx-commons-configs';
 
 import {useNetwork} from 'context/network';
 import React, {
-  ReactNode,
   createContext,
+  ReactNode,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react';
 
-import {SUBGRAPH_API_URL, SupportedNetworks} from 'utils/constants';
+import {
+  SUBGRAPH_API_URL,
+  SUBGRAPH_TOKEN_VOTING_URL,
+  SupportedNetworks,
+} from 'utils/constants';
 import {translateToAppNetwork, translateToNetworkishName} from 'utils/library';
 import {useWallet} from './useWallet';
 import {aragonGateway} from 'utils/aragonGateway';
@@ -23,6 +27,8 @@ interface ClientContext {
   client?: Client;
   context?: SdkContext;
   network?: SupportedNetworks;
+  pluginContext?: SdkContext;
+  pluginClient?: Client;
 }
 
 const UseClientContext = createContext<ClientContext>({} as ClientContext);
@@ -47,6 +53,7 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
   const [client, setClient] = useState<Client>();
   const {network} = useNetwork();
   const [context, setContext] = useState<SdkContext>();
+  const [pluginContext, setPluginContext] = useState<SdkContext>();
 
   useEffect(() => {
     const translatedNetwork = translateToNetworkishName(network);
@@ -74,9 +81,15 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
       graphqlNodes: [{url: SUBGRAPH_API_URL[network]!}],
     };
 
+    const pluginContextParams: ContextParams = {
+      ...contextParams,
+      graphqlNodes: [{url: SUBGRAPH_TOKEN_VOTING_URL}],
+    };
+
     console.log('[CLIENT PROVIDER]::[sdk context params]', {contextParams});
 
     const sdkContext = new SdkContext(contextParams);
+    const sdkPluginContext = new SdkContext(pluginContextParams);
     const sdkClient = new Client(sdkContext);
 
     console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
@@ -84,12 +97,14 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
 
     setClient(sdkClient);
     setContext(sdkContext);
+    setPluginContext(sdkPluginContext);
   }, [network, signer]);
 
   const value: ClientContext = useMemo(
     () => ({
       client,
       context,
+      pluginContext,
     }),
     [client, context]
   );
