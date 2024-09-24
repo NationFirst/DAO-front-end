@@ -27,6 +27,7 @@ import {
 import {
   CHAIN_METADATA,
   SUBGRAPH_API_URL,
+  SUBGRAPH_TOKEN_VOTING_URL,
   SupportedChainID,
   SupportedNetworks,
 } from 'utils/constants';
@@ -85,7 +86,7 @@ async function getProposalsList(
     const {tokenVotingProposals} = await request<{
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tokenVotingProposals: any;
-    }>(SUBGRAPH_API_URL[network]!, QueryTokenVotingProposals, {
+    }>(SUBGRAPH_TOKEN_VOTING_URL, QueryTokenVotingProposals, {
       where: {
         dao: daoAddressOrEns,
         ...statusFilter,
@@ -182,6 +183,8 @@ async function fetchProposals(
 ): Promise<FetchProposalsResponseTypes> {
   invariant(!!client, 'fetchProposalsAsync: client is not defined');
 
+  console.log('[FETCH PROPOSALS]');
+
   // eslint-disable-next-line prefer-const
   let {daoAddressOrEns, ...restParams} = params;
 
@@ -229,6 +232,8 @@ export const useProposals = (
 
   const defaultSelect = (data: InfiniteData<FetchProposalsResponseTypes>) =>
     transformInfiniteProposals(chainId, data);
+
+  console.log('[USE PROPOSALS]');
 
   return useInfiniteQuery({
     ...options,

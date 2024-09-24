@@ -51,6 +51,7 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
 }) => {
   const {signer} = useWallet();
   const [client, setClient] = useState<Client>();
+  const [pluginClient, setPluginClient] = useState<Client>();
   const {network} = useNetwork();
   const [context, setContext] = useState<SdkContext>();
   const [pluginContext, setPluginContext] = useState<SdkContext>();
@@ -89,8 +90,9 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
     console.log('[CLIENT PROVIDER]::[sdk context params]', {contextParams});
 
     const sdkContext = new SdkContext(contextParams);
-    const sdkPluginContext = new SdkContext(pluginContextParams);
     const sdkClient = new Client(sdkContext);
+    const sdkPluginContext = new SdkContext(pluginContextParams);
+    const sdkPluginClient = new Client(sdkPluginContext);
 
     console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
     console.log('[CLIENT PROVIDER]::[sdk client]', {sdkClient});
@@ -98,6 +100,7 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
     setClient(sdkClient);
     setContext(sdkContext);
     setPluginContext(sdkPluginContext);
+    setPluginClient(sdkPluginClient);
   }, [network, signer]);
 
   const value: ClientContext = useMemo(
@@ -105,6 +108,7 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
       client,
       context,
       pluginContext,
+      pluginClient,
     }),
     [client, context]
   );
