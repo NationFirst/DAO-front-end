@@ -787,6 +787,7 @@ export async function resolveDaoAvatarIpfsCid(
     } else if (/^ipfs/.test(avatar) && client) {
       try {
         const cid = resolveIpfsCid(avatar);
+        console.log('IPFS resolveDaoAvatarIpfsCid', {avatar, cid});
         return `${import.meta.env.VITE_PINATA_GATEWAY}/${cid}`;
       } catch (err) {
         console.warn('Error resolving DAO avatar IPFS Cid', err);

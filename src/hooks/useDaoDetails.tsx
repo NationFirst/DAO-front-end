@@ -46,6 +46,9 @@ async function fetchDaoDetails(
   const address = isEnsDomain(daoAddressOrEns)
     ? await provider.resolveName(daoAddressOrEns as string)
     : daoAddressOrEns;
+  
+  console.log('address', address);
+  console.log('daoAddressOrEns', daoAddressOrEns);
 
   let daoDetails;
 
@@ -72,6 +75,7 @@ async function fetchDaoDetails(
   }
 
   const avatar = daoDetails?.metadata.avatar;
+    console.log('IPDS fetchDaoDetails', {avatar});
   if (avatar)
     if (typeof avatar !== 'string') {
       daoDetails.metadata.avatar = URL.createObjectURL(avatar);

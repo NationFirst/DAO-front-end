@@ -18,12 +18,12 @@ const PoapClaimModal: React.FC = () => {
     >
       <Container>
         <BodyWrapper>
-          <PoapImgContainer>
+          {/* <PoapImgContainer>
             <PoapImg
               src="https://assets.poap.xyz/aragon-dao-builder-2023-logo-1678314360270.png"
               alt=""
             />
-          </PoapImgContainer>
+          </PoapImgContainer> */}
 
           <Button
             variant="primary"

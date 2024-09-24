@@ -145,7 +145,7 @@ export const App: React.FC = () => {
       </Suspense>
       <DaoSelectMenu />
       <WalletMenu />
-      <PoapClaimModal />
+      {/* <PoapClaimModal /> */}
       <NetworkErrorMenu />
     </>
   );

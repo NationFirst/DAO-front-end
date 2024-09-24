@@ -68,7 +68,7 @@ export const useSendTransaction = (
     error: estimateGasError,
   } = useEstimateGas({ ...transaction, value: parseEther('0.01') });
 
-  console.log('useEstimateGas', transaction, estimateGasError);
+  // console.log('useEstimateGas', transaction, estimateGasError);
 
   const handleSendTransactionError = useCallback(
     (step: SendTransactionStep) => (error: unknown) => {
@@ -107,13 +107,13 @@ export const useSendTransaction = (
     query: {enabled: txHash != null},
   });
 
-  console.log('txHash', txHash);
-  console.log('txReceipt', txReceipt);
-  console.log('waitTransactionError', waitTransactionError);
-  console.log('isSuccess', isSuccess);
+  // console.log('txHash', txHash);
+  // console.log('txReceipt', txReceipt);
+  // console.log('waitTransactionError', waitTransactionError);
+  // console.log('isSuccess', isSuccess);
 
-  console.log('isEstimateGasError', isEstimateGasError);
-  console.log('estimateGasError', estimateGasError);
+  // console.log('isEstimateGasError', isEstimateGasError);
+  // console.log('estimateGasError', estimateGasError);
 
   // Trigger onSuccess callback on transaction success
   useEffect(() => {
@@ -169,7 +169,7 @@ export const useSendTransaction = (
   }, [txHash, isSuccess]);
 
   const sendTransaction = useCallback(() => {
-    console.log('sendTransaction');
+    // console.log('sendTransaction');
     if (transaction == null) {
       return;
     }

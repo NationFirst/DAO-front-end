@@ -11,7 +11,7 @@ class IpfsService {
 
   getData = async (cid: string) => {
     const resolvedCid = cid.startsWith('ipfs') ? resolveIpfsCid(cid) : cid;
-
+    console.log('IPFS getData', {cid, resolvedCid});
     const response = await fetch(`${this.gateway}/${resolvedCid}`, {
       method: 'GET',
     });
@@ -24,6 +24,13 @@ class IpfsService {
   pinData = async (data: IPinDataProps) => {
     const {processedData, type} = await this.processData(data);
     let res;
+
+     console.log('IPFS pinData', {
+       data,
+       processedData,
+       type,
+       CIDVersion: this.CIDVersion,
+     });
 
     if (type === DataType.File) {
       res = await fetch(pinataFileAPI, {

@@ -30,7 +30,9 @@ export function useDaoToken(
       try {
         setIsLoading(true);
 
+        console.log('address', address);
         const response = await client?.methods.getToken(address);
+        console.log('response', response);
 
         if (response) {
           setData(response as Erc20TokenDetails | Erc20WrapperTokenDetails);
@@ -47,6 +49,6 @@ export function useDaoToken(
       getTokenMetadata(pluginAddress);
     }
   }, [pluginAddress, client]);
-
+  
   return {data, error, isLoading};
 }
