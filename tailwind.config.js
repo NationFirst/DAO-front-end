@@ -2,6 +2,22 @@
 module.exports = {
   presets: [require('@aragon/ods/tailwind.config')],
   content: ['./src/**/*.{tsx,html}', './node_modules/@aragon/ods/**/*.js'],
+  theme: {
+    extend: {
+      colors: {
+        current: 'currentColor',
+        primary: {
+          50: '#E1EFE6',
+          400: '#0F4925',
+          500: '#133A22',
+        },
+        accent: '#AC802A',
+      },
+      fontWeight: {
+        normal: 400,
+      },
+    },
+  },
   plugins: [
     require('tailwindcss-fluid-type')({
       settings: {

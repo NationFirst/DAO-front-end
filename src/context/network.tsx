@@ -92,8 +92,6 @@ export function NetworkProvider({children}: NetworkProviderProps) {
     SupportedNetworks | 'unsupported'
   >(determineNetwork(networkUrlSegment, chainId, status));
 
-  console.log('[WAGMI STATUS]', {wagmiStatus, chain});
-
   useEffect(() => {
     /**
      * isCreatePage will avoid side effects of redundant re-renders to
