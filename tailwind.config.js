@@ -12,6 +12,7 @@ module.exports = {
           500: '#133A22',
         },
         accent: '#AC802A',
+        white: '#FFFFFF',
       },
       fontWeight: {
         normal: 400,

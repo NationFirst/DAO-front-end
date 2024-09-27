@@ -78,15 +78,15 @@ const Menu = styled.nav.attrs({
 })``;
 
 const Content = styled.div.attrs({
-  className: 'col-span-full flex grid grid-cols-3',
+  className: 'col-span-full flex grid grid-cols-[auto_auto] lg:grid-cols-3',
 })``;
 
 const LeftContent = styled.div.attrs({
-  className: 'flex items-center gap-9',
+  className: 'flex items-center gap-9 max-lg:hidden',
 })``;
 
 const LogoContainer = styled.img.attrs({
-  className: 'h-20 cursor-pointer mx-auto min-w-max',
+  className: 'w-48 min-w-48 cursor-pointer lg:mx-auto',
 })``;
 
 const RightContent = styled.div.attrs({
