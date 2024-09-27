@@ -86,7 +86,7 @@ const LeftContent = styled.div.attrs({
 })``;
 
 const LogoContainer = styled.img.attrs({
-  className: 'h-20 cursor-pointer mx-auto min-w-fit',
+  className: 'h-20 cursor-pointer mx-auto min-w-max',
 })``;
 
 const RightContent = styled.div.attrs({
