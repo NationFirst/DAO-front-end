@@ -16,10 +16,7 @@ export const QueryTokenVotingProposals = gql`
       orderBy: $sortBy
     ) {
       id
-      dao {
-        id
-        subdomain
-      }
+      daoAddress
       creator
       metadata
       yes

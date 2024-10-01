@@ -88,7 +88,7 @@ async function getProposalsList(
       tokenVotingProposals: any;
     }>(SUBGRAPH_TOKEN_VOTING_URL, QueryTokenVotingProposals, {
       where: {
-        dao: daoAddressOrEns,
+        daoAddress: daoAddressOrEns,
         ...statusFilter,
       },
       limit,
@@ -96,6 +96,10 @@ async function getProposalsList(
       direction,
       sortBy,
     });
+
+    console.log('tokenVotingProposals', tokenVotingProposals);
+
+    // TODO: migrate dao {id, subdomain} -> daoAddress
 
     return await Promise.all(
       tokenVotingProposals.map(
