@@ -20,7 +20,7 @@ const CardWithImage: React.FC<CardWithImageProps> = ({
       <VStack>
         <Caption>{caption}</Caption>
         <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
+        {!!subtitle && <Subtitle>{subtitle}</Subtitle>}
       </VStack>
     </Container>
   );
@@ -29,23 +29,24 @@ const CardWithImage: React.FC<CardWithImageProps> = ({
 export default CardWithImage;
 
 const Container = styled.div.attrs({
-  className: 'flex-1 p-6 rounded-xl bg-neutral-0 mx-2 mb-6 xl:m-0',
+  className: 'flex-1 p-10 rounded-[40px] bg-neutral-0 mx-2 mb-6 xl:m-0',
 })``;
 
 const ImageContainer = styled.div.attrs({
-  className: 'mb-4 rounded-xl flex justify-center bg-neutral-50',
+  className: 'mb-4 rounded-xl flex justify-center',
 })``;
 
 const VStack = styled.div.attrs({
-  className: 'space-y-0.5',
+  className: 'space-y-4',
 })``;
 
 const Caption = styled.div.attrs({
-  className: 'text-sm leading-normal text-neutral-500',
+  className:
+    'h-14 w-14 rounded-xl bg-primary-50 flex justify-center items-center font-semibold text-primary-400 text-3xl',
 })``;
 
 const Title = styled.div.attrs({
-  className: 'font-semibold text-neutral-800',
+  className: 'text-neutral-800',
 })``;
 
 const Subtitle = styled.div.attrs({

@@ -1,9 +1,10 @@
 import React, {type ReactElement} from 'react';
 import {styled} from 'styled-components';
-import {Button, Icon, IconType} from '@aragon/ods';
+import {Icon, IconType} from '@aragon/ods';
 import {type TagProps} from '../tag';
 import Crumb from './crumb';
-import {shortenAddress} from '../../utils/addresses';
+import {shortenAddress} from '../../utils';
+import ButtonBack from 'components/buttons/buttonBack';
 
 export type CrumbType = {
   label: ReactElement | string;
@@ -81,13 +82,10 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     return (
       <ProcessContainer data-testid="breadcrumbs">
         <ProcessCrumbContainer>
-          <Button
-            variant="tertiary"
-            iconLeft={IconType.CHEVRON_LEFT}
+          <ButtonBack
+            title={getLabel(crumbs?.label)}
             onClick={() => onClick?.(crumbs.path)}
-            size="md"
           />
-          <p className="font-semibold">{getLabel(crumbs?.label)}</p>
           {tag}
         </ProcessCrumbContainer>
       </ProcessContainer>
@@ -102,8 +100,7 @@ const Container = styled.div.attrs({
 })``;
 
 const ProcessContainer = styled.div.attrs({
-  className:
-    'inline-flex py-1 xl:pr-4 xl:pl-1 xl:rounded-xl xl:bg-neutral-0 h-12',
+  className: 'inline-flex',
 })``;
 
 const ProcessCrumbContainer = styled.div.attrs({
