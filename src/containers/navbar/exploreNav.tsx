@@ -74,7 +74,7 @@ const ExploreNav: React.FC = () => {
 };
 
 const Menu = styled.nav.attrs({
-  className: 'py-4 xl:py-6',
+  className: 'py-4 xl:py-6 backdrop-blur-xl bg-primary-500/50',
 })``;
 
 const Content = styled.div.attrs({
