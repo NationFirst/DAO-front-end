@@ -1,5 +1,5 @@
 export default {
   backgroundImage: 'url(./decoration.svg)',
   backgroundRepeat: 'no-repeat',
-  backgroundPosition: '-100px 60px',
+  backgroundPosition: 'calc((100vw - min(1520px, 100vw)) / 2 - 250px) 280px',
 };
