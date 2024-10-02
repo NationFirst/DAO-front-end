@@ -886,28 +886,6 @@ export function translateToNetworkishName(
   }
 
   switch (appNetwork) {
-    // case 'arbitrum':
-    //   return SdkSupportedNetworks.ARBITRUM;
-    // case 'arbitrum-goerli':
-    //   throw new Error('Arbitrum Goerli is not supported by the SDK');
-    // case 'base':
-    //   return SdkSupportedNetworks.BASE;
-    // case 'base-goerli':
-    //   return SdkSupportedNetworks.BASE_GOERLI;
-    // case 'ethereum':
-    //   return SdkSupportedNetworks.MAINNET;
-    // case 'goerli':
-    //   return SdkSupportedNetworks.GOERLI;
-    // case 'mumbai':
-    //   return SdkSupportedNetworks.MUMBAI;
-    // case 'polygon':
-    //   return SdkSupportedNetworks.POLYGON;
-    // case 'sepolia':
-    //   return SdkSupportedNetworks.SEPOLIA;
-    // case 'zksyncSepolia':
-    //   return SdkSupportedNetworks.ZKSYNC_SEPOLIA;
-    // case 'zksyncMainnet':
-    //   return SdkSupportedNetworks.ZKSYNC_MAINNET;
     case 'nationsfirst':
       return SdkSupportedNetworks.NATIONSFIRST;
     default:

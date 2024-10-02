@@ -1,7 +1,7 @@
 import React, {type ButtonHTMLAttributes, type FC} from 'react';
 import {styled} from 'styled-components';
 
-import {shortenAddress} from '../../utils/addresses';
+import {shortenAddress} from '../../utils';
 import {AvatarWallet} from '../avatar';
 import {Spinner} from '../spinner';
 import {Icon, IconType} from '@aragon/ods';
@@ -54,14 +54,10 @@ const Avatar: FC<AvatarProps> = ({isConnected, isLoading, src}) => {
 
 type StyledButtonProp = Pick<ButtonWalletProps, 'isLoading'>;
 
-const StyledButton = styled.button.attrs<StyledButtonProp>(({isLoading}) => {
-  const className = `${
-    isLoading ? 'text-primary-500' : 'text-neutral-600'
-  } flex items-center md:space-x-3 font-semibold p-3 hover:text-neutral-800
-    active:text-neutral-800 disabled:text-neutral-300 bg-neutral-0 hover:bg-neutral-100 active:bg-neutral-200
-    disabled:bg-neutral-100 rounded-xl focus-visible:ring focus-visible:ring-primary`;
-  return {className};
-})``;
+const StyledButton = styled.button.attrs<StyledButtonProp>(({isLoading}) => ({
+  className:
+    'flex items-center gap-x-3 text-neutral-0 active:border-white/30 hover:border-white/30 rounded-xl border-white/10 border-2 p-2.5 px-4',
+}))``;
 
 const StyledLabel = styled.span.attrs({
   className: 'md:inline hidden',
