@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import {Backdrop} from '@aragon/ods-old';
 import styled from 'styled-components';
+import cls from 'classnames';
 
 export type BottomSheetProps = {
   children?: ReactNode;
@@ -63,10 +64,14 @@ export default function BottomSheet({
   );
 }
 
-const BottomSheetContainer = styled.div.attrs<{isOpen: boolean}>({
-  className:
-    'bg-neutral-50 block left-0 fixed bottom-0 md:bottom-6 w-full md:w-max md:max-w-full rounded-t-xl md:rounded-xl md:left-0 md:right-0 md:mx-auto z-30',
-})`
+const BottomSheetContainer = styled.div.attrs<{isOpen: boolean}>(
+  ({isOpen}) => ({
+    className: cls(
+      {'md:bottom-6': isOpen},
+      'fixed bg-neutral-50 block left-0 bottom-0 w-full md:w-max md:max-w-full rounded-t-xl md:rounded-xl md:left-0 md:right-0 md:mx-auto z-30'
+    ),
+  })
+)`
   &:before {
     content: '';
     display: ${props => (props.isOpen ? 'inline-block' : 'none')};

@@ -32,7 +32,7 @@
     "subtitle": "Go back to explorer page"
   },
   "navButtons": {
-    "connectWallet": "Connect wallet",
+    "connectWallet": "Connect Wallet",
     "giveFeedback": "Give feedback"
   },
   "labels": {
@@ -224,7 +224,7 @@
     "minimumApprovalProgressInfo": "of {{amount}} addresses",
     "anyWallet": "Any wallet",
     "aragonOSx": "DAO OSx",
-    "disconnectWallet": "Disconnect wallet",
+    "disconnectWallet": "Disconnect Wallet",
     "submitProposal": "Publish proposal",
     "addWalletsDescriptionLinkLabel": "read our guide",
     "addWalletsDescription": "Wallets can create proposals, propose to send funds in and out of the treasury, and vote in your DAO.",
