@@ -27,7 +27,6 @@ import {
 import {
   CHAIN_METADATA,
   SUBGRAPH_API_URL,
-  SUBGRAPH_TOKEN_VOTING_URL,
   SupportedChainID,
   SupportedNetworks,
 } from 'utils/constants';
@@ -86,9 +85,9 @@ async function getProposalsList(
     const {tokenVotingProposals} = await request<{
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tokenVotingProposals: any;
-    }>(SUBGRAPH_TOKEN_VOTING_URL, QueryTokenVotingProposals, {
+    }>(SUBGRAPH_API_URL[network]!, QueryTokenVotingProposals, {
       where: {
-        daoAddress: daoAddressOrEns,
+        dao: daoAddressOrEns,
         ...statusFilter,
       },
       limit,

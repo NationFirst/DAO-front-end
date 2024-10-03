@@ -64,10 +64,10 @@ export const usePluginClient = <T extends PluginTypes = PluginTypes>(
 ): PluginType<T> | undefined => {
   const [pluginClient, setPluginClient] = useState<PluginType<PluginTypes>>();
 
-  const {client, context, pluginContext} = useClient();
+  const {client, context} = useClient();
 
   useEffect(() => {
-    if (!client || !context || !pluginContext) return;
+    if (!client || !context) return;
 
     if (!pluginType) {
       setPluginClient(undefined);
@@ -77,7 +77,7 @@ export const usePluginClient = <T extends PluginTypes = PluginTypes>(
           setPluginClient(new MultisigClient(context));
           break;
         case 'token-voting.plugin.dao.eth':
-          setPluginClient(new TokenVotingClient(pluginContext));
+          setPluginClient(new TokenVotingClient(context));
           break;
         case GaslessPluginName:
           setPluginClient(
@@ -92,7 +92,7 @@ export const usePluginClient = <T extends PluginTypes = PluginTypes>(
           throw new Error('The requested plugin type is invalid');
       }
     }
-  }, [client, context, pluginType, pluginContext]);
+  }, [client, context, pluginType]);
 
   return pluginClient as PluginType<T>;
 };
