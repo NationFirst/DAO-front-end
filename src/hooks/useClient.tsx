@@ -16,7 +16,6 @@ import React, {
 
 import {
   SUBGRAPH_API_URL,
-  SUBGRAPH_TOKEN_VOTING_URL,
   SupportedNetworks,
 } from 'utils/constants';
 import {translateToAppNetwork, translateToNetworkishName} from 'utils/library';
@@ -27,8 +26,6 @@ interface ClientContext {
   client?: Client;
   context?: SdkContext;
   network?: SupportedNetworks;
-  pluginContext?: SdkContext;
-  pluginClient?: Client;
 }
 
 const UseClientContext = createContext<ClientContext>({} as ClientContext);
@@ -51,10 +48,8 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
 }) => {
   const {signer} = useWallet();
   const [client, setClient] = useState<Client>();
-  const [pluginClient, setPluginClient] = useState<Client>();
   const {network} = useNetwork();
   const [context, setContext] = useState<SdkContext>();
-  const [pluginContext, setPluginContext] = useState<SdkContext>();
 
   useEffect(() => {
     const translatedNetwork = translateToNetworkishName(network);
@@ -81,34 +76,22 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
       ipfsNodes: [],
       graphqlNodes: [{url: SUBGRAPH_API_URL[network]!}],
     };
-
-    const pluginContextParams: ContextParams = {
-      ...contextParams,
-      graphqlNodes: [{url: SUBGRAPH_TOKEN_VOTING_URL}],
-    };
-
     console.log('[CLIENT PROVIDER]::[sdk context params]', {contextParams});
 
     const sdkContext = new SdkContext(contextParams);
     const sdkClient = new Client(sdkContext);
-    const sdkPluginContext = new SdkContext(pluginContextParams);
-    const sdkPluginClient = new Client(sdkPluginContext);
 
     console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
     console.log('[CLIENT PROVIDER]::[sdk client]', {sdkClient});
 
     setClient(sdkClient);
     setContext(sdkContext);
-    setPluginContext(sdkPluginContext);
-    setPluginClient(sdkPluginClient);
   }, [network, signer]);
 
   const value: ClientContext = useMemo(
     () => ({
       client,
       context,
-      pluginContext,
-      pluginClient,
     }),
     [client, context]
   );

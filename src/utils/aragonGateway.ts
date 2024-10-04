@@ -30,8 +30,6 @@ class AragonGateway {
       network
     ) as SdkSupportedNetworks;
 
-    console.log('TEST123', {network});
-
     const options: Networkish = {
       chainId: CHAIN_METADATA[network].id,
       name: sdkNetwork,
