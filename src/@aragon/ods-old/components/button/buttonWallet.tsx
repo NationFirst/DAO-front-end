@@ -1,11 +1,11 @@
 import React, {type ButtonHTMLAttributes, type FC} from 'react';
 import {styled} from 'styled-components';
+import {Icon, IconType} from '@aragon/ods';
 import cls from 'classnames';
 
 import {shortenAddress} from '../../utils';
 import {AvatarWallet} from '../avatar';
 import {Spinner} from '../spinner';
-import {Icon, IconType} from '@aragon/ods';
 
 export type ButtonWalletProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   /**

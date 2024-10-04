@@ -53,6 +53,10 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
     }
   };
 
+  const navigateHome = () => {
+    navigate(path);
+  };
+
   const exitProcess = useCallback(() => {
     setShowExitProcessMenu(false);
     navigate(generatePath(props.returnURL!, {network, dao}));
