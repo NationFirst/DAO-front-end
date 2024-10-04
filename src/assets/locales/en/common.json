@@ -701,9 +701,9 @@
       "newTokenSubtitle": "No, I would like to create a token.",
       "existingToken": {
         "title": "Import your existing token",
-        "description": "Import the existing ERC-20 token that your community uses for governance. We recommend to read about why this is important in {{link}}.",
+        "description": "Import the existing NFC-20 token that your community uses for governance. We recommend to read about why this is important in {{link}}.",
         "descriptionLinkLabel": "our guide",
-        "questionLabel": "Does your community already have an ERC-20 token to govern your DAO?",
+        "questionLabel": "Does your community already have an NFC-20 token to govern your DAO?",
         "answerNegative": "No",
         "answerPositive": "Yes",
         "inputLabel": "Contract address",
@@ -712,7 +712,7 @@
         "verificationLabelSupply": "Total supply",
         "verificationLabelHolders": "Current holders",
         "verificationAlertSuccessTitle": "Supported token",
-        "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the ERC20Votes extension to the ERC-20 standard.",
+        "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the ERC20Votes extension to the NFC-20 standard.",
         "verificationLoading": "Verifying governance compatibility …",
         "verificationStandardUnknown": "Unknown",
         "verificationGovernanceSupported": "Supported",
@@ -725,7 +725,7 @@
         "verificationAlertCriticalBlockchainTitle": "Incorrect blockchain",
         "verificationAlertCriticalBlockchainDescription": "This token is deployed on a different blockchain than the one you chose for your DAO. Use a token deployed on {{blockchainName}}.",
         "vocdoni": {
-          "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the ERC-20 standard and is supported by Vocdoni."
+          "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the NFC-20 standard and is supported by Vocdoni."
         }
       },
       "existingTokenSubtitle": "Yes, we already have a token.",
