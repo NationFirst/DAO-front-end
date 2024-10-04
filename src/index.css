@@ -19,4 +19,6 @@
   --ods-color-primary-700: #0a2515 !important;
   --ods-color-primary-800: #071b0f !important;
   --ods-color-primary-900: #021108 !important;
+
+  --app-navbar-height: 96px;
 }

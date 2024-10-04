@@ -2,7 +2,7 @@ import React, {ReactElement, ReactNode} from 'react';
 
 export type StepProps = {
   includeStepper?: boolean;
-  wizardTitle?: string;
+  wizardTitle?: string | React.ReactNode;
   wizardDescription?: string | React.ReactNode;
   wizardDescriptionLink?: string;
   hideWizard?: boolean;

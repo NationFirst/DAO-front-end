@@ -17,6 +17,9 @@ module.exports = {
       fontWeight: {
         normal: 400,
       },
+      height: {
+        header: 'var(--app-navbar-height)',
+      },
     },
   },
   plugins: [

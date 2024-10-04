@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import {useNetwork} from 'context/network';
 import {CHAIN_METADATA, SupportedNetworks} from 'utils/constants';
 import {featureFlags} from 'utils/featureFlags';
-import {Toggle, ToggleGroup} from '@aragon/ods';
+import {GridLayout} from '../../components/layout';
 
 type NetworkType = 'main' | 'test';
 
@@ -36,48 +36,52 @@ const SelectChainForm: React.FC = () => {
   };
 
   return (
-    <>
-      <Header>
-        <NetworkTypeSwitcher>
-          <ToggleGroup
-            isMultiSelect={false}
-            value={networkType}
-            onChange={handleNetworkTypeChange}
-          >
-            <Toggle value="main" label={t('labels.mainNet')} />
-            <Toggle value="test" label={t('labels.testNet')} />
-          </ToggleGroup>
-        </NetworkTypeSwitcher>
-      </Header>
-      <FormItem>
-        {availableNetworks.map(selectedNetwork => (
-          <Controller
-            key={selectedNetwork}
-            name="blockchain"
-            rules={{required: true}}
-            control={control}
-            render={({field}) => (
-              <ListItemBlockchain
-                onClick={() => {
-                  setNetwork(selectedNetwork);
-                  field.onChange({
-                    id: CHAIN_METADATA[selectedNetwork].id,
-                    label: CHAIN_METADATA[selectedNetwork].name,
-                    network: networkType,
-                  });
-                  if (!CHAIN_METADATA[selectedNetwork].supportsEns) {
-                    // reset daoEnsName if network changed to L2
-                    resetField('daoEnsName');
+    <GridLayout>
+      {/*<Header>*/}
+      {/*  <NetworkTypeSwitcher>*/}
+      {/*    <ToggleGroup*/}
+      {/*      isMultiSelect={false}*/}
+      {/*      value={networkType}*/}
+      {/*      onChange={handleNetworkTypeChange}*/}
+      {/*    >*/}
+      {/*      <Toggle value="main" label={t('labels.mainNet')} />*/}
+      {/*      <Toggle value="test" label={t('labels.testNet')} />*/}
+      {/*    </ToggleGroup>*/}
+      {/*  </NetworkTypeSwitcher>*/}
+      {/*</Header>*/}
+      <Wrapper>
+        <FormItem>
+          {availableNetworks.map(selectedNetwork => (
+            <Controller
+              key={selectedNetwork}
+              name="blockchain"
+              rules={{required: true}}
+              control={control}
+              render={({field}) => (
+                <ListItemBlockchain
+                  onClick={() => {
+                    setNetwork(selectedNetwork);
+                    field.onChange({
+                      id: CHAIN_METADATA[selectedNetwork].id,
+                      label: CHAIN_METADATA[selectedNetwork].name,
+                      network: networkType,
+                    });
+                    if (!CHAIN_METADATA[selectedNetwork].supportsEns) {
+                      // reset daoEnsName if network changed to L2
+                      resetField('daoEnsName');
+                    }
+                  }}
+                  selected={
+                    CHAIN_METADATA[selectedNetwork].id === field.value.id
                   }
-                }}
-                selected={CHAIN_METADATA[selectedNetwork].id === field.value.id}
-                {...CHAIN_METADATA[selectedNetwork]}
-              />
-            )}
-          />
-        ))}
-      </FormItem>
-    </>
+                  {...CHAIN_METADATA[selectedNetwork]}
+                />
+              )}
+            />
+          ))}
+        </FormItem>
+      </Wrapper>
+    </GridLayout>
   );
 };
 
@@ -87,6 +91,10 @@ const Header = styled.div.attrs({className: 'flex justify-between'})``;
 
 const NetworkTypeSwitcher = styled.div.attrs({
   className: 'flex p-1 space-x-1',
+})``;
+
+const Wrapper = styled.div.attrs({
+  className: 'col-span-full xl:col-start-3 xl:col-end-11',
 })``;
 
 const FormItem = styled.div.attrs({

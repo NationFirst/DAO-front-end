@@ -1,5 +1,6 @@
 import React, {type ButtonHTMLAttributes, type FC} from 'react';
 import {styled} from 'styled-components';
+import cls from 'classnames';
 
 import {shortenAddress} from '../../utils';
 import {AvatarWallet} from '../avatar';
@@ -23,6 +24,7 @@ export type ButtonWalletProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    * Check if wallet is connected!
    */
   isConnected?: boolean;
+  theme?: 'light' | 'dark';
 };
 
 export const ButtonWallet: FC<ButtonWalletProps> = ({
@@ -30,10 +32,11 @@ export const ButtonWallet: FC<ButtonWalletProps> = ({
   src,
   isLoading = false,
   isConnected = false,
+  theme = 'dark',
   ...props
 }) => {
   return (
-    <StyledButton {...props} {...{isLoading}}>
+    <StyledButton {...props} {...{isLoading, theme}}>
       <StyledLabel>{shortenAddress(label)}</StyledLabel>
       <Avatar {...{isConnected, isLoading, src}} />
     </StyledButton>
@@ -52,12 +55,21 @@ const Avatar: FC<AvatarProps> = ({isConnected, isLoading, src}) => {
   return <AvatarWallet src={src ?? ''} />;
 };
 
-type StyledButtonProp = Pick<ButtonWalletProps, 'isLoading'>;
+type StyledButtonProp = Pick<ButtonWalletProps, 'isLoading' | 'theme'>;
 
-const StyledButton = styled.button.attrs<StyledButtonProp>(({isLoading}) => ({
-  className:
-    'flex items-center gap-x-3 text-neutral-0 active:border-white/30 hover:border-white/30 rounded-xl border-white/10 border-2 p-2.5 px-4',
-}))``;
+const StyledButton = styled.button.attrs<StyledButtonProp>(
+  ({isLoading, theme}) => ({
+    className: cls(
+      {
+        'text-neutral-0 border-white/10 hover:border-white/30 active:border-white/30':
+          theme === 'light',
+        'text-primary-400 border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30':
+          theme === 'dark',
+      },
+      'flex items-center gap-x-3 transition-colors rounded-xl border-2 p-2.5 px-4'
+    ),
+  })
+)``;
 
 const StyledLabel = styled.span.attrs({
   className: 'md:inline hidden',

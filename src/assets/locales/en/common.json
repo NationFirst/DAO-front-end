@@ -667,21 +667,21 @@
     }
   },
   "createDAO": {
-    "title": "Create your DAO",
+    "title": "Build your DAO",
     "overview": {
       "title": "Build your DAO",
-      "description": "Start simple and learn as you go. You can always evolve your DAO in the future.",
-      "button": "Build your DAO"
+      "description": "Begin with the basics and expand over time. Your DAO can always adapt and grow as your needs change.",
+      "button": "Create a DAO"
     },
     "step1": {
-      "label": "Step 1",
-      "title": "Select blockchain",
-      "description": "The chain you choose is where your tokens and assets are stored. If you already have a token, choose the chain your token is minted on. This cannot be changed later.",
+      "label": "1",
+      "title": "Choose a blockchain network",
+      "description": "Select the network where your tokens and assets will reside. If you have an existing token, pick the blockchain it was originally created on. Please note, this decision is final and cannot be altered later.",
       "descriptionLinkURL": "#"
     },
     "step2": {
-      "label": "Step 2",
-      "title": "Describe your DAO",
+      "label": "2",
+      "title": "Outline your DAO's mission",
       "description": "Name and define your DAO so new contributors know they've come to the right place. This information is displayed on the DAO Explore page and can be changed with a vote.",
       "nameSubtitle": "Maximum of 128 characters",
       "logoSubtitle": "JPG, PNG or GIF of no more than 3MB. We recommend 1024x1024px.",
@@ -691,8 +691,8 @@
       "ensNameSubtitle": "This will be your DAO’s unique ENS subdomain, created automatically for you. Lowercase letters, numbers, and the dash '-' are all acceptable characters; ideally, the character count should be under 128."
     },
     "step3": {
-      "label": "Step 3",
-      "title": "Define membership",
+      "label": "3",
+      "title": "Set up membership criteria",
       "description": "Decide the type of voting your DAO uses. You can change these settings with a vote.",
       "newToken": "No",
       "authorisedWalletsSubtitle": "Add wallets of members who are authorized to participate in governance",
@@ -794,8 +794,8 @@
       }
     },
     "step4": {
-      "label": "Step 4",
-      "title": "Select governance settings",
+      "label": "4",
+      "title": "Configure governance rules",
       "description": "These are the rules that define how decisions are made in your DAO. How many people have to participate? How much support is needed? How long are proposals open for voting?",
       "bestPractices": "best practices on governance",
       "supportThresholdSubtitle": "The percentage of tokens that vote \"Yes\" in support of a proposal, out of all tokens that have voted, must be greater than this value for the proposal to pass.",
@@ -1190,7 +1190,7 @@
     }
   },
   "logo": {
-    "linkURL": "#"
+    "linkURL": "/"
   },
   "modal": {
     "deposit": {

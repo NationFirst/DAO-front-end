@@ -55,6 +55,7 @@ const ExploreNav: React.FC = () => {
             <RightContent>
               <ActionsWrapper>
                 <ButtonWallet
+                  theme="light"
                   src={ensAvatarUrl || address}
                   onClick={handleWalletButtonClick}
                   isConnected={isConnected}

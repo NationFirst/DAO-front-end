@@ -7,14 +7,17 @@ import React, {
   useState,
 } from 'react';
 import {Breadcrumb, Wizard} from '@aragon/ods-old';
-import {Button, IconType} from '@aragon/ods';
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
+import cls from 'classnames';
 
 import ExitProcessMenu, {ProcessType} from 'containers/exitProcessMenu';
 import {useStepper} from 'hooks/useStepper';
 import {StepProps} from './step';
+import Button from '../buttons/button';
+import Arrow from '../../assets/icons/arrow';
+import {useStepperContext} from '../../context/stepperContext';
 
 export type FullScreenStepperProps = {
   navLabel: string;
@@ -46,6 +49,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
   returnPath,
 }) => {
   const skipSteps = children.filter(child => child.props.skipStep !== true);
+  const {updateContext: updateStepperContext} = useStepperContext();
 
   const {t} = useTranslation();
   const navigate = useNavigate();
@@ -100,6 +104,15 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
   /*************************************************
    *                    Effects                    *
    *************************************************/
+
+  useEffect(() => {
+    updateStepperContext({
+      currentStep: currentFormStep,
+      totalSteps,
+      show: !hideWizard,
+    });
+  }, [currentFormStep, totalSteps, hideWizard]);
+
   // Scroll Top each time the CurrentStep changed
   useEffect(() => {
     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -120,6 +133,14 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
     setShowExitProcessMenu(false);
     navigate(returnPath);
   }, [navigate, returnPath]);
+
+  const handleButtonBack = () => {
+    onBackButtonClicked ? onBackButtonClicked() : prev();
+  };
+
+  const handleButtonNext = () => {
+    onNextButtonClicked ? onNextButtonClicked(next) : next();
+  };
 
   /*************************************************
    *                     Render                    *
@@ -159,32 +180,26 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
           {customFooter ? (
             <>{customFooter}</>
           ) : (
-            <FormFooter>
+            <FormFooter1>
               <Button
-                variant="tertiary"
-                size="lg"
-                onClick={() =>
-                  onBackButtonClicked ? onBackButtonClicked() : prev()
-                }
+                variant="outline"
+                onClick={handleButtonBack}
                 disabled={currentStep === 1}
-                iconLeft={IconType.CHEVRON_LEFT}
+                iconLeft={<Arrow className="rotate-180" w={20} h={20} />}
               >
-                {backButtonLabel || t('labels.back')}
+                BACK
               </Button>
               <ButtonValidationTrigger onClick={onNextButtonDisabledClicked}>
                 <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={() =>
-                    onNextButtonClicked ? onNextButtonClicked(next) : next()
-                  }
+                  variant="fill"
+                  onClick={handleButtonNext}
                   disabled={isNextButtonDisabled}
-                  iconRight={IconType.CHEVRON_RIGHT}
+                  iconRight={<Arrow w={20} h={20} />}
                 >
-                  {nextButtonLabel || t('labels.next')}
+                  NEXT
                 </Button>
               </ButtonValidationTrigger>
-            </FormFooter>
+            </FormFooter1>
           )}
         </FormLayout>
       </Layout>
@@ -201,8 +216,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
 };
 
 const Layout = styled.div.attrs({
-  className:
-    'col-span-full xl:col-start-2 xl:col-end-12 font-medium text-neutral-600',
+  className: 'col-span-full font-medium text-neutral-600 flex flex-col',
 })``;
 
 type FormLayoutProps = {
@@ -211,12 +225,15 @@ type FormLayoutProps = {
 
 const FormLayout = styled.div.attrs<{fullWidth: FormLayoutProps}>(
   ({fullWidth}) => ({
-    className: `mt-10 xl:mt-16 mx-auto space-y-10 ${!fullWidth && 'xl:w-3/5'}`,
+    className: cls(
+      {'xl:w-3/5': !fullWidth},
+      'mt-10 xl:mt-16 mx-auto gap-y-20 flex-1 flex flex-col'
+    ),
   })
 )<FormLayoutProps>``;
 
-const FormFooter = styled.div.attrs({
-  className: 'flex justify-between xl:pt-6',
+const FormFooter1 = styled.div.attrs({
+  className: 'flex justify-between mt-auto',
 })``;
 
 const ButtonValidationTrigger = styled.div``;
