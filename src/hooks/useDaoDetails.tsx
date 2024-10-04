@@ -46,9 +46,6 @@ async function fetchDaoDetails(
   const address = isEnsDomain(daoAddressOrEns)
     ? await provider.resolveName(daoAddressOrEns as string)
     : daoAddressOrEns;
-  
-  console.log('address', address);
-  console.log('daoAddressOrEns', daoAddressOrEns);
 
   let daoDetails;
 
