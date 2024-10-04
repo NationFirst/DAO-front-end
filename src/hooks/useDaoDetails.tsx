@@ -46,9 +46,6 @@ async function fetchDaoDetails(
   const address = isEnsDomain(daoAddressOrEns)
     ? await provider.resolveName(daoAddressOrEns as string)
     : daoAddressOrEns;
-  
-  console.log('address', address);
-  console.log('daoAddressOrEns', daoAddressOrEns);
 
   let daoDetails;
 
@@ -82,10 +79,9 @@ async function fetchDaoDetails(
     } else if (/^ipfs/.test(avatar) && client) {
       try {
         const cid = resolveIpfsCid(avatar);
-
-        daoDetails.metadata.avatar = `${
-          import.meta.env.VITE_PINATA_GATEWAY
-        }/${cid}`;
+        const gateway = import.meta.env.VITE_PINATA_GATEWAY;
+        const gatewayKey = import.meta.env.VITE_PINATA_GATEWAY_KEY;
+        daoDetails.metadata.avatar = `${gateway}/ipfs/${cid}?pinataGatewayToken=${gatewayKey}`;
       } catch (err) {
         console.warn('Error resolving DAO avatar IPFS Cid', err);
       }
