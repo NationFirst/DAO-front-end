@@ -75,7 +75,7 @@ export const Dashboard: React.FC = () => {
     isFetching: followedDaosFetching,
   } = useFollowedDaosQuery();
 
-  console.log('[FOLLOWED DAOS]', {followedDaos});
+  // console.log('[FOLLOWED DAOS]', {followedDaos});
 
   const enableFollowing =
     !followedDaosFetching &&
@@ -317,7 +317,7 @@ export const Dashboard: React.FC = () => {
           href: link.url,
         })) ?? [];
 
-    console.log('[LIVE DAO]', {liveDao});
+    // console.log('[LIVE DAO]', {liveDao});
 
     return (
       <>

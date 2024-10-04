@@ -155,7 +155,6 @@ class CreateDaoUtils {
   private getTokenVotingPlugin = (
     formValues: Omit<CreateDaoFormData, 'daoLogo'>
   ) => {
-    console.log('getTokenVotingPlugin', formValues);
     const {tokenType, isCustomToken, blockchain} = formValues;
 
     const votingSettings = this.getVoteSettings(formValues);

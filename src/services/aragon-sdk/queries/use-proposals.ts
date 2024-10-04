@@ -236,7 +236,7 @@ export const useProposals = (
   const defaultSelect = (data: InfiniteData<FetchProposalsResponseTypes>) =>
     transformInfiniteProposals(chainId, data);
 
-  console.log('[USE PROPOSALS]');
+  // console.log('[USE PROPOSALS]');
 
   return useInfiniteQuery({
     ...options,

@@ -54,8 +54,8 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
   useEffect(() => {
     const translatedNetwork = translateToNetworkishName(network);
 
-    console.log('[CLIENT PROVIDER]::[signer]', {signer});
-    console.log('[CLIENT PROVIDER]::[network]', {translatedNetwork});
+    // console.log('[CLIENT PROVIDER]::[signer]', {signer});
+    // console.log('[CLIENT PROVIDER]::[network]', {translatedNetwork});
 
     // when network not supported by the SDK, don't set network
     if (
@@ -76,13 +76,12 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
       ipfsNodes: [],
       graphqlNodes: [{url: SUBGRAPH_API_URL[network]!}],
     };
-    console.log('[CLIENT PROVIDER]::[sdk context params]', {contextParams});
 
     const sdkContext = new SdkContext(contextParams);
     const sdkClient = new Client(sdkContext);
 
-    console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
-    console.log('[CLIENT PROVIDER]::[sdk client]', {sdkClient});
+    // console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
+    // console.log('[CLIENT PROVIDER]::[sdk client]', {sdkClient});
 
     setClient(sdkClient);
     setContext(sdkContext);
