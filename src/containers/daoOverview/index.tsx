@@ -10,6 +10,7 @@ import useScreen from 'hooks/useScreen';
 import {trackEvent} from 'services/analytics';
 import {i18n} from '../../../i18n.config';
 import ButtonCreateDao from 'components/buttons/buttonCreateDao';
+import CardImage from '../../components/cardWithImage/CardImage';
 
 type OverviewDAOHeaderProps = {
   navLabel: string;
@@ -54,25 +55,25 @@ export const OverviewDAOHeader: React.FC<OverviewDAOHeaderProps> = ({
 const OverviewCards = [
   <CardWithImage
     key="SelectBlockchain"
-    imgSrc={<div className="h-40" />}
+    imgSrc={<CardImage type="blockchain" height="h-48" />}
     caption={i18n.t('createDAO.step1.label')}
     title={i18n.t('createDAO.step1.title')}
   />,
   <CardWithImage
     key="DefineMetadata"
-    imgSrc={<div className="h-40" />}
+    imgSrc={<CardImage type="mission" height="h-48" />}
     caption={i18n.t('createDAO.step2.label')}
     title={i18n.t('createDAO.step2.title')}
   />,
   <CardWithImage
     key="SetupCommunity"
-    imgSrc={<div className="h-40" />}
+    imgSrc={<CardImage type="membership" height="h-48" />}
     caption={i18n.t('createDAO.step3.label')}
     title={i18n.t('createDAO.step3.title')}
   />,
   <CardWithImage
     key="ConfigureGovernance"
-    imgSrc={<div className="h-40" />}
+    imgSrc={<CardImage type="rules" height="h-48" />}
     caption={i18n.t('createDAO.step4.label')}
     title={i18n.t('createDAO.step4.title')}
   />,

@@ -29,15 +29,16 @@ const CardWithImage: React.FC<CardWithImageProps> = ({
 export default CardWithImage;
 
 const Container = styled.div.attrs({
-  className: 'flex-1 p-10 rounded-[40px] bg-neutral-0 mx-2 mb-6 xl:m-0',
+  className:
+    'flex-1 overflow-hidden rounded-[30px] bg-neutral-0 mx-2 mb-6 xl:m-0 shadow-card',
 })``;
 
 const ImageContainer = styled.div.attrs({
-  className: 'mb-4 rounded-xl flex justify-center',
+  className: 'rounded-xl flex justify-center',
 })``;
 
 const VStack = styled.div.attrs({
-  className: 'space-y-4',
+  className: 'space-y-4 p-8',
 })``;
 
 const Caption = styled.div.attrs({
