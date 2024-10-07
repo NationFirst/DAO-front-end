@@ -17,9 +17,10 @@
     "lint:fix": "eslint src --fix",
     "check-types": "tsc --noemit",
     "e2e": "playwright test --ui",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org aragonorg --project app-react ./dist && sentry-cli sourcemaps upload --org aragonorg --project app-react ./dist"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org aragonorg --project app-react ./dist && sentry-cli sourcemaps upload --org aragonorg --project app-react ./dist",
+    "postinstall": "./patch-ods.sh"
   },
-  "dependencies": {
+  "dependencies": { 
     "@apollo/client": "^3.5.8",
     "@aragon/ods": "^1.0.20",
     "@aragon/osx-commons-configs": "^0.6.0",
