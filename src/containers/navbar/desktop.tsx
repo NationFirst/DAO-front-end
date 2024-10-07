@@ -62,10 +62,6 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
     navigate(generatePath(props.returnURL!, {network, dao}));
   }, [dao, navigate, network, props.returnURL]);
 
-  const navigateHome = () => {
-    navigate(path);
-  };
-
   if (props.isProcess) {
     return (
       <>
