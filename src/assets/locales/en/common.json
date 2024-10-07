@@ -228,8 +228,8 @@
     "submitProposal": "Publish proposal",
     "addWalletsDescriptionLinkLabel": "read our guide",
     "addWalletsDescription": "Wallets can create proposals, propose to send funds in and out of the treasury, and vote in your DAO.",
-    "daoEnsName": "ENS Subdomain",
-    "ens": "ENS name",
+    "daoEnsName": "NFN Subdomain",
+    "ens": "NFN name",
     "currentTokenSupply": "Current token supply",
     "helptext": {
       "snapshot": "Based on this proposal snapshot"
@@ -253,14 +253,14 @@
   },
   "placeHolders": {
     "selectToken": "Select a token …",
-    "walletOrEns": "Type wallet address or ENS …",
+    "walletOrEns": "Type wallet address or NFN …",
     "searchTokens": "Type to search …",
     "searchTransfers": "Type to filter …",
     "daoName": "Type your DAO's name …",
     "ensName": "nationsfirst",
     "daoDescription": "Type your summary …",
     "addResource": "Lens, Discord, etc.",
-    "searchWalletAddress": "Filter by ENS or wallet address …"
+    "searchWalletAddress": "Filter by NFN or wallet address …"
   },
   "finance": {
     "tokenSection": "Tokens",
@@ -400,7 +400,7 @@
     "invalidAddress": "Invalid address",
     "lteZero": "The amount must be greater than zero",
     "ltAmount": "The amount must be less than {{amount}}",
-    "notERC20Token": "Token address is not ERC20 compliant",
+    "notERC20Token": "Token address is not NFN20 compliant",
     "noTokenSelected": "A token must be selected",
     "duplicateAddress": "Address must not be reused",
     "duplicateAddressOnCurrentMembersList": "This wallet address is already a member of this Multisig.",
@@ -414,9 +414,9 @@
     "totalSupplyZero": "Total token supply can not be 0",
     "requiredTokenAddressZero": "Required token amount can not be 0",
     "onlyAlphaNumeric": "{{field}} can only contain alphanumeric characters",
-    "ensDuplication": "ENS subdomain is already taken. Try a different name.",
+    "ensDuplication": "NFN subdomain is already taken. Try a different name.",
     "ensNameInvalidFormat": "Please only use Lowercase letters, numbers, and the dash '-'",
-    "ensNetworkIssue": "Failed to resolve ENS",
+    "ensNetworkIssue": "Failed to resolve NFN",
     "ensNameLength": "DAO name must be less than 128 characters",
     "notValidContractAddress": "Smart contract address not valid",
     "duplicateContractAddress": "Smart contract has already been added",
@@ -437,13 +437,13 @@
       "time": "Time is required",
       "timezone": "Timezone is required",
       "name": "DAO name is mandatory",
-      "ensName": "DAO Ens Subdomain is mandatory",
+      "ensName": "DAO Nfn Subdomain is mandatory",
       "title": "Title is required",
       "summary": "Summary is required",
       "minApproval": "At least one authorized address is required in order to approve a proposal."
     },
     "startPast": "Process must not start in the past",
-    "ensUnsupported": "Network does not support ENS",
+    "ensUnsupported": "Network does not support NFN",
     "fields": {
       "tokenName": "Token name",
       "tokenSymbol": "Token symbol"
@@ -688,7 +688,7 @@
       "descriptionSubtitle": "Describe your DAO's purpose in a few sentences. This is listed on the Explore page so new contributors can find you.",
       "linksSubtitle": "Links to your DAO's website, social media profiles, Discord, or other places your community gathers.",
       "descriptionLinkURL": "#",
-      "ensNameSubtitle": "This will be your DAO’s unique ENS subdomain, created automatically for you. Lowercase letters, numbers, and the dash '-' are all acceptable characters; ideally, the character count should be under 128."
+      "ensNameSubtitle": "This will be your DAO’s unique NFN subdomain, created automatically for you. Lowercase letters, numbers, and the dash '-' are all acceptable characters; ideally, the character count should be under 128."
     },
     "step3": {
       "label": "3",
@@ -701,9 +701,9 @@
       "newTokenSubtitle": "No, I would like to create a token.",
       "existingToken": {
         "title": "Import your existing token",
-        "description": "Import the existing NFC-20 token that your community uses for governance. We recommend to read about why this is important in {{link}}.",
+        "description": "Import the existing NFN-20 token that your community uses for governance. We recommend to read about why this is important in {{link}}.",
         "descriptionLinkLabel": "our guide",
-        "questionLabel": "Does your community already have an NFC-20 token to govern your DAO?",
+        "questionLabel": "Does your community already have an NFN-20 token to govern your DAO?",
         "answerNegative": "No",
         "answerPositive": "Yes",
         "inputLabel": "Contract address",
@@ -712,7 +712,7 @@
         "verificationLabelSupply": "Total supply",
         "verificationLabelHolders": "Current holders",
         "verificationAlertSuccessTitle": "Supported token",
-        "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the ERC20Votes extension to the NFC-20 standard.",
+        "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the NFN20Votes extension to the NFN-20 standard.",
         "verificationLoading": "Verifying governance compatibility …",
         "verificationStandardUnknown": "Unknown",
         "verificationGovernanceSupported": "Supported",
@@ -725,7 +725,7 @@
         "verificationAlertCriticalBlockchainTitle": "Incorrect blockchain",
         "verificationAlertCriticalBlockchainDescription": "This token is deployed on a different blockchain than the one you chose for your DAO. Use a token deployed on {{blockchainName}}.",
         "vocdoni": {
-          "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the NFC-20 standard and is supported by Vocdoni."
+          "verificationAlertSuccessDescription": "This token can be used to participate in your DAO's governance because it follows the NFN-20 standard and is supported by Vocdoni."
         }
       },
       "existingTokenSubtitle": "Yes, we already have a token.",
@@ -929,7 +929,7 @@
     "abstainHelptext": "Your choice will be counted for \"Abstain\"",
     "noHelptext": "Your choice will be counted for \"No\"",
     "token": "Token",
-    "inputPlaceholder": "Wallet, ENS, or email",
+    "inputPlaceholder": "Wallet, NFN, or email",
     "options": "Options",
     "yes+no": "Yes, no, or abstain",
     "strategy": "Strategy",
@@ -980,7 +980,7 @@
     "emptyState": {
       "titleSearch": "No result found for {{query}}",
       "title": "No voters yet",
-      "subtitle": "Search for another wallet address or ENS"
+      "subtitle": "Search for another wallet address or NFN"
     },
     "label": {
       "in": "In"
@@ -1197,7 +1197,7 @@
       "headerTitle": "Deposit assets",
       "headerDescription": "Send assets to the DAO treasury",
       "inputLabelEns": "DAO treasury",
-      "inputHelptextEns": "Copy the ENS or address below and use your wallet's send feature to send money to your DAO's treasury.",
+      "inputHelptextEns": "Copy the NFN or address below and use your wallet's send feature to send money to your DAO's treasury.",
       "ctaLabel": "View all transfers",
       "cancelLabel": "Cancel",
       "inputLabelBlockchain": "Blockchain",
@@ -1475,11 +1475,11 @@
     }
   },
   "inputWallet": {
-    "placeholder": "ENS or 0x…",
-    "ensAlertSuccess": "ENS resolved successfully",
+    "placeholder": "NFN or 0x…",
+    "ensAlertSuccess": "NFN resolved successfully",
     "addressAlertSuccess": "Address resolved successfully",
-    "ensAlertWarning": "This network does not support ENS domains",
-    "ensAlertCirtical": "Invalid ENS",
+    "ensAlertWarning": "This network does not support NFN domains",
+    "ensAlertCirtical": "Invalid NFN",
     "addressAlertCritical": "Invalid address"
   },
   "modalWarning": {
