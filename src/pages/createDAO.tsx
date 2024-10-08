@@ -360,7 +360,13 @@ export const CreateDAO: React.FC = () => {
           <OverviewDAOStep />
         </Step>
         <Step
-          wizardTitle={t('createDAO.step1.title')}
+          fullWidth
+          wizardTitle={
+            <>
+              Choose a{' '}
+              <span className="font-semibold text-accent">Network</span>
+            </>
+          }
           wizardDescription={htmlIn(t)('createDAO.step1.description')}
           wizardDescriptionLink={t('createDAO.step1.descriptionLinkURL')}
           onNextButtonClicked={next =>

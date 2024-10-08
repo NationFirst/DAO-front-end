@@ -3,6 +3,7 @@ import {styled} from 'styled-components';
 import FallbackImg from '../../assets/avatar-token.svg';
 import {Tag} from '../tag';
 import {Icon, IconType} from '@aragon/ods';
+import cls from 'classnames';
 
 export type ListItemBlockchainProps = {
   domain: string;
@@ -52,12 +53,15 @@ export const ListItemBlockchain: React.FC<ListItemBlockchainProps> = ({
 type SelectedProps = {
   selected: boolean;
 };
-const Container = styled.div.attrs<SelectedProps>(({selected}) => {
-  const className = `${
-    selected ? 'bg-neutral-0' : 'bg-neutral-50'
-  } flex items-center p-4 space-x-4 rounded-xl cursor-pointer`;
-  return {className};
-})<SelectedProps>``;
+const Container = styled.div.attrs<SelectedProps>(({selected}) => ({
+  className: cls(
+    {
+      'bg-neutral-0 border-[3px] border border-primary-50': selected,
+      'bg-neutral-50': !selected,
+    },
+    'flex items-center p-4 space-x-4 rounded-xl cursor-pointer'
+  ),
+}))<SelectedProps>``;
 
 const Domain = styled.p.attrs<SelectedProps>(({selected}) => ({
   className: `${

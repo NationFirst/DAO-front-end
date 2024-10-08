@@ -6,7 +6,7 @@ import {generatePath, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {DaoSelector} from 'components/daoSelector';
-import {Container} from 'components/layout';
+import {Container, GridLayout} from 'components/layout';
 import NavLinks from 'components/navLinks';
 import ExitProcessMenu, {ProcessType} from 'containers/exitProcessMenu';
 import {selectedDaoVar} from 'context/apolloClient';
@@ -15,6 +15,7 @@ import {useMappedBreadcrumbs} from 'hooks/useMappedBreadcrumbs';
 import {useWallet} from 'hooks/useWallet';
 import {NavlinksDropdown} from './breadcrumbDropdown';
 import LogoImg from 'assets/images/mainLogoGreen.png';
+import {useStepperContext} from '../../context/stepperContext';
 
 const MIN_ROUTE_DEPTH_FOR_BREADCRUMBS = 2;
 
@@ -38,7 +39,7 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
   const path = t('logo.linkURL');
 
   const currentDao = useReactiveVar(selectedDaoVar);
-
+  const {currentStep, totalSteps, show: isShowStep} = useStepperContext();
   const [showExitProcessMenu, setShowExitProcessMenu] = useState(false);
 
   // Note: Obviously because of convoluted navigation, this is being handled here
@@ -64,24 +65,33 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
   if (props.isProcess) {
     return (
       <>
-        <Container data-testid="navbar">
-          <Menu>
-            <Breadcrumb
-              crumbs={{label: props.processLabel!, path: props.returnURL!}}
-              onClick={handleExitWithWarning}
-            />
-
-            <LogoContainer src={LogoImg} onClick={navigateHome} />
-
-            <ButtonWallet
-              src={ensAvatarUrl || address}
-              onClick={props.onWalletClick}
-              isConnected={isConnected}
-              label={
-                isConnected ? ensName || address : t('navButtons.connectWallet')
-              }
-            />
-          </Menu>
+        <Container data-testid="navbar" className="backdrop-blur-xl">
+          <GridLayout>
+            <Menu>
+              <Breadcrumb
+                crumbs={{label: props.processLabel!, path: props.returnURL!}}
+                onClick={handleExitWithWarning}
+              />
+              {isShowStep ? (
+                <StepIndicator>
+                  Step {currentStep} out of {totalSteps}
+                </StepIndicator>
+              ) : (
+                <LogoContainer src={LogoImg} onClick={navigateHome} />
+              )}
+              <ButtonWallet
+                theme="dark"
+                src={ensAvatarUrl || address}
+                onClick={props.onWalletClick}
+                isConnected={isConnected}
+                label={
+                  isConnected
+                    ? ensName || address
+                    : t('navButtons.connectWallet')
+                }
+              />
+            </Menu>
+          </GridLayout>
         </Container>
         {props.processType && (
           <ExitProcessMenu
@@ -141,7 +151,7 @@ export default DesktopNav;
 
 const Menu = styled.nav.attrs({
   className: `flex mx-auto justify-between items-center max-w-[1680px]
-     px-10 2xl:px-20 py-6 backdrop-blur-xl`,
+     py-6 h-header col-span-full w-full`,
 })``;
 
 const Content = styled.div.attrs({
@@ -150,6 +160,10 @@ const Content = styled.div.attrs({
 
 const LinksWrapper = styled.div.attrs({
   className: 'flex items-center space-x-3',
+})``;
+
+const StepIndicator = styled.span.attrs({
+  className: 'text-xl font-semibold',
 })``;
 
 const LogoContainer = styled.img.attrs({className: 'h-16 cursor-pointer'})``;
