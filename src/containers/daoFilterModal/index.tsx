@@ -18,11 +18,11 @@ import {
 import {DaoFilterAction, DaoFilterState, FilterActionTypes} from './reducer';
 
 export const DEFAULT_FILTERS: DaoFilterState = {
-  quickFilter: 'allDaos',
+  quickFilter: 'following',
   pluginNames: [],
   networks: ['nationsfirst'],
   order: 'tvl',
-  showTestnets: false,
+  showTestnets: true,
 };
 
 type DaoFilterModalProps = {
