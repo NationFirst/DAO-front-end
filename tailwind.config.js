@@ -17,6 +17,9 @@ module.exports = {
       fontWeight: {
         normal: 400,
       },
+      boxShadow: {
+        card: '0px 4px 20px 0px #0000000D',
+      },
     },
   },
   plugins: [

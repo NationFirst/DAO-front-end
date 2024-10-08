@@ -1,36 +1,15 @@
-import React, {useCallback} from 'react';
+import React, {FC} from 'react';
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom';
 
-import {useWallet} from '../../hooks/useWallet';
-import {trackEvent} from '../../services/analytics';
-import {CreateDAO} from '../../utils/paths';
-import Arrow from '../../assets/icons/arrow';
+import Arrow from 'assets/icons/arrow';
 
-const ButtonCreateDao = () => {
-  const navigate = useNavigate();
-  const {methods, isConnected} = useWallet();
+type Props = {
+  onClick: () => void;
+};
 
-  const handleClick = useCallback(() => {
-    trackEvent('landing_createDaoBtn_clicked');
-
-    if (isConnected) {
-      navigate(CreateDAO);
-      return;
-    }
-
-    methods
-      .selectWallet()
-      .then(() => {
-        navigate(CreateDAO);
-      })
-      .catch((err: Error) => {
-        console.error(err);
-      });
-  }, [isConnected, methods, navigate]);
-
+const ButtonCreateDao: FC<Props> = ({onClick}) => {
   return (
-    <Button onClick={handleClick}>
+    <Button onClick={onClick}>
       CREATE A DAO
       <ArrowRight />
     </Button>

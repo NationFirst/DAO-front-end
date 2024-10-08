@@ -1,6 +1,5 @@
 import React, {useCallback, useState} from 'react';
 import {Breadcrumb, ButtonWallet} from '@aragon/ods-old';
-import {Button, IconType} from '@aragon/ods';
 import {useTranslation} from 'react-i18next';
 import {useReactiveVar} from '@apollo/client';
 import {generatePath, useNavigate, useParams} from 'react-router-dom';
@@ -15,6 +14,7 @@ import {useNetwork} from 'context/network';
 import {useMappedBreadcrumbs} from 'hooks/useMappedBreadcrumbs';
 import {useWallet} from 'hooks/useWallet';
 import {NavlinksDropdown} from './breadcrumbDropdown';
+import LogoImg from 'assets/images/mainLogoGreen.png';
 
 const MIN_ROUTE_DEPTH_FOR_BREADCRUMBS = 2;
 
@@ -35,6 +35,7 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
   const {dao} = useParams();
   const {breadcrumbs, icon, tag} = useMappedBreadcrumbs();
   const {address, ensName, ensAvatarUrl, isConnected} = useWallet();
+  const path = t('logo.linkURL');
 
   const currentDao = useReactiveVar(selectedDaoVar);
 
@@ -51,6 +52,10 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
     }
   };
 
+  const navigateHome = () => {
+    navigate(path);
+  };
+
   const exitProcess = useCallback(() => {
     setShowExitProcessMenu(false);
     navigate(generatePath(props.returnURL!, {network, dao}));
@@ -65,6 +70,8 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
               crumbs={{label: props.processLabel!, path: props.returnURL!}}
               onClick={handleExitWithWarning}
             />
+
+            <LogoContainer src={LogoImg} onClick={navigateHome} />
 
             <ButtonWallet
               src={ensAvatarUrl || address}
@@ -116,16 +123,6 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
         </Content>
 
         <div className="flex gap-4">
-          {/* <Button
-            className="w-full md:w-max"
-            size="lg"
-            variant="tertiary"
-            iconRight={IconType.FEEDBACK}
-            onClick={props.onFeedbackClick}
-          >
-            {t('navButtons.giveFeedback')}
-          </Button> */}
-
           <ButtonWallet
             src={ensAvatarUrl || address}
             onClick={props.onWalletClick}
@@ -144,15 +141,8 @@ export default DesktopNav;
 
 const Menu = styled.nav.attrs({
   className: `flex mx-auto justify-between items-center max-w-[1680px]
-     px-10 2xl:px-20 py-6`,
-})`
-  background: linear-gradient(
-    180deg,
-    rgba(245, 247, 250, 1) 0%,
-    rgba(245, 247, 250, 0) 100%
-  );
-  backdrop-filter: blur(24px);
-`;
+     px-10 2xl:px-20 py-6 backdrop-blur-xl`,
+})``;
 
 const Content = styled.div.attrs({
   className: 'flex items-center space-x-12',
@@ -161,3 +151,5 @@ const Content = styled.div.attrs({
 const LinksWrapper = styled.div.attrs({
   className: 'flex items-center space-x-3',
 })``;
+
+const LogoContainer = styled.img.attrs({className: 'h-16 cursor-pointer'})``;

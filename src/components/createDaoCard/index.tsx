@@ -1,9 +1,34 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 import ButtonCreateDao from 'components/buttons/buttonCreateDao';
+import {useWallet} from 'hooks/useWallet';
+import {trackEvent} from 'services/analytics';
+import {CreateDAO} from 'utils/paths';
 
 const CreateDaoCard = () => {
+  const navigate = useNavigate();
+  const {methods, isConnected} = useWallet();
+
+  const handleClick = useCallback(() => {
+    trackEvent('landing_createDaoBtn_clicked');
+
+    if (isConnected) {
+      navigate(CreateDAO);
+      return;
+    }
+
+    methods
+      .selectWallet()
+      .then(() => {
+        navigate(CreateDAO);
+      })
+      .catch((err: Error) => {
+        console.error(err);
+      });
+  }, [isConnected, methods, navigate]);
+
   return (
     <Card>
       <ContentWrapper>
@@ -15,7 +40,7 @@ const CreateDaoCard = () => {
           your DAO to life on the Nationsfirst Network with our easy, no-code
           platform.
         </Subtitle>
-        <ButtonCreateDao />
+        <ButtonCreateDao onClick={handleClick} />
       </ContentWrapper>
     </Card>
   );
