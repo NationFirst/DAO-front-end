@@ -197,17 +197,15 @@ const DaoWrapper: React.FC = () => {
       {/* <UpdateBanner /> */}
       <StepperProvider>
         <Navbar />
-        <div className="flex min-h-[calc(100vh-var(--app-navbar-height))] flex-col pb-16">
-          <GridLayout className="flex-1">
-            <Outlet />
-            <TransferMenu />
-            <DepositModal />
-            <GatingMenu />
-            <DelegateVotingMenu />
-            <DelegationGatingMenu />
-            {isOpen && <TransactionDetail />}
-          </GridLayout>
-        </div>
+        <GridLayout className="min-h-[calc(100vh-var(--app-navbar-height))] pb-16">
+          <Outlet />
+          <TransferMenu />
+          <DepositModal />
+          <GatingMenu />
+          <DelegateVotingMenu />
+          <DelegationGatingMenu />
+          {isOpen && <TransactionDetail />}
+        </GridLayout>
       </StepperProvider>
       {/* <Footer /> */}
     </GovTokensWrappingProvider>
