@@ -6,7 +6,7 @@ import {generatePath, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 
 import {DaoSelector} from 'components/daoSelector';
-import {Container} from 'components/layout';
+import {Container, GridLayout} from 'components/layout';
 import NavLinks from 'components/navLinks';
 import ExitProcessMenu, {ProcessType} from 'containers/exitProcessMenu';
 import {selectedDaoVar} from 'context/apolloClient';
@@ -65,29 +65,33 @@ const DesktopNav: React.FC<DesktopNavProp> = props => {
   if (props.isProcess) {
     return (
       <>
-        <Container data-testid="navbar">
-          <Menu>
-            <Breadcrumb
-              crumbs={{label: props.processLabel!, path: props.returnURL!}}
-              onClick={handleExitWithWarning}
-            />
-            {isShowStep ? (
-              <StepIndicator>
-                Step {currentStep} out of {totalSteps}
-              </StepIndicator>
-            ) : (
-              <LogoContainer src={LogoImg} onClick={navigateHome} />
-            )}
-            <ButtonWallet
-              theme="dark"
-              src={ensAvatarUrl || address}
-              onClick={props.onWalletClick}
-              isConnected={isConnected}
-              label={
-                isConnected ? ensName || address : t('navButtons.connectWallet')
-              }
-            />
-          </Menu>
+        <Container data-testid="navbar" className="backdrop-blur-xl">
+          <GridLayout>
+            <Menu>
+              <Breadcrumb
+                crumbs={{label: props.processLabel!, path: props.returnURL!}}
+                onClick={handleExitWithWarning}
+              />
+              {isShowStep ? (
+                <StepIndicator>
+                  Step {currentStep} out of {totalSteps}
+                </StepIndicator>
+              ) : (
+                <LogoContainer src={LogoImg} onClick={navigateHome} />
+              )}
+              <ButtonWallet
+                theme="dark"
+                src={ensAvatarUrl || address}
+                onClick={props.onWalletClick}
+                isConnected={isConnected}
+                label={
+                  isConnected
+                    ? ensName || address
+                    : t('navButtons.connectWallet')
+                }
+              />
+            </Menu>
+          </GridLayout>
         </Container>
         {props.processType && (
           <ExitProcessMenu
@@ -147,7 +151,7 @@ export default DesktopNav;
 
 const Menu = styled.nav.attrs({
   className: `flex mx-auto justify-between items-center max-w-[1680px]
-     px-10 2xl:px-20 py-6 backdrop-blur-xl h-header`,
+     py-6 h-header col-span-full w-full`,
 })``;
 
 const Content = styled.div.attrs({

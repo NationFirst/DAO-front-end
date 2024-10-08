@@ -180,7 +180,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
           {customFooter ? (
             <>{customFooter}</>
           ) : (
-            <FormFooter1>
+            <FormFooter>
               <Button
                 variant="outline"
                 onClick={handleButtonBack}
@@ -199,7 +199,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
                   NEXT
                 </Button>
               </ButtonValidationTrigger>
-            </FormFooter1>
+            </FormFooter>
           )}
         </FormLayout>
       </Layout>
@@ -227,12 +227,12 @@ const FormLayout = styled.div.attrs<{fullWidth: FormLayoutProps}>(
   ({fullWidth}) => ({
     className: cls(
       {'xl:w-3/5': !fullWidth},
-      'mt-10 xl:mt-16 gap-y-20 flex-1 flex flex-col w-full'
+      'mt-10 xl:mt-16 gap-y-20 flex-1 flex flex-col w-full mx-auto'
     ),
   })
 )<FormLayoutProps>``;
 
-const FormFooter1 = styled.div.attrs({
+const FormFooter = styled.div.attrs({
   className: 'flex justify-between mt-auto',
 })``;
 
