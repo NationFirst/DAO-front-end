@@ -1,11 +1,8 @@
 import React from 'react';
 import {styled} from 'styled-components';
-import {LinearProgress} from '../progress';
-import {Button, IconType} from '@aragon/ods';
-import {t} from 'i18next';
 
 export type WizardProps = {
-  title: string;
+  title: string | React.ReactNode;
   description?: string | React.ReactNode;
   descriptionLink?: string;
   includeStepper?: boolean;
@@ -31,19 +28,19 @@ export const Wizard: React.FC<WizardProps> = ({
       <div className="xl:hidden">{nav}</div>
 
       {/* Stepper */}
-      {includeStepper && (
-        <Wrapper>
-          <CenteredFlex>
-            <p className="font-semibold text-neutral-800 xl:text-primary-500">
-              {processName}
-            </p>
-            <p className="text-neutral-400">
-              Step {currentStep} of {totalSteps}
-            </p>
-          </CenteredFlex>
-          <LinearProgress max={totalSteps} value={currentStep} />
-        </Wrapper>
-      )}
+      {/*{includeStepper && (*/}
+      {/*  <Wrapper>*/}
+      {/*    <CenteredFlex>*/}
+      {/*      <p className="font-semibold text-neutral-800 xl:text-primary-500">*/}
+      {/*        {processName}*/}
+      {/*      </p>*/}
+      {/*      <p className="text-neutral-400">*/}
+      {/*        Step {currentStep} of {totalSteps}*/}
+      {/*      </p>*/}
+      {/*    </CenteredFlex>*/}
+      {/*    <LinearProgress max={totalSteps} value={currentStep} />*/}
+      {/*  </Wrapper>*/}
+      {/*)}*/}
 
       {/* Main */}
       <Wrapper>
@@ -70,8 +67,7 @@ export const Wizard: React.FC<WizardProps> = ({
 };
 
 const StepCard = styled.div.attrs({
-  className:
-    'flex flex-col px-4 pt-4 pb-6 md:p-6 xl:p-12 md:rounded-xl gap-y-6 bg-neutral-0 md:shadow-neutral',
+  className: 'flex flex-col mt-10',
 })``;
 
 const Wrapper = styled.div.attrs({
@@ -79,7 +75,7 @@ const Wrapper = styled.div.attrs({
 })``;
 
 const StepTitle = styled.p.attrs({
-  className: 'ft-text-3xl text-neutral-800 font-semibold',
+  className: 'ft-text-3xl text-neutral-800 font-semibold mb-2',
 })``;
 
 const StepSubTitle = styled.span.attrs({

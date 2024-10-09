@@ -34,6 +34,7 @@ import {GatingMenu} from 'containers/gatingMenu';
 import {DelegationGatingMenu} from 'containers/delegationGatingMenu';
 import {ActionsProvider} from './context/actions';
 import decorationStyles from 'utils/decorationStyles';
+import {StepperProvider} from './context/stepperContext';
 
 export const App: React.FC = () => {
   // TODO this needs to be inside a Routes component. Will be moved there with
@@ -194,9 +195,9 @@ const DaoWrapper: React.FC = () => {
   return (
     <GovTokensWrappingProvider>
       {/* <UpdateBanner /> */}
-      <Navbar />
-      <div className="mb-16 min-h-screen">
-        <GridLayout>
+      <StepperProvider>
+        <Navbar />
+        <GridLayout className="min-h-[calc(100vh-var(--app-navbar-height))] pb-16">
           <Outlet />
           <TransferMenu />
           <DepositModal />
@@ -205,7 +206,7 @@ const DaoWrapper: React.FC = () => {
           <DelegationGatingMenu />
           {isOpen && <TransactionDetail />}
         </GridLayout>
-      </div>
+      </StepperProvider>
       {/* <Footer /> */}
     </GovTokensWrappingProvider>
   );

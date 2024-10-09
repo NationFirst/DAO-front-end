@@ -26,7 +26,7 @@ const CardImage: FC<Props> = ({type, height = 'h-full'}) => {
     <ImageContainer height={height}>
       <img
         src={images[type]}
-        alt="type"
+        alt={type}
         width={90}
         height={90}
         draggable={false}

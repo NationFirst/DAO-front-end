@@ -66,7 +66,7 @@ const StyledButton = styled.button.attrs<StyledButtonProp>(
         'text-primary-400 border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30':
           theme === 'dark',
       },
-      'flex items-center gap-x-3 transition-colors  rounded-xl  border-2 p-2.5 px-4'
+      'flex items-center gap-x-3 transition-colors rounded-xl border-2 p-2.5 px-4'
     ),
   })
 )``;

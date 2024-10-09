@@ -37,7 +37,7 @@ export const OverviewDAOHeader: React.FC<OverviewDAOHeaderProps> = ({
         />
       </div>
 
-      <div className="mt-20 items-end md:flex md:space-x-12">
+      <div className="mt-10 items-end md:flex md:space-x-12">
         <div className="w-full">
           <h1 className="font-semibold text-neutral-800 ft-text-3xl">
             Build Your <span className="font-semibold text-accent">DAO</span>

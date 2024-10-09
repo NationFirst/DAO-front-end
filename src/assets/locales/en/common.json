@@ -676,7 +676,7 @@
     "step1": {
       "label": "1",
       "title": "Choose a blockchain network",
-      "description": "The chain you choose is where your tokens and assets are stored. If you already have a token, choose the chain your token is minted on. This cannot be changed later.",
+      "description": "Select the network where your tokens and assets will reside. If you have an existing token, pick the blockchain it was originally created on. Please note, this decision is final and cannot be altered later.",
       "descriptionLinkURL": "#"
     },
     "step2": {
@@ -795,7 +795,7 @@
     },
     "step4": {
       "label": "4",
-      "title": "Configure governance rules\n",
+      "title": "Configure governance rules",
       "description": "These are the rules that define how decisions are made in your DAO. How many people have to participate? How much support is needed? How long are proposals open for voting?",
       "bestPractices": "best practices on governance",
       "supportThresholdSubtitle": "The percentage of tokens that vote \"Yes\" in support of a proposal, out of all tokens that have voted, must be greater than this value for the proposal to pass.",
