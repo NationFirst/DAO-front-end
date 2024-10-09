@@ -151,7 +151,7 @@ export default DesktopNav;
 
 const Menu = styled.nav.attrs({
   className: `flex mx-auto justify-between items-center max-w-[1680px]
-     py-6 h-header col-span-full w-full`,
+     py-6 h-header col-span-full w-full px-10 2xl:px-20 backdrop-blur-xl`,
 })``;
 
 const Content = styled.div.attrs({
