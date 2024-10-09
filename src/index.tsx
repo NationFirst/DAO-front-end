@@ -1,26 +1,17 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {HashRouter as Router} from 'react-router-dom';
-import '@aragon/ods/index.css';
-import './index.css';
-import isPropValid from '@emotion/is-prop-valid';
-import {StyleSheetManager} from 'styled-components';
-import {createWeb3Modal} from '@web3modal/wagmi/react';
-import {http, createConfig, WagmiProvider} from 'wagmi';
-import {walletConnect, coinbaseWallet} from 'wagmi/connectors';
 
-import {
-  Chain,
-  arbitrum,
-  base,
-  mainnet,
-  polygon,
-  sepolia,
-  zkSyncSepoliaTestnet,
-  zkSync,
-} from 'wagmi/chains';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import isPropValid from '@emotion/is-prop-valid';
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
+import {createWeb3Modal} from '@web3modal/wagmi/react';
+import {createConfig, http, WagmiProvider} from 'wagmi';
+import {injected} from 'wagmi/connectors';
+import {Chain} from 'wagmi/chains';
+import {defineChain, HttpTransport} from 'viem';
+import {StyleSheetManager} from 'styled-components';
+
 import {AlertProvider} from 'context/alert';
 import {GlobalModalsProvider} from 'context/globalModals';
 import {NetworkProvider} from 'context/network';
@@ -30,26 +21,38 @@ import {TransactionDetailProvider} from 'context/transactionDetail';
 import {WalletMenuProvider} from 'context/walletMenu';
 import {UseCacheProvider} from 'hooks/useCache';
 import {UseClientProvider} from 'hooks/useClient';
-import {
-  AppMetadata,
-  SupportedChainID,
-  walletConnectProjectID,
-} from 'utils/constants';
-import {VocdoniClientProvider} from './hooks/useVocdoniSdk';
-
-import {App} from './app';
+import {AppMetadata, SupportedChainID} from 'utils/constants';
 import {aragonGateway} from 'utils/aragonGateway';
-import {HttpTransport} from 'viem';
+import {VocdoniClientProvider} from 'hooks/useVocdoniSdk';
+import {App} from 'app';
+import LogoNF from 'assets/images/logoNF.png';
 
-const chains = [
-  mainnet,
-  polygon,
-  base,
-  arbitrum,
-  sepolia,
-  zkSyncSepoliaTestnet,
-  zkSync,
-] as [Chain, ...Chain[]];
+import '@aragon/ods/index.css';
+import './index.css';
+
+const nationsfirst = defineChain({
+  id: 0xa868,
+  name: 'Nationsfirst',
+  testnet: true,
+  nativeCurrency: {
+    name: 'Nationsfirst Coin',
+    symbol: 'NFC',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://api-dev-network.nationsfirst.io/ext/bc/C/rpc'],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: 'Nationsfirst',
+      url: 'https://explorer-dev.nationsfirst.io/',
+    },
+  },
+});
+
+const chains = [nationsfirst] as [Chain, ...Chain[]];
 
 const transports = chains.reduce(
   (RPCs, value) => {
@@ -63,16 +66,16 @@ const transports = chains.reduce(
 
 export const wagmiConfig = createConfig({
   chains,
-  transports: transports,
+  transports,
+  multiInjectedProviderDiscovery: false,
   connectors: [
-    walletConnect({
-      projectId: walletConnectProjectID,
-      metadata: AppMetadata,
-      showQrModal: false,
-    }),
-    coinbaseWallet({
-      appName: AppMetadata.name,
-      appLogoUrl: AppMetadata.icons[0],
+    injected({
+      target: () => ({
+        id: 'nationsfirst',
+        name: 'Nationsfirst Wallet',
+        provider: window => window?.ethereum,
+        icon: LogoNF,
+      }),
     }),
   ],
 });
@@ -80,16 +83,16 @@ export const wagmiConfig = createConfig({
 // 3. Create modal
 createWeb3Modal({
   wagmiConfig,
-  projectId: walletConnectProjectID,
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
-  enableOnramp: true, // Optional
+  chainImages: {
+    0xa868: LogoNF,
+  },
+  metadata: AppMetadata,
+  projectId: '123',
+  enableAnalytics: false, // Optional - defaults to your Cloud configuration
+  enableOnramp: false, // Optional
+  allowUnsupportedChain: false,
   themeMode: 'light',
-  allWallets: 'SHOW',
-  featuredWalletIds: [
-    'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-    '1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-    '18388be9ac2d02726dbac9777c96efaac06d744b2f6d580fccdd4127a6d01fd1',
-  ],
+  allWallets: 'HIDE',
 });
 
 // Add toJSON method to BigInt interface to properly serialize bigint types

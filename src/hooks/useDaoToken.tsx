@@ -47,6 +47,6 @@ export function useDaoToken(
       getTokenMetadata(pluginAddress);
     }
   }, [pluginAddress, client]);
-
+  
   return {data, error, isLoading};
 }

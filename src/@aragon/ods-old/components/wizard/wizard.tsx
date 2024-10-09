@@ -50,7 +50,7 @@ export const Wizard: React.FC<WizardProps> = ({
         <StepTitle>{title}</StepTitle>
 
         <StepSubTitle>{description}</StepSubTitle>
-        {!!descriptionLink && (
+        {/* {!!descriptionLink && (
           <div className="max-w-fit">
             <Button
               className="mt-4"
@@ -63,7 +63,7 @@ export const Wizard: React.FC<WizardProps> = ({
               {t('navLinks.guide')}
             </Button>
           </div>
-        )}
+        )} */}
       </Wrapper>
     </StepCard>
   );

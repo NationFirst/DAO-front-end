@@ -13,6 +13,8 @@ export const ProvidersContextProvider = (props: {children: ReactNode}) => {
   const {network} = useNetwork();
   const apiProvider = aragonGateway.getRpcProvider(network);
 
+  // console.log('[PROVIDERS CONTEXT]', {network, apiProvider});
+
   const contextValue = useMemo(() => ({api: apiProvider}), [apiProvider]);
 
   return (

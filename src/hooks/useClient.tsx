@@ -6,15 +6,18 @@ import {
 
 import {useNetwork} from 'context/network';
 import React, {
-  ReactNode,
   createContext,
+  ReactNode,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react';
 
-import {SUBGRAPH_API_URL, SupportedNetworks} from 'utils/constants';
+import {
+  SUBGRAPH_API_URL,
+  SupportedNetworks,
+} from 'utils/constants';
 import {translateToAppNetwork, translateToNetworkishName} from 'utils/library';
 import {useWallet} from './useWallet';
 import {aragonGateway} from 'utils/aragonGateway';
@@ -51,6 +54,9 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
   useEffect(() => {
     const translatedNetwork = translateToNetworkishName(network);
 
+    // console.log('[CLIENT PROVIDER]::[signer]', {signer});
+    // console.log('[CLIENT PROVIDER]::[network]', {translatedNetwork});
+
     // when network not supported by the SDK, don't set network
     if (
       translatedNetwork === 'unsupported' ||
@@ -60,7 +66,7 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
     }
 
     const daoFactoryAddress =
-      getLatestNetworkDeployment(translatedNetwork)?.DAOFactory.address ?? '';
+      getLatestNetworkDeployment(translatedNetwork)?.DAOFactory?.address ?? '';
 
     const contextParams: ContextParams = {
       DAOFactory: daoFactoryAddress,
@@ -72,8 +78,12 @@ export const UseClientProvider: React.FC<{children: ReactNode}> = ({
     };
 
     const sdkContext = new SdkContext(contextParams);
+    const sdkClient = new Client(sdkContext);
 
-    setClient(new Client(sdkContext));
+    // console.log('[CLIENT PROVIDER]::[sdk context]', {sdkContext});
+    // console.log('[CLIENT PROVIDER]::[sdk client]', {sdkClient});
+
+    setClient(sdkClient);
     setContext(sdkContext);
   }, [network, signer]);
 

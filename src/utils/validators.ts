@@ -73,6 +73,8 @@ export async function validateGovernanceTokenAddress(
 }> {
   const isAddress = validateAddress(address);
 
+  console.log('[VALIDATE CONTRACT ADDRESS]::[is address]', {isAddress});
+
   if (isAddress !== true) {
     return {
       verificationResult: isAddress,
@@ -82,6 +84,11 @@ export async function validateGovernanceTokenAddress(
     const isGovernanceCompatible = await isCompatibleToken(
       pluginClient,
       address
+    );
+
+    console.log(
+      '[VALIDATE CONTRACT ADDRESS]::[is token governance compatible]',
+      {isGovernanceCompatible}
     );
 
     // I should've used TokenVotingTokenCompatibility enum but It isn't exported

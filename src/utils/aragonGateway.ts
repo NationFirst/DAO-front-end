@@ -21,9 +21,9 @@ class AragonGateway {
   ): JsonRpcProvider => {
     let network = this.parseNetwork(chainIdOrNetwork);
 
-    // Default provider to ethereum for unsupported networks
+    // Default provider to nationsfirst for unsupported networks
     if (network == null || network === 'unsupported') {
-      network = 'ethereum';
+      network = 'nationsfirst';
     }
 
     const sdkNetwork = translateToNetworkishName(
@@ -53,19 +53,19 @@ class AragonGateway {
       return null;
     }
 
-    const {gatewayNetwork} = CHAIN_METADATA[network];
-    const gatewayKey =
-      network === 'zksyncSepolia' || network === 'zksyncMainnet'
-        ? import.meta.env.VITE_GATEWAY_RPC_API_KEY_ALCHEMY
-        : import.meta.env.VITE_GATEWAY_RPC_API_KEY;
-
-    const baseUrl =
-      network === 'zksyncSepolia' || network === 'zksyncMainnet'
-        ? this.baseUrl.replace('app', 'alchemy')
-        : this.baseUrl;
-
-    const rpcUrl = `${baseUrl}/v${this.rpcVersion}/rpc/${gatewayNetwork}/${gatewayKey}`;
-    return rpcUrl;
+    const {publicRpc} = CHAIN_METADATA[network];
+    // const gatewayKey =
+    //   network === 'zksyncSepolia' || network === 'zksyncMainnet'
+    //     ? import.meta.env.VITE_GATEWAY_RPC_API_KEY_ALCHEMY
+    //     : import.meta.env.VITE_GATEWAY_RPC_API_KEY;
+    //
+    // const baseUrl =
+    //   network === 'zksyncSepolia' || network === 'zksyncMainnet'
+    //     ? this.baseUrl.replace('app', 'alchemy')
+    //     : this.baseUrl;
+    //
+    // const rpcUrl = `${baseUrl}/v${this.rpcVersion}/rpc/${gatewayNetwork}/${gatewayKey}`;
+    return publicRpc;
   };
 
   private parseNetwork = (

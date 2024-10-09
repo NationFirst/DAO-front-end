@@ -1,10 +1,11 @@
 import React, {type ButtonHTMLAttributes, type FC} from 'react';
 import {styled} from 'styled-components';
+import {Icon, IconType} from '@aragon/ods';
+import cls from 'classnames';
 
-import {shortenAddress} from '../../utils/addresses';
+import {shortenAddress} from '../../utils';
 import {AvatarWallet} from '../avatar';
 import {Spinner} from '../spinner';
-import {Icon, IconType} from '@aragon/ods';
 
 export type ButtonWalletProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   /**
@@ -23,6 +24,7 @@ export type ButtonWalletProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    * Check if wallet is connected!
    */
   isConnected?: boolean;
+  theme?: 'light' | 'dark';
 };
 
 export const ButtonWallet: FC<ButtonWalletProps> = ({
@@ -30,10 +32,11 @@ export const ButtonWallet: FC<ButtonWalletProps> = ({
   src,
   isLoading = false,
   isConnected = false,
+  theme = 'dark',
   ...props
 }) => {
   return (
-    <StyledButton {...props} {...{isLoading}}>
+    <StyledButton {...props} {...{isLoading, theme}}>
       <StyledLabel>{shortenAddress(label)}</StyledLabel>
       <Avatar {...{isConnected, isLoading, src}} />
     </StyledButton>
@@ -52,16 +55,21 @@ const Avatar: FC<AvatarProps> = ({isConnected, isLoading, src}) => {
   return <AvatarWallet src={src ?? ''} />;
 };
 
-type StyledButtonProp = Pick<ButtonWalletProps, 'isLoading'>;
+type StyledButtonProp = Pick<ButtonWalletProps, 'isLoading' | 'theme'>;
 
-const StyledButton = styled.button.attrs<StyledButtonProp>(({isLoading}) => {
-  const className = `${
-    isLoading ? 'text-primary-500' : 'text-neutral-600'
-  } flex items-center md:space-x-3 font-semibold p-3 hover:text-neutral-800
-    active:text-neutral-800 disabled:text-neutral-300 bg-neutral-0 hover:bg-neutral-100 active:bg-neutral-200
-    disabled:bg-neutral-100 rounded-xl focus-visible:ring focus-visible:ring-primary`;
-  return {className};
-})``;
+const StyledButton = styled.button.attrs<StyledButtonProp>(
+  ({isLoading, theme}) => ({
+    className: cls(
+      {
+        'text-neutral-0 border-white/10 hover:border-white/30 active:border-white/30':
+          theme === 'light',
+        'text-primary-400 border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30':
+          theme === 'dark',
+      },
+      'flex items-center gap-x-3 transition-colors  rounded-xl  border-2 p-2.5 px-4'
+    ),
+  })
+)``;
 
 const StyledLabel = styled.span.attrs({
   className: 'md:inline hidden',

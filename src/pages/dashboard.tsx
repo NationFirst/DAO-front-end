@@ -75,6 +75,8 @@ export const Dashboard: React.FC = () => {
     isFetching: followedDaosFetching,
   } = useFollowedDaosQuery();
 
+  // console.log('[FOLLOWED DAOS]', {followedDaos});
+
   const enableFollowing =
     !followedDaosFetching &&
     !addFollowedDaoMutation.isPending &&
@@ -315,6 +317,8 @@ export const Dashboard: React.FC = () => {
           href: link.url,
         })) ?? [];
 
+    // console.log('[LIVE DAO]', {liveDao});
+
     return (
       <>
         <HeaderWrapper>
@@ -323,7 +327,7 @@ export const Dashboard: React.FC = () => {
             daoEnsName={toDisplayEns(liveDao.ensDomain)}
             daoAddress={liveDao.address}
             daoAvatar={liveDao?.metadata?.avatar}
-            daoUrl={`app.aragon.org/#/daos/${network}/${liveAddressOrEns}`}
+            daoUrl={`${document.location.host}/#/daos/${network}/${liveAddressOrEns}`}
             description={liveDao.metadata.description}
             created_at={formatDate(
               liveDao.creationDate.getTime() / 1000,

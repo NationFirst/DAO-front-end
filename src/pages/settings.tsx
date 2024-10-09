@@ -58,8 +58,9 @@ export const Settings: React.FC = () => {
     return null;
   }
 
-  const daoUpdateEnabled =
-    featureFlags.getValue('VITE_FEATURE_FLAG_OSX_UPDATES') === 'true';
+  // const daoUpdateEnabled =
+  //   featureFlags.getValue('VITE_FEATURE_FLAG_OSX_UPDATES') === 'true';
+  const daoUpdateEnabled = false;
 
   const showUpdatesCard = updateExists && isMember && daoUpdateEnabled;
 
@@ -86,7 +87,7 @@ export const Settings: React.FC = () => {
         </div>
       </div>
 
-      {/* Version Info */}
+      Version Info
       {daoUpdateEnabled && (
         <VersionInfoCard
           pluginAddress={daoDetails.plugins[0].instanceAddress}

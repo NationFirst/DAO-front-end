@@ -25,7 +25,8 @@ export const DaoCard = (props: IDaoCardProps) => {
 
   const daoPage = generatePath(Dashboard, {
     network,
-    dao: toDisplayEns(ens) || daoAddress,
+    // dao: toDisplayEns(ens) || daoAddress,
+    dao: daoAddress,
   });
   const daoUrl = useHref(daoPage);
 

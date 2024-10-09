@@ -36,6 +36,8 @@ const VerificationCard: React.FC<TransferListProps> = ({tokenAddress}) => {
     ],
     control: control,
   });
+
+  console.log('tokenType', tokenType);
   const {network} = useNetwork();
 
   const {data: tokenHolders, isLoading: isTotalHoldersLoading} =
@@ -184,7 +186,11 @@ const VerificationCard: React.FC<TransferListProps> = ({tokenAddress}) => {
             <Dt>
               {t('createDAO.step3.existingToken.verificationLabelStandard')}
             </Dt>
-            <Dd>{tokenType === 'governance-ERC20' ? 'ERC-20' : tokenType}</Dd>
+            <Dd>
+              {tokenType === 'governance-ERC20'
+                ? 'NFC-20'
+                : tokenType.replace('ERC', 'NFC')}
+            </Dd>
           </Dl>
           {tokenType !== 'Unknown' && (
             <>

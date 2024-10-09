@@ -96,6 +96,10 @@ async function getProposalsList(
       sortBy,
     });
 
+    console.log('tokenVotingProposals', tokenVotingProposals);
+
+    // TODO: migrate dao {id, subdomain} -> daoAddress
+
     return await Promise.all(
       tokenVotingProposals.map(
         async (
@@ -182,6 +186,8 @@ async function fetchProposals(
 ): Promise<FetchProposalsResponseTypes> {
   invariant(!!client, 'fetchProposalsAsync: client is not defined');
 
+  console.log('[FETCH PROPOSALS]');
+
   // eslint-disable-next-line prefer-const
   let {daoAddressOrEns, ...restParams} = params;
 
@@ -229,6 +235,8 @@ export const useProposals = (
 
   const defaultSelect = (data: InfiniteData<FetchProposalsResponseTypes>) =>
     transformInfiniteProposals(chainId, data);
+
+  // console.log('[USE PROPOSALS]');
 
   return useInfiniteQuery({
     ...options,

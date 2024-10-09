@@ -1,47 +1,44 @@
 import React, {useEffect} from 'react';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styled from 'styled-components';
+import {SupportedNetworks as SdkSupportedNetworks} from '@aragon/osx-commons-configs';
 
 import {GridLayout} from 'components/layout';
-import Carousel from 'containers/carousel';
-import {DaoExplorer} from 'containers/daoExplorer';
 import Hero from 'containers/hero';
 import {useNetwork} from 'context/network';
 import {translateToNetworkishName} from 'utils/library';
-import {SupportedNetworks} from '@aragon/osx-commons-configs';
+import CreateDaoCard from 'components/createDaoCard';
 
 export const Explore: React.FC = () => {
   const {network, setNetwork} = useNetwork();
 
   useEffect(() => {
-    //FIXME: temporarily when network not supported by the SDK, default to ethereum
     const translatedNetwork = translateToNetworkishName(
       network
-    ) as SupportedNetworks;
+    ) as SdkSupportedNetworks;
 
     // when network not supported by the SDK, don't set network
-    if (!Object.values(SupportedNetworks).includes(translatedNetwork)) {
-      console.warn('Unsupported network, defaulting to ethereum');
-      setNetwork('ethereum');
+    if (!Object.values(SdkSupportedNetworks).includes(translatedNetwork)) {
+      console.warn('Unsupported network, defaulting to nationsfirst');
+      setNetwork('nationsfirst');
     }
   }, [network, setNetwork]);
 
   return (
-    <>
-      <Hero />
+    <Wrapper>
       <GridLayout>
         <ContentWrapper>
-          <Carousel />
-          <DaoExplorer />
+          <Hero />
+          <CreateDaoCard />
         </ContentWrapper>
       </GridLayout>
-    </>
+    </Wrapper>
   );
 };
 
-/* STYLES =================================================================== */
+const Wrapper = styled.div.attrs({
+  className: 'my-auto py-10',
+})``;
 
 const ContentWrapper = styled.div.attrs({
-  className:
-    'col-span-full xl:col-start-2 xl:col-end-12 space-y-10 xl:space-y-[72px] mb-10 xl:mb-20 pb-10',
+  className: 'col-span-full grid grid-cols-1 lg:grid-cols-2 gap-28 items-end',
 })``;

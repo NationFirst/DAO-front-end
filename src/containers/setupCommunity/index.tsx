@@ -106,6 +106,7 @@ const SetupCommunityForm: React.FC = () => {
                 helptext={t('createDAO.step3.multisigMembershipSubtitle')}
                 onClick={() => handleCheckBoxSelected('multisig', onChange)}
                 multiSelect={false}
+                disabled
                 {...(value === 'multisig' ? {type: 'active'} : {})}
               />
             </>

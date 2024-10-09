@@ -20,7 +20,7 @@ import {DaoFilterAction, DaoFilterState, FilterActionTypes} from './reducer';
 export const DEFAULT_FILTERS: DaoFilterState = {
   quickFilter: 'allDaos',
   pluginNames: [],
-  networks: [],
+  networks: ['nationsfirst'],
   order: 'tvl',
   showTestnets: false,
 };

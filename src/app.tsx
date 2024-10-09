@@ -11,8 +11,6 @@ import {
 import {GridLayout} from 'components/layout';
 import ProtectedRoute from 'components/protectedRoute';
 import {Loading} from 'components/temporary/loading';
-import ExploreFooter from 'containers/exploreFooter';
-import Footer from 'containers/footer';
 import Navbar from 'containers/navbar';
 import DaoSelectMenu from 'containers/navbar/daoSelectMenu';
 import ExploreNav from 'containers/navbar/exploreNav';
@@ -24,9 +22,7 @@ import {ProposalTransactionProvider} from 'context/proposalTransaction';
 import {useTransactionDetailContext} from 'context/transactionDetail';
 import {FormProvider, useForm} from 'react-hook-form';
 import DepositModal from 'containers/transactionModals/depositModal';
-import PoapClaimModal from 'containers/poapClaiming/PoapClaimModal';
 import {GovTokensWrappingProvider} from 'context/govTokensWrapping';
-import {useMonitoring} from 'hooks/useMonitoring';
 import {useWallet} from 'hooks/useWallet';
 import {identifyUser, trackPage} from 'services/analytics';
 import {featureFlags} from 'utils/featureFlags';
@@ -36,16 +32,14 @@ import '../i18n.config';
 import {ProposalSettingsFormData} from 'utils/types';
 import {GatingMenu} from 'containers/gatingMenu';
 import {DelegationGatingMenu} from 'containers/delegationGatingMenu';
-import UpdateBanner from 'containers/navbar/updateBanner';
 import {ActionsProvider} from './context/actions';
+import decorationStyles from 'utils/decorationStyles';
 
 export const App: React.FC = () => {
   // TODO this needs to be inside a Routes component. Will be moved there with
   // further refactoring of layout (see further below).
   const {pathname} = useLocation();
   const {methods, status, network, address, provider} = useWallet();
-
-  useMonitoring();
 
   // Initialize feature flags using the initial URL
   useEffect(() => featureFlags.initializeFeatureFlags(), []);
@@ -143,7 +137,7 @@ export const App: React.FC = () => {
       </Suspense>
       <DaoSelectMenu />
       <WalletMenu />
-      <PoapClaimModal />
+      {/* <PoapClaimModal /> */}
       <NetworkErrorMenu />
     </>
   );
@@ -182,13 +176,13 @@ const ProposalDetailsWrapper: React.FC = () => (
 );
 
 const ExploreWrapper: React.FC = () => (
-  <>
-    <div className="min-h-screen">
-      <ExploreNav />
-      <Outlet />
-    </div>
-    <ExploreFooter />
-  </>
+  <div
+    className="relative flex min-h-screen flex-col bg-primary-500"
+    style={decorationStyles}
+  >
+    <ExploreNav />
+    <Outlet />
+  </div>
 );
 
 const DaoWrapper: React.FC = () => {
@@ -199,9 +193,9 @@ const DaoWrapper: React.FC = () => {
 
   return (
     <GovTokensWrappingProvider>
-      <UpdateBanner />
+      {/* <UpdateBanner /> */}
       <Navbar />
-      <div className="min-h-screen">
+      <div className="mb-16 min-h-screen">
         <GridLayout>
           <Outlet />
           <TransferMenu />
@@ -212,7 +206,7 @@ const DaoWrapper: React.FC = () => {
           {isOpen && <TransactionDetail />}
         </GridLayout>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </GovTokensWrappingProvider>
   );
 };

@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
   font-weight: 500;
 }
 
 body {
-  background-color: #f5f7fa;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  background-color: #FFF;
 }
 
 /* Web3Modal comes with a default setting of z-index: 2. This conflicts with

@@ -140,6 +140,7 @@ export const useProposal = (
     queryKey: aragonSdkQueryKeys.proposal(params),
     queryFn: async () => {
       const serverData = await fetchProposal(params, client, network);
+      console.log('syncProposalData', {chainId, params, network, serverData});
       return syncProposalData(chainId, params.id, serverData);
     },
     select: options.select ?? defaultSelect,

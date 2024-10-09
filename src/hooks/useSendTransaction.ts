@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from 'react';
 import {ITransaction} from 'services/transactions/domain/transaction';
-import {FormattedTransactionReceipt, Hash, TransactionReceipt} from 'viem';
+import {FormattedTransactionReceipt, Hash, parseEther, TransactionReceipt} from 'viem';
 import {
   SendTransactionErrorType,
   WaitForTransactionReceiptErrorType,
@@ -66,7 +66,9 @@ export const useSendTransaction = (
     isFetching: isEstimateGasLoading,
     isError: isEstimateGasError,
     error: estimateGasError,
-  } = useEstimateGas(transaction);
+  } = useEstimateGas({ ...transaction, value: parseEther('0.01') });
+
+  // console.log('useEstimateGas', transaction, estimateGasError);
 
   const handleSendTransactionError = useCallback(
     (step: SendTransactionStep) => (error: unknown) => {
@@ -101,9 +103,17 @@ export const useSendTransaction = (
     isSuccess,
   } = useWaitForTransactionReceipt({
     hash: txHash,
-    confirmations: 2,
+    confirmations: 1,
     query: {enabled: txHash != null},
   });
+
+  // console.log('txHash', txHash);
+  // console.log('txReceipt', txReceipt);
+  // console.log('waitTransactionError', waitTransactionError);
+  // console.log('isSuccess', isSuccess);
+
+  // console.log('isEstimateGasError', isEstimateGasError);
+  // console.log('estimateGasError', estimateGasError);
 
   // Trigger onSuccess callback on transaction success
   useEffect(() => {
@@ -159,6 +169,7 @@ export const useSendTransaction = (
   }, [txHash, isSuccess]);
 
   const sendTransaction = useCallback(() => {
+    // console.log('sendTransaction');
     if (transaction == null) {
       return;
     }

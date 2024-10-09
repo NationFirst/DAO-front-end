@@ -62,6 +62,8 @@ async function fetchDaoDetails(
     }
   );
 
+  console.log('[FETCH DAO DETAILS]', {dao});
+
   try {
     const metadata = await ipfsService.getData(dao.metadata);
     daoDetails = toDaoDetails(dao, metadata);
@@ -70,16 +72,16 @@ async function fetchDaoDetails(
   }
 
   const avatar = daoDetails?.metadata.avatar;
+    console.log('IPDS fetchDaoDetails', {avatar});
   if (avatar)
     if (typeof avatar !== 'string') {
       daoDetails.metadata.avatar = URL.createObjectURL(avatar);
     } else if (/^ipfs/.test(avatar) && client) {
       try {
         const cid = resolveIpfsCid(avatar);
-
-        daoDetails.metadata.avatar = `${
-          import.meta.env.VITE_PINATA_GATEWAY
-        }/${cid}`;
+        const gateway = import.meta.env.VITE_PINATA_GATEWAY;
+        const gatewayKey = import.meta.env.VITE_PINATA_GATEWAY_KEY;
+        daoDetails.metadata.avatar = `${gateway}/ipfs/${cid}?pinataGatewayToken=${gatewayKey}`;
       } catch (err) {
         console.warn('Error resolving DAO avatar IPFS Cid', err);
       }

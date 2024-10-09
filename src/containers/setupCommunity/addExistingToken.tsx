@@ -29,14 +29,13 @@ const AddExistingToken: React.FC = () => {
 
   const provider = aragonGateway.getRpcProvider(blockchain.id);
   const nativeCurrency = CHAIN_METADATA[network].nativeCurrency;
-  const explorerPath =
-    network === 'zksyncMainnet' || network === 'zksyncSepolia'
-      ? 'address/'
-      : 'token/';
+  const explorerPath = 'token/';
   const tokenAddressBlockExplorerURL = `${CHAIN_METADATA[network].explorer}${explorerPath}`;
 
   // get plugin Client
   const pluginClient = usePluginClient('token-voting.plugin.dao.eth');
+
+  console.log('[ADD EXISTING TOKEN]::[plugin client]', {pluginClient});
 
   // Trigger address validation on network change
   useEffect(() => {
@@ -66,6 +65,12 @@ const AddExistingToken: React.FC = () => {
         provider,
         pluginClient as TokenVotingClient
       );
+
+      console.log('[ADD EXISTING TOKEN]::[token contract]', {
+        tokenContract,
+        verificationResult,
+        type,
+      });
 
       if (verificationResult === true) {
         if (type !== 'Unknown') {

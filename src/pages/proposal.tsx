@@ -718,6 +718,11 @@ export const Proposal: React.FC = () => {
   const isLoading = proposalIsLoading || detailsAreLoading;
 
   if (proposalError || (proposalIsFetched && proposal == null)) {
+    console.log('PROPOSAL -> NOT_FOUND', {
+      proposalError,
+      proposalIsFetched,
+      proposal,
+    });
     navigate(NotFound, {replace: true, state: {invalidProposal: proposalId}});
     return null;
   }

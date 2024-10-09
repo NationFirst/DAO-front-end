@@ -71,6 +71,9 @@ class TransactionsService {
       trustedForwarder: trustedForwarder,
     };
 
+    console.log('createDaoParams', createDaoParams, { metadataUri });
+    console.log('pluginInstallationData', pluginInstallationData);
+
     const transaction = await daoFactoryInstance.populateTransaction.createDao(
       createDaoParams,
       pluginInstallationData

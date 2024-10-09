@@ -5,16 +5,20 @@ import {pinataJSONAPI, pinataFileAPI, DataType} from 'utils/constants';
 class IpfsService {
   constructor(
     private gateway: string = import.meta.env.VITE_PINATA_GATEWAY,
+    private gatewayKey: string = import.meta.env.VITE_PINATA_GATEWAY_KEY,
     private apiKey: string = import.meta.env.VITE_PINATA_JWT_API_KEY,
     private CIDVersion: string = import.meta.env.VITE_PINATA_CID_VERSION
   ) {}
 
   getData = async (cid: string) => {
     const resolvedCid = cid.startsWith('ipfs') ? resolveIpfsCid(cid) : cid;
-
-    const response = await fetch(`${this.gateway}/${resolvedCid}`, {
-      method: 'GET',
-    });
+    console.trace('IPFS getData', {cid, resolvedCid});
+    const response = await fetch(
+      `${this.gateway}/ipfs/${resolvedCid}?pinataGatewayToken=${this.gatewayKey}`,
+      {
+        method: 'GET',
+      }
+    );
 
     const data = await response.json();
 
@@ -24,6 +28,13 @@ class IpfsService {
   pinData = async (data: IPinDataProps) => {
     const {processedData, type} = await this.processData(data);
     let res;
+
+     console.log('IPFS pinData', {
+       data,
+       processedData,
+       type,
+       CIDVersion: this.CIDVersion,
+     });
 
     if (type === DataType.File) {
       res = await fetch(pinataFileAPI, {
