@@ -237,7 +237,11 @@ export const DaoExplorer = () => {
           <CardEmptyState
             objectIllustration={{object: 'MAGNIFYING_GLASS'}}
             heading={t('explore.emptyStateSearch.title')}
-            // description={t('explore.emptyStateSearch.description')}
+            description={
+              !isConnected
+                ? 'Connect your wallet to view your DAOs.'
+                : 'Recently followed DAOs will appear here.'
+            }
             // secondaryButton={{
             //   label: t('explore.emptyStateSearch.ctaLabel'),
             //   iconLeft: IconType.RELOAD,
