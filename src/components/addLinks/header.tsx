@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Label} from '@aragon/ods-old';
 import {useTranslation} from 'react-i18next';
+import {Link} from '../../assets/icons';
 
 export type BgWhite = {bgWhite?: boolean};
 
@@ -14,6 +15,7 @@ const AddLinksHeader: React.FC<BgWhite> = ({bgWhite}) => {
         <Label label={t('labels.label')} />
       </HeaderItem>
       <HeaderItem>
+        <Link />
         <Label label={t('labels.link')} />
       </HeaderItem>
       <div className="w-12" />
@@ -24,7 +26,7 @@ const AddLinksHeader: React.FC<BgWhite> = ({bgWhite}) => {
 export default AddLinksHeader;
 
 const Container = styled.div.attrs<{bgWhite: BgWhite}>(({bgWhite}) => ({
-  className: `hidden md:flex p-4 space-x-4 ${
+  className: `hidden md:flex mt-4 space-x-4 ${
     bgWhite
       ? 'bg-neutral-50 border border-neutral-100 rounded-t-xl'
       : 'bg-neutral-0'
@@ -32,5 +34,5 @@ const Container = styled.div.attrs<{bgWhite: BgWhite}>(({bgWhite}) => ({
 }))<BgWhite>``;
 
 const HeaderItem = styled.div.attrs({
-  className: 'flex-1',
+  className: 'flex-1 inline-flex items-center gap-x-2',
 })``;

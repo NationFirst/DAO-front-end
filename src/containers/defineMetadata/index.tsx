@@ -16,6 +16,8 @@ import {useProviders} from 'context/providers';
 import {ENS_SUPPORTED_NETWORKS, URL_PATTERN} from 'utils/constants';
 import {isOnlyWhitespace} from 'utils/library';
 import {isDaoEnsNameValid} from 'utils/validators';
+import {Help} from '../../@aragon/ods-old/components/help';
+import {GridLayout} from '../../components/layout';
 
 const DAO_LOGO = {
   maxDimension: 2400,
@@ -104,61 +106,18 @@ const DefineMetadata: React.FC<DefineMetadataProps> = ({
   }
 
   return (
-    <>
-      {/* Name */}
-      <FormItem>
-        <Label
-          label={t('labels.daoName')}
-          helpText={t('createDAO.step2.nameSubtitle')}
-        />
-
-        <Controller
-          name="daoName"
-          control={control}
-          defaultValue=""
-          rules={{
-            required: t('errors.required.name'),
-          }}
-          render={({
-            field: {onBlur, onChange, value, name},
-            fieldState: {error},
-          }) => (
-            <>
-              <TextInput
-                {...{name, value, onBlur, onChange}}
-                placeholder={t('placeHolders.daoName')}
-              />
-              <InputCount>{`${value.length}/128`}</InputCount>
-              {error?.message && (
-                <AlertInline message={error.message} variant="critical" />
-              )}
-            </>
-          )}
-        />
-      </FormItem>
-
-      {/* ENS Ens Name */}
-      {!isSettingPage && supportsENS && (
+    <GridLayout>
+      <div className="col-span-full flex flex-col gap-y-10 xl:col-start-3 xl:col-end-11">
+        {/* Name */}
         <FormItem>
-          <Label
-            label={t('labels.daoEnsName')}
-            helpText={t('createDAO.step2.ensNameSubtitle')}
-          />
+          <Label label="Name your DAO" />
 
           <Controller
-            name="daoEnsName"
+            name="daoName"
             control={control}
             defaultValue=""
             rules={{
-              required: t('errors.required.ensName'),
-              validate: value =>
-                isDaoEnsNameValid(
-                  value,
-                  provider,
-                  setError,
-                  clearErrors,
-                  getValues
-                ),
+              required: t('errors.required.name'),
             }}
             render={({
               field: {onBlur, onChange, value, name},
@@ -166,122 +125,173 @@ const DefineMetadata: React.FC<DefineMetadataProps> = ({
             }) => (
               <>
                 <TextInput
-                  {...{
-                    name,
-                    value,
-                    onBlur,
-                    onChange: event => {
-                      event.target.value = event.target.value.toLowerCase();
-                      onChange(event);
-                    },
-                  }}
-                  placeholder={t('placeHolders.ensName')}
-                  rightAdornment={
-                    <div className="flex h-full items-center rounded-r-xl bg-neutral-50 px-4">
-                      .dao.nfn
-                    </div>
-                  }
+                  {...{name, value, onBlur, onChange}}
+                  placeholder="Type"
                 />
-                <InputCount>{`${value.length}/128`}</InputCount>
-                <ErrorHandler {...{value, error}} />
-              </>
-            )}
-          />
-        </FormItem>
-      )}
-
-      {/* Logo */}
-      <FormItem>
-        <Label
-          label={t('labels.logo')}
-          helpText={t('createDAO.step2.logoSubtitle')}
-          isOptional
-          tagLabel={t('labels.optional')}
-        />
-
-        <Controller
-          name="daoLogo"
-          control={control}
-          render={({field: {value, onChange}, fieldState: {error}}) => {
-            let preview = '';
-
-            try {
-              // in case url does not need to be created
-              if (URL_PATTERN.test(value) || value?.startsWith?.('blob')) {
-                preview = value;
-              } else {
-                preview = value ? URL.createObjectURL(value) : '';
-              }
-            } catch (error) {
-              console.error(error);
-            }
-
-            return (
-              <>
-                <LogoContainer>
-                  <InputImageSingle
-                    {...{DAO_LOGO, preview}}
-                    maxFileSize={DAO_LOGO.maxFileSize}
-                    onError={handleImageError}
-                    onChange={onChange}
-                    acceptableFileFormat="image/jpg, image/jpeg, image/png, image/gif"
-                    onlySquare
-                  />
-                </LogoContainer>
+                <InputDetails>
+                  <Help>{t('createDAO.step2.nameSubtitle')}</Help>
+                  <InputCount>{`${value.length}/128`}</InputCount>
+                </InputDetails>
                 {error?.message && (
                   <AlertInline message={error.message} variant="critical" />
                 )}
               </>
-            );
-          }}
-        />
-      </FormItem>
+            )}
+          />
+        </FormItem>
 
-      {/* Summary */}
-      <FormItem>
-        <Label
-          label={t('labels.description')}
-          helpText={t('createDAO.step2.descriptionSubtitle')}
-        />
-        <Controller
-          name="daoSummary"
-          rules={{
-            required: t('errors.required.summary'),
-            validate: value =>
-              isOnlyWhitespace(value) ? t('errors.required.summary') : true,
-          }}
-          control={control}
-          render={({field, fieldState: {error}}) => (
-            <>
-              <TextareaSimple
-                {...field}
-                placeholder={t('placeHolders.daoDescription')}
-              />
-              {error?.message && (
-                <AlertInline message={error.message} variant="critical" />
+        {/* ENS Ens Name */}
+        {!isSettingPage && supportsENS && (
+          <FormItem>
+            <Label label={t('labels.daoEnsName')} />
+
+            <Controller
+              name="daoEnsName"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: t('errors.required.ensName'),
+                validate: value =>
+                  isDaoEnsNameValid(
+                    value,
+                    provider,
+                    setError,
+                    clearErrors,
+                    getValues
+                  ),
+              }}
+              render={({
+                field: {onBlur, onChange, value, name},
+                fieldState: {error},
+              }) => (
+                <>
+                  <TextInput
+                    {...{
+                      name,
+                      value,
+                      onBlur,
+                      onChange: event => {
+                        event.target.value = event.target.value.toLowerCase();
+                        onChange(event);
+                      },
+                    }}
+                    placeholder={t('placeHolders.ensName')}
+                    rightAdornment={
+                      <div className="flex h-full items-center rounded-r-xl bg-neutral-50 px-4">
+                        .dao.nfn
+                      </div>
+                    }
+                  />
+                  <InputDetails>
+                    <Help>{t('createDAO.step2.ensNameSubtitle')}</Help>
+                    <InputCount>{`${value.length}/128`}</InputCount>
+                  </InputDetails>
+                  <ErrorHandler {...{value, error}} />
+                </>
               )}
-            </>
-          )}
-        />
-      </FormItem>
+            />
+          </FormItem>
+        )}
 
-      {/* Links */}
-      <FormItem>
-        <Label
-          label={t('labels.links')}
-          helpText={t('createDAO.step2.linksSubtitle')}
-          isOptional
-        />
-        <AddLinks arrayName={arrayName} bgWhite={bgWhite} />
-      </FormItem>
-    </>
+        {/* Logo */}
+        <FormItem>
+          <Label
+            label={t('labels.logo')}
+            isOptional
+            tagLabel={t('labels.optional')}
+          />
+
+          <Controller
+            name="daoLogo"
+            control={control}
+            render={({field: {value, onChange}, fieldState: {error}}) => {
+              let preview = '';
+
+              try {
+                // in case url does not need to be created
+                if (URL_PATTERN.test(value) || value?.startsWith?.('blob')) {
+                  preview = value;
+                } else {
+                  preview = value ? URL.createObjectURL(value) : '';
+                }
+              } catch (error) {
+                console.error(error);
+              }
+
+              return (
+                <>
+                  <LogoContainer>
+                    <InputImageSingle
+                      {...{DAO_LOGO, preview}}
+                      maxFileSize={DAO_LOGO.maxFileSize}
+                      onError={handleImageError}
+                      onChange={onChange}
+                      acceptableFileFormat="image/jpg, image/jpeg, image/png, image/gif"
+                      onlySquare
+                    />
+                  </LogoContainer>
+                  <InputDetails>
+                    <Help>{t('createDAO.step2.logoSubtitle')}</Help>
+                  </InputDetails>
+                  {error?.message && (
+                    <AlertInline message={error.message} variant="critical" />
+                  )}
+                </>
+              );
+            }}
+          />
+        </FormItem>
+
+        {/* Summary */}
+        <FormItem>
+          <Label label={t('labels.description')} />
+          <Controller
+            name="daoSummary"
+            rules={{
+              required: t('errors.required.summary'),
+              validate: value =>
+                isOnlyWhitespace(value) ? t('errors.required.summary') : true,
+            }}
+            control={control}
+            render={({field, fieldState: {error}}) => (
+              <>
+                <TextareaSimple
+                  {...field}
+                  placeholder={t('placeHolders.daoDescription')}
+                />
+
+                <InputDetails>
+                  <Help>{t('createDAO.step2.descriptionSubtitle')}</Help>
+                </InputDetails>
+                {error?.message && (
+                  <AlertInline message={error.message} variant="critical" />
+                )}
+              </>
+            )}
+          />
+        </FormItem>
+
+        {/* Links */}
+        <FormItem>
+          <Label label={t('labels.links')} isOptional />
+          <AddLinks arrayName={arrayName} bgWhite={bgWhite} />
+          <InputDetails>
+            <Help>{t('createDAO.step2.linksSubtitle')}</Help>
+          </InputDetails>
+        </FormItem>
+      </div>
+    </GridLayout>
   );
 };
 
 export default DefineMetadata;
 
+const InputDetails = styled.div.attrs({
+  className: 'flex items-start justify-between gap-x-10',
+})``;
+
 const InputCount = styled.div.attrs({
-  className: 'ft-text-sm mt-2',
+  className: 'ft-text-sm',
 })``;
 
 const FormItem = styled.div.attrs({

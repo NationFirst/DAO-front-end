@@ -378,7 +378,12 @@ export const CreateDAO: React.FC = () => {
           <SelectChain />
         </Step>
         <Step
-          wizardTitle={t('createDAO.step2.title')}
+          fullWidth
+          wizardTitle={
+            <>
+              Set Up Your <span className="font-semibold text-accent">DAO</span>
+            </>
+          }
           wizardDescription={htmlIn(t)('createDAO.step2.description')}
           wizardDescriptionLink={t('createDAO.step2.descriptionLinkURL')}
           isNextButtonDisabled={!daoMetadataIsValid}

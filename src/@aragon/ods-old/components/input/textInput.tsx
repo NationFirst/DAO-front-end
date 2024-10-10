@@ -49,10 +49,11 @@ export const Container = styled.div.attrs<StyledContainerProps>(
   ({mode, disabled, containerClassName}) => {
     let className = `${
       disabled
-        ? 'bg-neutral-100 border-neutral-200 border-2  text-neutral-700'
-        : 'bg-neutral-0'
-    } flex items-center focus-within:border-primary-500 focus-within:hover:border-primary-500
-    rounded-xl hover:border-neutral-300 border-2 h-12 `;
+        ? 'bg-neutral-100 border-neutral-200 border-3 text-neutral-700'
+        : 'bg-neutral-0 border-primary-50'
+    } flex items-center focus-within:border-primary-400 focus-within:hover:border-primary-400
+    transition-colors
+    rounded-xl hover:border-primary-400 border-3 h-14 `;
 
     if (containerClassName) {
       className += containerClassName;
@@ -73,7 +74,8 @@ export const Container = styled.div.attrs<StyledContainerProps>(
 )<StyledContainerProps>``;
 
 export const StyledInput = styled.input.attrs(() => {
-  const className: string | undefined = 'w-full bg-[transparent] h-8 truncate';
+  const className: string | undefined =
+    'w-full bg-[transparent] h-8 truncate placeholder-neutral-200';
   return {className};
 })`
   outline: 0;

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Header from './header';
 import Row from './row';
 import {IconType, Button} from '@aragon/ods';
+import ButtonForm from '../buttons/buttonForm';
 
 export type AddLinks = {
   /** Name of the fieldArray that is the target of the link inputs. Defaults to
@@ -61,14 +62,18 @@ const AddLinks: React.FC<AddLinks> = ({
         </ListGroup>
       )}
 
-      <Button
-        variant="tertiary"
-        size="lg"
-        onClick={handleAddLink}
-        {...(buttonPlusIcon ? {iconLeft: IconType.PLUS} : {})}
-      >
+      <ButtonForm onClick={handleAddLink}>
         {buttonLabel || t('labels.addLink')}
-      </Button>
+      </ButtonForm>
+
+      {/*<Button*/}
+      {/*  variant="tertiary"*/}
+      {/*  size="lg"*/}
+      {/*  onClick={handleAddLink}*/}
+      {/*  {...(buttonPlusIcon ? {iconLeft: IconType.PLUS} : {})}*/}
+      {/*>*/}
+      {/*  {buttonLabel || t('labels.addLink')}*/}
+      {/*</Button>*/}
     </Container>
   );
 };
@@ -77,5 +82,5 @@ export default AddLinks;
 
 const Container = styled.div.attrs({className: 'space-y-3'})``;
 const ListGroup = styled.div.attrs({
-  className: 'flex flex-col overflow-auto rounded-xl',
+  className: 'flex flex-col rounded-xl',
 })``;
