@@ -138,112 +138,116 @@ export const DaoExplorer = () => {
   return (
     <Container>
       <MainContainer>
-        <Title>{t('explore.explorer.title')}</Title>
-        <FilterGroupContainer>
-          <ToggleGroup
-            isMultiSelect={false}
-            value={filters.quickFilter}
-            onChange={toggleQuickFilters}
-          >
-            {quickFilters.map(f => {
-              return (
-                <Toggle
-                  key={f.value}
-                  label={t(f.label)}
-                  value={f.value}
-                  disabled={
-                    (f.value === 'memberOf' || f.value === 'following') &&
-                    !isConnected
-                  }
-                />
-              );
-            })}
-          </ToggleGroup>
-          <ButtonGroupContainer>
-            <Button
-              variant={filtersCount !== '' ? 'secondary' : 'tertiary'}
-              size="md"
-              className="!min-w-fit"
-              responsiveSize={{lg: 'lg'}}
-              iconLeft={IconType.FILTER}
-              onClick={() => setShowAdvancedFilters(true)}
-            >
-              {filtersCount}
-            </Button>
-            {filters.quickFilter !== 'following' && (
-              <Dropdown.Container
-                align="end"
-                open={activeDropdown}
-                onOpenChange={e => {
-                  setActiveDropdown(e);
-                }}
-                customTrigger={
-                  <Button
-                    variant={activeDropdown ? 'secondary' : 'tertiary'}
-                    size="md"
-                    responsiveSize={{lg: 'lg'}}
-                    iconLeft={IconType.SORT_DESC}
-                  />
-                }
-              >
-                <Dropdown.Item
-                  icon={
-                    filters.order === 'tvl' ? IconType.CHECKMARK : undefined
-                  }
-                  selected={filters.order === 'tvl'}
-                  onClick={() => toggleOrderby('tvl')}
-                >
-                  {t('explore.sortBy.largestTreasury')}
-                </Dropdown.Item>
-                <Dropdown.Item
-                  icon={
-                    filters.order === 'proposals'
-                      ? IconType.CHECKMARK
-                      : undefined
-                  }
-                  iconPosition="right"
-                  selected={filters.order === 'proposals'}
-                  onClick={() => toggleOrderby('proposals')}
-                >
-                  {t('explore.sortBy.mostProposals')}
-                </Dropdown.Item>
-                <Dropdown.Item
-                  icon={
-                    filters.order === 'members' ? IconType.CHECKMARK : undefined
-                  }
-                  iconPosition="right"
-                  selected={filters.order === 'members'}
-                  onClick={() => toggleOrderby('members')}
-                >
-                  {t('explore.sortBy.largestCommunity')}
-                </Dropdown.Item>
-                <Dropdown.Item
-                  icon={
-                    filters.order === 'createdAt'
-                      ? IconType.CHECKMARK
-                      : undefined
-                  }
-                  iconPosition="right"
-                  selected={filters.order === 'createdAt'}
-                  onClick={() => toggleOrderby('createdAt')}
-                >
-                  {t('explore.sortBy.recentlyCreated')}
-                </Dropdown.Item>
-              </Dropdown.Container>
-            )}
-          </ButtonGroupContainer>
-        </FilterGroupContainer>
+        <Title>Following DAOs</Title>
+        {/*<FilterGroupContainer>*/}
+        {/*  <ToggleGroup*/}
+        {/*    isMultiSelect={false}*/}
+        {/*    value={filters.quickFilter}*/}
+        {/*    onChange={toggleQuickFilters}*/}
+        {/*  >*/}
+        {/*    {quickFilters.map(f => {*/}
+        {/*      return (*/}
+        {/*        <Toggle*/}
+        {/*          key={f.value}*/}
+        {/*          label={t(f.label)}*/}
+        {/*          value={f.value}*/}
+        {/*          disabled={*/}
+        {/*            (f.value === 'memberOf' || f.value === 'following') &&*/}
+        {/*            !isConnected*/}
+        {/*          }*/}
+        {/*        />*/}
+        {/*      );*/}
+        {/*    })}*/}
+        {/*  </ToggleGroup>*/}
+        {/*  <ButtonGroupContainer>*/}
+        {/*    <Button*/}
+        {/*      variant={filtersCount !== '' ? 'secondary' : 'tertiary'}*/}
+        {/*      size="md"*/}
+        {/*      className="!min-w-fit"*/}
+        {/*      responsiveSize={{lg: 'lg'}}*/}
+        {/*      iconLeft={IconType.FILTER}*/}
+        {/*      onClick={() => setShowAdvancedFilters(true)}*/}
+        {/*    >*/}
+        {/*      {filtersCount}*/}
+        {/*    </Button>*/}
+        {/*    {filters.quickFilter !== 'following' && (*/}
+        {/*      <Dropdown.Container*/}
+        {/*        align="end"*/}
+        {/*        open={activeDropdown}*/}
+        {/*        onOpenChange={e => {*/}
+        {/*          setActiveDropdown(e);*/}
+        {/*        }}*/}
+        {/*        customTrigger={*/}
+        {/*          <Button*/}
+        {/*            variant={activeDropdown ? 'secondary' : 'tertiary'}*/}
+        {/*            size="md"*/}
+        {/*            responsiveSize={{lg: 'lg'}}*/}
+        {/*            iconLeft={IconType.SORT_DESC}*/}
+        {/*          />*/}
+        {/*        }*/}
+        {/*      >*/}
+        {/*        <Dropdown.Item*/}
+        {/*          icon={*/}
+        {/*            filters.order === 'tvl' ? IconType.CHECKMARK : undefined*/}
+        {/*          }*/}
+        {/*          selected={filters.order === 'tvl'}*/}
+        {/*          onClick={() => toggleOrderby('tvl')}*/}
+        {/*        >*/}
+        {/*          {t('explore.sortBy.largestTreasury')}*/}
+        {/*        </Dropdown.Item>*/}
+        {/*        <Dropdown.Item*/}
+        {/*          icon={*/}
+        {/*            filters.order === 'proposals'*/}
+        {/*              ? IconType.CHECKMARK*/}
+        {/*              : undefined*/}
+        {/*          }*/}
+        {/*          iconPosition="right"*/}
+        {/*          selected={filters.order === 'proposals'}*/}
+        {/*          onClick={() => toggleOrderby('proposals')}*/}
+        {/*        >*/}
+        {/*          {t('explore.sortBy.mostProposals')}*/}
+        {/*        </Dropdown.Item>*/}
+        {/*        <Dropdown.Item*/}
+        {/*          icon={*/}
+        {/*            filters.order === 'members' ? IconType.CHECKMARK : undefined*/}
+        {/*          }*/}
+        {/*          iconPosition="right"*/}
+        {/*          selected={filters.order === 'members'}*/}
+        {/*          onClick={() => toggleOrderby('members')}*/}
+        {/*        >*/}
+        {/*          {t('explore.sortBy.largestCommunity')}*/}
+        {/*        </Dropdown.Item>*/}
+        {/*        <Dropdown.Item*/}
+        {/*          icon={*/}
+        {/*            filters.order === 'createdAt'*/}
+        {/*              ? IconType.CHECKMARK*/}
+        {/*              : undefined*/}
+        {/*          }*/}
+        {/*          iconPosition="right"*/}
+        {/*          selected={filters.order === 'createdAt'}*/}
+        {/*          onClick={() => toggleOrderby('createdAt')}*/}
+        {/*        >*/}
+        {/*          {t('explore.sortBy.recentlyCreated')}*/}
+        {/*        </Dropdown.Item>*/}
+        {/*      </Dropdown.Container>*/}
+        {/*    )}*/}
+        {/*  </ButtonGroupContainer>*/}
+        {/*</FilterGroupContainer>*/}
         {noDaosFound ? (
           <CardEmptyState
             objectIllustration={{object: 'MAGNIFYING_GLASS'}}
             heading={t('explore.emptyStateSearch.title')}
-            description={t('explore.emptyStateSearch.description')}
-            secondaryButton={{
-              label: t('explore.emptyStateSearch.ctaLabel'),
-              iconLeft: IconType.RELOAD,
-              onClick: handleClearFilters,
-              className: 'w-full',
-            }}
+            description={
+              !isConnected
+                ? 'Connect your wallet to view your DAOs.'
+                : 'Recently followed DAOs will appear here.'
+            }
+            // secondaryButton={{
+            //   label: t('explore.emptyStateSearch.ctaLabel'),
+            //   iconLeft: IconType.RELOAD,
+            //   onClick: handleClearFilters,
+            //   className: 'w-full',
+            // }}
           />
         ) : (
           <CardsWrapper>
@@ -272,7 +276,7 @@ export const DaoExplorer = () => {
               {t('explore.explorer.showMore')}
             </Button>
           )}
-          <span className="ml-auto font-semibold text-neutral-800 ft-text-base lg:ml-0">
+          <span className="ml-auto font-semibold text-neutral-0 ft-text-base lg:ml-0">
             {t('explore.pagination.label.amountOf DAOs', {
               amount: totalDaosShown,
               total: totalDaos,
@@ -280,16 +284,16 @@ export const DaoExplorer = () => {
           </span>
         </div>
       )}
-      <DaoFilterModal
-        isOpen={showAdvancedFilters}
-        filters={filters}
-        daoListLoading={isLoading}
-        totalCount={totalDaos}
-        onFilterChange={dispatch}
-        onClose={() => {
-          setShowAdvancedFilters(false);
-        }}
-      />
+      {/*<DaoFilterModal*/}
+      {/*  isOpen={showAdvancedFilters}*/}
+      {/*  filters={filters}*/}
+      {/*  daoListLoading={isLoading}*/}
+      {/*  totalCount={totalDaos}*/}
+      {/*  onFilterChange={dispatch}*/}
+      {/*  onClose={() => {*/}
+      {/*    setShowAdvancedFilters(false);*/}
+      {/*  }}*/}
+      {/*/>*/}
     </Container>
   );
 };
@@ -306,7 +310,7 @@ const CardsWrapper = styled.div.attrs({
 })``;
 
 const Title = styled.p.attrs({
-  className: 'font-semibold ft-text-xl text-neutral-800',
+  className: 'font-semibold ft-text-xl text-neutral-0',
 })``;
 
 const FilterGroupContainer = styled.div.attrs({
