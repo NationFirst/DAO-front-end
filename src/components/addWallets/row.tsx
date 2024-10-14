@@ -4,7 +4,7 @@ import {
   TextInput,
   InputValue as WalletInputValue,
 } from '@aragon/ods-old';
-import {Button, IconType, AlertInline, Dropdown} from '@aragon/ods';
+import {AlertInline, Button, Dropdown, IconType} from '@aragon/ods';
 import Big from 'big.js';
 import {constants} from 'ethers';
 import React, {useCallback, useState} from 'react';
@@ -20,6 +20,8 @@ import {Web3Address} from 'utils/library';
 import {validateWeb3Address} from 'utils/validators';
 import {MultisigWalletField} from 'components/multisigWallets/row';
 import {Address, isAddress, isAddressEqual} from 'viem';
+import ButtonForm from '../buttons/buttonForm';
+import {ThreeDots} from '../../assets/icons/threeDots';
 
 type WalletRowProps = {
   index: number;
@@ -269,12 +271,7 @@ const WalletRow: React.FC<WalletRowProps> = ({index, onDelete}) => {
         <Dropdown.Container
           align="start"
           customTrigger={
-            <Button
-              variant="tertiary"
-              size="lg"
-              iconLeft={IconType.DOTS_VERTICAL}
-              data-testid="trigger"
-            />
+            <ButtonForm iconLeft={<ThreeDots className="text-primary-400" />} />
           }
         >
           <Dropdown.Item
@@ -324,7 +321,7 @@ const Break = styled.hr.attrs({
 })``;
 
 const DropdownMenuWrapper = styled.div.attrs({
-  className: 'flex order-2 md:order-5 mt-7 md:mt-0 w-12',
+  className: 'flex order-2 md:order-5 mt-7 md:mt-0 w-fit',
 })``;
 
 const InputContainer = styled.div.attrs(() => ({
