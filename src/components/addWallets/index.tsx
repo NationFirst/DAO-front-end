@@ -45,7 +45,7 @@ const AddWallets: React.FC = () => {
     if (
       address &&
       controlledFields?.length === 0 &&
-      appendConnectedAddress.current === true
+      appendConnectedAddress.current
     ) {
       append({address, amount: '1', ensName});
       appendConnectedAddress.current = false;
@@ -135,7 +135,7 @@ export default AddWallets;
 const Container = styled.div.attrs({className: 'space-y-3'})``;
 
 const ListGroup = styled.div.attrs({
-  className: 'flex flex-col overflow-hidden space-y-0.5 rounded-xl',
+  className: 'flex flex-col overflow-hidden space-y-3 rounded-xl',
 })``;
 
 const ActionsWrapper = styled.div.attrs({

@@ -292,7 +292,7 @@ const WalletRow: React.FC<WalletRowProps> = ({index, onDelete}) => {
 export default WalletRow;
 
 const Container = styled.div.attrs({
-  className: 'flex flex-wrap gap-x-4 gap-y-3 p-4 bg-neutral-0',
+  className: 'flex flex-wrap gap-x-4 gap-y-3 bg-neutral-0',
 })``;
 
 const PercentageInputDisplay = styled(TextInput).attrs({
