@@ -7,13 +7,9 @@ import React, {
   type ReactEventHandler,
 } from 'react';
 import {styled} from 'styled-components';
+import cls from 'classnames';
 
-import {
-  IsAddress,
-  isEnsDomain,
-  shortenAddress,
-  shortenENS,
-} from '../../utils/addresses';
+import {IsAddress, isEnsDomain, shortenAddress, shortenENS} from '../../utils';
 import {Button, IconType} from '@aragon/ods';
 
 /** Input Wallet value type */
@@ -572,20 +568,16 @@ const modeStyles = (state: WalletInputProps['state']) => {
 };
 
 export const Container = styled.div.attrs<StyledContainerProps>(
-  ({state, disabled}) => {
-    const baseClassName = 'border-2 flex space-x-3 py-1.5 pr-2 pl-4 rounded-xl';
-    const modeClassName = modeStyles(state);
-
-    const focusClass = disabled
-      ? ''
-      : 'focus-within:border-primary-500 focus-within:hover:border-primary-500';
-
-    const bgAndBorderColor = disabled
-      ? 'bg-neutral-100 border-neutral-200 text-neutral-700'
-      : 'bg-neutral-0 text-neutral-600';
-
-    return {
-      className: `${baseClassName} ${modeClassName} ${bgAndBorderColor} ${focusClass}`,
-    };
-  }
-)<StyledContainerProps>``;
+  ({state, disabled}) => ({
+    className: cls(
+      'border-3 flex space-x-3 py-2.5 pr-2.5 pl-4 rounded-xl',
+      {
+        'border-primary-50 focus-within:border-primary-400 focus-within:hover:border-primary-400':
+          !disabled,
+        'bg-neutral-0 text-neutral-600': !disabled,
+        'bg-neutral-100 border-neutral-200 text-neutral-700': disabled,
+      },
+      modeStyles(state)
+    ),
+  })
+)``;

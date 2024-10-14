@@ -153,14 +153,14 @@ const DefaultContainer = styled.div.attrs<DefaultContainerProps>(
   ({isdragactive}) => ({
     className: `flex items-center justify-center bg-neutral-0
     h-16 w-16 border-dashed ${
-      isdragactive ? 'border-primary-500' : 'border-neutral-100'
-    } border-2 rounded-xl cursor-pointer`,
+      isdragactive ? 'border-primary-50' : 'border-primary-50'
+    } border-3 rounded-xl cursor-pointer`,
   })
 )<DefaultContainerProps>``;
 
 const LoadingContainer = styled.div.attrs({
   className: `flex items-center justify-center bg-neutral-0
-    h-16 w-16 border-dashed border-primary-500 border-2 rounded-xl`,
+    h-16 w-16 border-dashed border-primary-50 border-3 rounded-xl`,
 })``;
 
 const ImageContainer = styled.div.attrs({

@@ -105,8 +105,8 @@
     "deleteAllAddresses": "Delete all addresses",
     "addResource": "Add resource",
     "link": "Link",
-    "links": "Links",
-    "label": "Name / Description",
+    "links": "Community Links",
+    "label": "Name",
     "logo": "Logo",
     "optional": "Optional",
     "minimumApprovalThreshold": "Approval threshold",
@@ -258,8 +258,8 @@
     "searchTransfers": "Type to filter …",
     "daoName": "Type your DAO's name …",
     "ensName": "nationsfirst",
-    "daoDescription": "Type your summary …",
-    "addResource": "Lens, Discord, etc.",
+    "daoDescription": "Tell us more about your DAO",
+    "addResource": "Type",
     "searchWalletAddress": "Filter by NFN or wallet address …"
   },
   "finance": {
@@ -681,8 +681,8 @@
     },
     "step2": {
       "label": "2",
-      "title": "Outline your DAO's mission",
-      "description": "Name and define your DAO so new contributors know they've come to the right place. This information is displayed on the DAO Explore page and can be changed with a vote.",
+      "title": "Set Up Your DAO",
+      "description": "Give your DAO a unique identity with a name and brief overview, making it easy for newcomers to understand its mission. These details will be visible on the DAO Listings page and can be modified later through a member vote.",
       "nameSubtitle": "Maximum of 128 characters",
       "logoSubtitle": "JPG, PNG or GIF of no more than 3MB. We recommend 1024x1024px.",
       "descriptionSubtitle": "Describe your DAO's purpose in a few sentences. This is listed on the Explore page so new contributors can find you.",
@@ -693,7 +693,7 @@
     "step3": {
       "label": "3",
       "title": "Set up membership criteria",
-      "description": "Decide the type of voting your DAO uses. You can change these settings with a vote.",
+      "description": "Select the voting model your DAO will operate with. These rules can be adjusted in the future through a community decision.",
       "newToken": "No",
       "authorisedWalletsSubtitle": "Add wallets of members who are authorized to participate in governance",
       "warningTitle": "Changing the list",

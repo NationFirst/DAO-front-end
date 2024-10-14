@@ -12,6 +12,8 @@ import {
 } from 'utils/constants';
 import {isOnlyWhitespace} from 'utils/library';
 import {BgWhite} from './header';
+import ButtonForm from '../buttons/buttonForm';
+import {ThreeDots} from '../../assets/icons/threeDots';
 
 type LinkRowProps = {
   index: number;
@@ -174,12 +176,13 @@ const LinkRow: React.FC<LinkRowProps & BgWhite> = ({
         <Dropdown.Container
           align="end"
           customTrigger={
-            <Button
-              variant="tertiary"
-              size="lg"
-              iconLeft={IconType.DOTS_VERTICAL}
-              data-testid="trigger"
-            />
+            <ButtonForm iconLeft={<ThreeDots className="text-primary-400" />} />
+            // <Button
+            //   variant="tertiary"
+            //   size="lg"
+            //   iconLeft={IconType.DOTS_VERTICAL}
+            //   data-testid="trigger"
+            // />
           }
         >
           <Dropdown.Item onClick={() => onDelete?.(index)}>
@@ -194,7 +197,7 @@ const LinkRow: React.FC<LinkRowProps & BgWhite> = ({
 export default LinkRow;
 
 const Container = styled.div.attrs<{bgWhite: BgWhite}>(({bgWhite}) => ({
-  className: `flex flex-wrap gap-x-4 gap-y-3 p-4 ${
+  className: `flex flex-wrap gap-x-4 my-2 gap-y-3 ${
     bgWhite
       ? 'bg-neutral-50 border border-t-0 border-neutral-100 last:rounded-b-xl'
       : 'bg-neutral-0'
@@ -206,7 +209,7 @@ const LabelContainer = styled.div.attrs({
 })``;
 
 const LabelWrapper = styled.div.attrs({
-  className: 'md:hidden mb-1',
+  className: 'md:hidden mb-',
 })``;
 
 const ButtonContainer = styled.div.attrs({
