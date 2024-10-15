@@ -7,6 +7,7 @@ import Hero from 'containers/hero';
 import {useNetwork} from 'context/network';
 import {translateToNetworkishName} from 'utils/library';
 import CreateDaoCard from 'components/createDaoCard';
+import {DaoExplorer} from '../containers/daoExplorer';
 
 export const Explore: React.FC = () => {
   const {network, setNetwork} = useNetwork();
@@ -30,15 +31,22 @@ export const Explore: React.FC = () => {
           <Hero />
           <CreateDaoCard />
         </ContentWrapper>
+        <ExploreDAOsContainer>
+          <DaoExplorer />
+        </ExploreDAOsContainer>
       </GridLayout>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div.attrs({
-  className: 'my-auto py-10',
+  className: 'py-10',
 })``;
 
 const ContentWrapper = styled.div.attrs({
   className: 'col-span-full grid grid-cols-1 lg:grid-cols-2 gap-28 items-end',
+})``;
+
+const ExploreDAOsContainer = styled.div.attrs({
+  className: 'col-span-full mt-10',
 })``;
