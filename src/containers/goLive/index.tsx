@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useFormContext} from 'react-hook-form';
 import {Breadcrumb} from '@aragon/ods-old';
-import {Button, AlertCard, IconType} from '@aragon/ods';
+import {AlertCard} from '@aragon/ods';
 import {useNavigate} from 'react-router-dom';
 
 import Blockchain from './blockchain';
@@ -16,6 +16,9 @@ import {useGlobalModalContext} from 'context/globalModals';
 import {trackEvent} from 'services/analytics';
 import Committee from './committee';
 import {CreateDaoDialog} from 'containers/createDaoDialog';
+import {GridLayout} from 'components/layout';
+import Button from 'components/buttons/button';
+import Arrow from 'assets/icons/arrow';
 
 export const GoLiveHeader: React.FC = () => {
   const {t} = useTranslation();
@@ -26,7 +29,7 @@ export const GoLiveHeader: React.FC = () => {
   };
 
   return (
-    <div className="bg-neutral-0 px-4 pb-6 pt-4 md:rounded-xl md:p-6 xl:p-12 xl:pt-6">
+    <div className="bg-neutral-0 pb-6 pt-4 md:rounded-xl xl:pt-6">
       <div className="xl:hidden">
         <Breadcrumb
           crumbs={{label: t('createDAO.title'), path: Landing}}
@@ -36,7 +39,7 @@ export const GoLiveHeader: React.FC = () => {
       <div className="flex justify-between">
         <div className="w-full pt-6">
           <h1 className="text-4xl font-semibold leading-tight text-neutral-800">
-            {t('createDAO.review.title')}
+            <span className="font-semibold text-accent">Deploy</span> Your DAO
           </h1>
           <p className="mt-4 text-xl leading-normal text-neutral-600">
             {t('createDAO.review.description')}
@@ -55,14 +58,20 @@ const GoLive: React.FC = () => {
   const {votingType} = getValues();
 
   return (
-    <div className="space-y-10 md:mx-auto md:w-3/4">
-      <Blockchain />
-      <DaoMetadata />
-      <Community />
-      <Governance />
-      {votingType === 'gasless' && <Committee />}
-      <AlertCard message={t('createDAO.review.daoUpdates')} variant="info" />
-    </div>
+    <GridLayout>
+      <div className="col-span-full flex flex-col gap-y-10 divide-y-3 divide-neutral-100 xl:col-start-3 xl:col-end-11">
+        <Blockchain />
+        <DaoMetadata />
+        <Community />
+        <Governance />
+        {votingType === 'gasless' && <Committee />}
+        <AlertCard
+          className="!border-3 !border-primary-50 shadow-none"
+          message={t('createDAO.review.daoUpdates')}
+          variant="info"
+        />
+      </div>
+    </GridLayout>
   );
 };
 
@@ -107,10 +116,9 @@ export const GoLiveFooter: React.FC = () => {
     <div className="flex justify-center pt-6">
       <div onClick={showInvalidFields}>
         <Button
-          size="lg"
-          variant="primary"
-          iconRight={IconType.CHEVRON_RIGHT}
           onClick={publishDao}
+          iconRight={<Arrow />}
+          variant="fill"
           disabled={isButtonDisabled}
         >
           {t('createDAO.review.title')}
