@@ -227,7 +227,7 @@ const FormLayout = styled.div.attrs<{fullWidth: FormLayoutProps}>(
   ({fullWidth}) => ({
     className: cls(
       {'xl:w-3/5': !fullWidth},
-      'mt-10 xl:mt-16 gap-y-20 flex-1 flex flex-col w-full mx-auto'
+      'mt-10 xl:mt-16 gap-y-14 flex-1 flex flex-col w-full mx-auto'
     ),
   })
 )<FormLayoutProps>``;

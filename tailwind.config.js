@@ -23,6 +23,9 @@ module.exports = {
       boxShadow: {
         card: '0px 4px 20px 0px #0000000D',
       },
+      borderWidth: {
+        3: '3px',
+      },
     },
   },
   plugins: [

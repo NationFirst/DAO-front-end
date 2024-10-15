@@ -37,11 +37,11 @@ export const Label: React.FC<LabelProps> = ({
 };
 
 const VStack = styled.div.attrs({
-  className: 'space-y-1',
+  className: '',
 })``;
 
 const LabelLine = styled.div.attrs({
-  className: 'flex space-x-3',
+  className: 'flex space-x-3 items-center',
 })``;
 
 const Heading = styled.p.attrs({
