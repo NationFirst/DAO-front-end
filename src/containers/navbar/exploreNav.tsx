@@ -38,7 +38,7 @@ const ExploreNav: React.FC = () => {
   return (
     <Container data-testid="navbar">
       <Menu>
-        <GridLayout>
+        <GridLayout className="w-full">
           <Content>
             <LeftContent>
               {navLinks.map(link => (
@@ -75,11 +75,11 @@ const ExploreNav: React.FC = () => {
 };
 
 const Menu = styled.nav.attrs({
-  className: 'py-4 xl:py-6 backdrop-blur-xl bg-primary-500/50',
+  className: 'h-header backdrop-blur-xl bg-primary-500/50 flex items-center',
 })``;
 
 const Content = styled.div.attrs({
-  className: 'col-span-full flex grid grid-cols-[auto_auto] lg:grid-cols-3',
+  className: 'col-span-full grid grid-cols-[auto_auto] lg:grid-cols-3',
 })``;
 
 const LeftContent = styled.div.attrs({
