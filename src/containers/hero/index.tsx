@@ -22,11 +22,11 @@ const Wrapper = styled.div.attrs({
 })``;
 
 const Title = styled.h1.attrs({
-  className: 'font-normal text-[40px] leading-tight mb-7',
+  className: 'font-normal lg:text-[40px] text-3xl leading-tight mb-7',
 })``;
 
 const Subtitle = styled.h3.attrs({
-  className: 'font-normal text-2xl leading-tight',
+  className: 'font-normal lg:text-2xl text-lg leading-tight',
 })``;
 
 type AccentedProps = {

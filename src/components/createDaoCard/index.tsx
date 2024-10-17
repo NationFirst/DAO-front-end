@@ -47,7 +47,8 @@ const CreateDaoCard = () => {
 };
 
 const Card = styled.div.attrs({
-  className: 'bg-neutral-0 rounded-[50px] p-12 h-[600px] flex',
+  className:
+    'bg-neutral-0 rounded-[50px] p-12 lg:h-[600px] h-auto flex max-sm:p-6',
 })``;
 
 const ContentWrapper = styled.div.attrs({
@@ -55,7 +56,7 @@ const ContentWrapper = styled.div.attrs({
 })``;
 
 const Title = styled.h2.attrs({
-  className: 'font-semibold text-[40px]',
+  className: 'font-semibold lg:text-[40px] text-4xl',
 })``;
 
 const Subtitle = styled.p.attrs({

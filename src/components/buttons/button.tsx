@@ -9,6 +9,7 @@ type Props = {
   iconRight?: ReactNode;
   onClick: () => void;
   disabled?: boolean;
+  fullWidth?: boolean;
 };
 
 const Button: FC<Props> = ({
@@ -18,13 +19,19 @@ const Button: FC<Props> = ({
   iconRight,
   onClick,
   disabled = false,
+  fullWidth = false,
 }) => {
   const handleClick = () => {
     !disabled && onClick();
   };
 
   return (
-    <StyledButton variant={variant} disabled={disabled} onClick={handleClick}>
+    <StyledButton
+      fullWidth={fullWidth}
+      variant={variant}
+      disabled={disabled}
+      onClick={handleClick}
+    >
       {!!iconLeft && <Icon left>{iconLeft}</Icon>}
       <span>{children}</span>
       {!!iconRight && <Icon right>{iconRight}</Icon>}
@@ -37,17 +44,21 @@ type IconProps = {
   right?: boolean;
 };
 
-type StyledButtonProps = Pick<Props, 'variant'>;
+type StyledButtonProps = Pick<Props, 'variant' | 'fullWidth'>;
 
-const StyledButton = styled.button.attrs<StyledButtonProps>(({variant}) => ({
-  className: cls(
-    {
-      'text-white bg-primary-400 border-primary-50': variant === 'fill',
-      'text-primary-400': variant === 'outline',
-    },
-    'border-2 relative py-4 w-[325px] rounded-full overflow-hidden disabled:opacity-30'
-  ),
-}))`
+const StyledButton = styled.button.attrs<StyledButtonProps>(
+  ({variant, fullWidth}) => ({
+    className: cls(
+      {
+        'text-white bg-primary-400 border-primary-50': variant === 'fill',
+        'text-primary-400': variant === 'outline',
+        'w-full': fullWidth,
+        'w-[325px]': !fullWidth,
+      },
+      'border-2 relative py-4 rounded-full overflow-hidden disabled:opacity-30'
+    ),
+  })
+)`
   &:not([disabled])&::after {
     content: '';
     position: absolute;
