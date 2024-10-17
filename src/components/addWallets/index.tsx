@@ -13,6 +13,8 @@ import {CHAIN_METADATA} from 'utils/constants';
 import Footer from './footer';
 import Header from './header';
 import Row from './row';
+import ButtonForm from '../buttons/buttonForm';
+import {ThreeDots} from '../../assets/icons/threeDots';
 
 const AddWallets: React.FC = () => {
   const {t} = useTranslation();
@@ -45,7 +47,7 @@ const AddWallets: React.FC = () => {
     if (
       address &&
       controlledFields?.length === 0 &&
-      appendConnectedAddress.current === true
+      appendConnectedAddress.current
     ) {
       append({address, amount: '1', ensName});
       appendConnectedAddress.current = false;
@@ -97,18 +99,13 @@ const AddWallets: React.FC = () => {
         <Footer totalAddresses={fields.length || 0} />
       </ListGroup>
       <ActionsWrapper>
-        <Button variant="tertiary" size="lg" onClick={handleAddWallet}>
+        <ButtonForm onClick={handleAddWallet}>
           {t('labels.addWallet')}
-        </Button>
+        </ButtonForm>
         <Dropdown.Container
           align="start"
           customTrigger={
-            <Button
-              variant="tertiary"
-              size="lg"
-              iconLeft={IconType.DOTS_VERTICAL}
-              data-testid="trigger"
-            />
+            <ButtonForm iconLeft={<ThreeDots className="text-primary-400" />} />
           }
         >
           <Dropdown.Item onClick={resetDistribution}>
@@ -135,7 +132,7 @@ export default AddWallets;
 const Container = styled.div.attrs({className: 'space-y-3'})``;
 
 const ListGroup = styled.div.attrs({
-  className: 'flex flex-col overflow-hidden space-y-0.5 rounded-xl',
+  className: 'flex flex-col space-y-3 rounded-xl',
 })``;
 
 const ActionsWrapper = styled.div.attrs({

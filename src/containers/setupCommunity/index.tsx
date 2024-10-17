@@ -16,6 +16,7 @@ import {
   GASLESS_SUPPORTED_NETWORKS,
   getSupportedNetworkByChainId,
 } from 'utils/constants';
+import {GridLayout} from 'components/layout';
 
 const SetupCommunityForm: React.FC = () => {
   const {t} = useTranslation();
@@ -42,11 +43,10 @@ const SetupCommunityForm: React.FC = () => {
   let showGaslessVoting = false;
   const network = getSupportedNetworkByChainId(blockchain.id);
   if (network) {
-    showGaslessVoting = !!(
+    showGaslessVoting =
       membership === 'token' &&
       featureFlags.getValue('VITE_FEATURE_FLAG_GASLESS_PLUGIN') === 'true' &&
-      GASLESS_SUPPORTED_NETWORKS.includes(network)
-    );
+      GASLESS_SUPPORTED_NETWORKS.includes(network);
   }
 
   const resetTokenFields = () => {
@@ -82,111 +82,113 @@ const SetupCommunityForm: React.FC = () => {
   };
 
   return (
-    <>
-      {/* Eligibility */}
-      <FormItem>
-        <Label label={t('createDAO.step3.membership')} />
-        <Controller
-          name="membership"
-          rules={{required: 'Validate'}}
-          control={control}
-          defaultValue="token"
-          render={({field: {onChange, value}}) => (
-            <>
-              <CheckboxListItem
-                label={t('createDAO.step3.tokenMembership')}
-                helptext={t('createDAO.step3.tokenMembershipSubtitle')}
-                multiSelect={false}
-                onClick={() => handleCheckBoxSelected('token', onChange)}
-                {...(value === 'token' ? {type: 'active'} : {})}
-              />
-
-              <CheckboxListItem
-                label={t('createDAO.step3.multisigMembership')}
-                helptext={t('createDAO.step3.multisigMembershipSubtitle')}
-                onClick={() => handleCheckBoxSelected('multisig', onChange)}
-                multiSelect={false}
-                disabled
-                {...(value === 'multisig' ? {type: 'active'} : {})}
-              />
-            </>
-          )}
-        />
-      </FormItem>
-
-      {showGaslessVoting && (
-        <FormSection>
-          <Label label={t('createDAO.step3.blockChainVoting.label')} />
+    <GridLayout>
+      <div className="col-span-full flex flex-col gap-y-10 xl:col-start-3 xl:col-end-11">
+        {/* Eligibility */}
+        <FormItem>
+          <Label label={t('createDAO.step3.membership')} />
           <Controller
-            name="votingType"
+            name="membership"
             rules={{required: 'Validate'}}
             control={control}
-            defaultValue="onChain"
+            defaultValue="token"
             render={({field: {onChange, value}}) => (
               <>
                 <CheckboxListItem
-                  label={t(
-                    'createDAO.step3.blockChainVoting.optionOnchainLabel',
-                    {blockchainName: blockchain.label}
-                  )}
-                  helptext={t(
-                    'createDAO.step3.blockChainVoting.optionOnchainDesc',
-                    {blockchainName: blockchain.label}
-                  )}
+                  label={t('createDAO.step3.tokenMembership')}
+                  helptext={t('createDAO.step3.tokenMembershipSubtitle')}
                   multiSelect={false}
-                  onClick={() => {
-                    onChange('onChain');
-                  }}
-                  {...(value === 'onChain' ? {type: 'active'} : {})}
+                  onClick={() => handleCheckBoxSelected('token', onChange)}
+                  {...(value === 'token' ? {type: 'active'} : {})}
                 />
-                <GaslessSelector
-                  onChange={() => {
-                    onChange('gasless');
-                  }}
-                  value={value}
+
+                <CheckboxListItem
+                  label={t('createDAO.step3.multisigMembership')}
+                  helptext={t('createDAO.step3.multisigMembershipSubtitle')}
+                  onClick={() => handleCheckBoxSelected('multisig', onChange)}
+                  multiSelect={false}
+                  disabled
+                  {...(value === 'multisig' ? {type: 'active'} : {})}
                 />
               </>
             )}
           />
-        </FormSection>
-      )}
-
-      {membership === 'multisig' && (
-        <FormItem>
-          <MultisigWallets />
         </FormItem>
-      )}
 
-      {/* Token creation */}
-      {/* TODO: when validating, the two list items should be either wrapped in a component that takes care of the state
-        or manually call setValue() onChange and get rid of the controller so that required validation can be done
-      */}
-
-      {/* Membership type */}
-      {/* for some reason the default value of the use form is not setting up correctly
-      and is initialized to null or '' so the condition cannot be membership === 'token'  */}
-      {membership === 'token' && (
-        <>
+        {showGaslessVoting && (
           <FormSection>
-            <Label label={t('createDAO.step3.existingToken.questionLabel')} />
+            <Label label={t('createDAO.step3.blockChainVoting.label')} />
             <Controller
-              name="isCustomToken"
+              name="votingType"
               rules={{required: 'Validate'}}
               control={control}
-              defaultValue={true}
-              render={({field: {value, onChange}}) => (
-                <ToggleCheckList
-                  items={existingTokenItems}
-                  value={value}
-                  onChange={onChange}
-                />
+              defaultValue="onChain"
+              render={({field: {onChange, value}}) => (
+                <>
+                  <CheckboxListItem
+                    label={t(
+                      'createDAO.step3.blockChainVoting.optionOnchainLabel',
+                      {blockchainName: blockchain.label}
+                    )}
+                    helptext={t(
+                      'createDAO.step3.blockChainVoting.optionOnchainDesc',
+                      {blockchainName: blockchain.label}
+                    )}
+                    multiSelect={false}
+                    onClick={() => {
+                      onChange('onChain');
+                    }}
+                    {...(value === 'onChain' ? {type: 'active'} : {})}
+                  />
+                  <GaslessSelector
+                    onChange={() => {
+                      onChange('gasless');
+                    }}
+                    value={value}
+                  />
+                </>
               )}
             />
           </FormSection>
-          {isCustomToken ? <CreateNewToken /> : <AddExistingToken />}
-        </>
-      )}
-    </>
+        )}
+
+        {membership === 'multisig' && (
+          <FormItem>
+            <MultisigWallets />
+          </FormItem>
+        )}
+
+        {/* Token creation */}
+        {/* TODO: when validating, the two list items should be either wrapped in a component that takes care of the state
+        or manually call setValue() onChange and get rid of the controller so that required validation can be done
+      */}
+
+        {/* Membership type */}
+        {/* for some reason the default value of the use form is not setting up correctly
+      and is initialized to null or '' so the condition cannot be membership === 'token'  */}
+        {membership === 'token' && (
+          <>
+            <FormSection>
+              <Label label={t('createDAO.step3.existingToken.questionLabel')} />
+              <Controller
+                name="isCustomToken"
+                rules={{required: 'Validate'}}
+                control={control}
+                defaultValue={true}
+                render={({field: {value, onChange}}) => (
+                  <ToggleCheckList
+                    items={existingTokenItems}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+            </FormSection>
+            {isCustomToken ? <CreateNewToken /> : <AddExistingToken />}
+          </>
+        )}
+      </div>
+    </GridLayout>
   );
 };
 

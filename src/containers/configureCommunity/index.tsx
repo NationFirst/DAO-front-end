@@ -17,6 +17,8 @@ import {
 import {getDaysHoursMins} from 'utils/date';
 import {ProposalCreation} from './proposalCreation';
 import {Tag} from '@aragon/ods';
+import {Help} from '@aragon/ods-old/components/help';
+import {GridLayout} from 'components/layout';
 
 export type ConfigureCommunityProps = {
   isSettingPage?: boolean;
@@ -145,267 +147,274 @@ const ConfigureCommunity: React.FC<ConfigureCommunityProps> = ({
    *                   Render                     *
    *************************************************/
   return (
-    <>
-      {membership === 'multisig' && (
-        <FormItem>
-          <MultisigMinimumApproval {...{isSettingPage}} />
-        </FormItem>
-      )}
-      {membership === 'token' && (
-        <>
-          {/* Support Threshold */}
+    <GridLayout>
+      <div className="col-span-full flex flex-col gap-y-10 xl:col-start-3 xl:col-end-11">
+        {membership === 'multisig' && (
           <FormItem>
-            <Label
-              label={t('labels.supportThreshold')}
-              helpText={t('createDAO.step4.supportThresholdSubtitle')}
-            />
+            <MultisigMinimumApproval {...{isSettingPage}} />
+          </FormItem>
+        )}
+        {membership === 'token' && (
+          <>
+            {/* Support Threshold */}
+            <FormItem>
+              <Label label={t('labels.supportThreshold')} />
 
-            <Controller
-              name="minimumApproval"
-              control={control}
-              defaultValue="50"
-              rules={{
-                validate: value => percentageInputValidator(value),
-              }}
-              render={({
-                field: {onBlur, onChange, value, name},
-                fieldState: {error},
-              }) => (
-                <>
-                  <ApprovalContainer>
-                    <div className="md:w-1/3">
+              <Controller
+                name="minimumApproval"
+                control={control}
+                defaultValue="50"
+                rules={{
+                  validate: value => percentageInputValidator(value),
+                }}
+                render={({
+                  field: {onBlur, onChange, value, name},
+                  fieldState: {error},
+                }) => (
+                  <>
+                    <ApprovalContainer>
+                      <div className="md:w-1/3">
+                        <NumberInput
+                          name={name}
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder={t('placeHolders.daoName')}
+                          view="percentage"
+                        />
+                      </div>
+
+                      <div className="flex flex-1 items-center">
+                        <Tag
+                          label={t('labels.yes')}
+                          variant="primary"
+                          className="mr-3 w-12 justify-center"
+                        />
+
+                        <LinearProgressContainer>
+                          <Progress value={value} />
+                          <ProgressBarTick />
+                          <ProgressInfo1>
+                            <p
+                              className="text-right font-semibold text-primary-500"
+                              style={{flexBasis: `${value}%`}}
+                            >
+                              {value !== '100' ? '>' : ''}
+                              {value}%
+                            </p>
+                          </ProgressInfo1>
+                        </LinearProgressContainer>
+
+                        <Tag
+                          label={t('labels.no')}
+                          className="ml-3 w-12 justify-center"
+                        />
+                      </div>
+                    </ApprovalContainer>
+
+                    <Help>{t('createDAO.step4.supportThresholdSubtitle')}</Help>
+                    {error?.message && (
+                      <AlertInline message={error.message} variant="critical" />
+                    )}
+                    {value < 50 ? (
+                      <AlertInline
+                        message={t('createDAO.step4.alerts.minority')}
+                        variant="warning"
+                      />
+                    ) : (
+                      <AlertInline
+                        message={t('createDAO.step4.alerts.majority')}
+                        variant="success"
+                      />
+                    )}
+                  </>
+                )}
+              />
+            </FormItem>
+
+            {/* Minimum Participation */}
+            <FormItem>
+              <MinParticipation />
+            </FormItem>
+
+            {/* Min Duration */}
+            <FormItem>
+              <Label label={t('labels.minimumDuration')} />
+              <DurationContainer>
+                <Controller
+                  name="durationMinutes"
+                  control={control}
+                  defaultValue="0"
+                  rules={{
+                    required: t('errors.emptyDistributionMinutes'),
+                    validate: value =>
+                      value <= 59 && value >= 0
+                        ? true
+                        : t('errors.distributionMinutes'),
+                  }}
+                  render={({
+                    field: {onBlur, onChange, value, name},
+                    fieldState: {error},
+                  }) => (
+                    <TimeLabelWrapper>
+                      <TimeLabel>{t('createDAO.step4.minutes')}</TimeLabel>
                       <NumberInput
                         name={name}
                         value={value}
                         onBlur={onBlur}
-                        onChange={onChange}
-                        placeholder={t('placeHolders.daoName')}
-                        view="percentage"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleMinutesChanged(e, onChange)
+                        }
+                        placeholder={'0'}
+                        min="0"
+                        disabled={durationDays === MAX_DURATION_DAYS.toString()}
                       />
-                    </div>
-
-                    <div className="flex flex-1 items-center">
-                      <Tag
-                        label={t('labels.yes')}
-                        variant="primary"
-                        className="mr-3 w-12 justify-center"
-                      />
-
-                      <LinearProgressContainer>
-                        <Progress value={value} />
-                        <ProgressBarTick />
-                        <ProgressInfo1>
-                          <p
-                            className="text-right font-semibold text-primary-500"
-                            style={{flexBasis: `${value}%`}}
-                          >
-                            {value !== '100' ? '>' : ''}
-                            {value}%
-                          </p>
-                        </ProgressInfo1>
-                      </LinearProgressContainer>
-
-                      <Tag
-                        label={t('labels.no')}
-                        className="ml-3 w-12 justify-center"
-                      />
-                    </div>
-                  </ApprovalContainer>
-
-                  {error?.message && (
-                    <AlertInline message={error.message} variant="critical" />
+                      {error?.message && (
+                        <AlertInline
+                          message={error.message}
+                          variant="critical"
+                        />
+                      )}
+                    </TimeLabelWrapper>
                   )}
-                  {value < 50 ? (
-                    <AlertInline
-                      message={t('createDAO.step4.alerts.minority')}
-                      variant="warning"
-                    />
-                  ) : (
-                    <AlertInline
-                      message={t('createDAO.step4.alerts.majority')}
-                      variant="success"
-                    />
+                />
+
+                <Controller
+                  name="durationHours"
+                  control={control}
+                  defaultValue="0"
+                  rules={{required: t('errors.emptyDistributionHours')}}
+                  render={({
+                    field: {onBlur, onChange, value, name},
+                    fieldState: {error},
+                  }) => (
+                    <TimeLabelWrapper>
+                      <TimeLabel>{t('createDAO.step4.hours')}</TimeLabel>
+                      <NumberInput
+                        name={name}
+                        value={value}
+                        onBlur={onBlur}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleHoursChanged(e, onChange)
+                        }
+                        placeholder={'0'}
+                        min="0"
+                        disabled={durationDays === MAX_DURATION_DAYS.toString()}
+                      />
+                      {error?.message && (
+                        <AlertInline
+                          message={error.message}
+                          variant="critical"
+                        />
+                      )}
+                    </TimeLabelWrapper>
                   )}
-                </>
+                />
+
+                <Controller
+                  name="durationDays"
+                  control={control}
+                  defaultValue="1"
+                  rules={{
+                    required: t('errors.emptyDistributionDays'),
+                    validate: value =>
+                      value >= 0 ? true : t('errors.distributionDays'),
+                  }}
+                  render={({
+                    field: {onBlur, onChange, value, name},
+                    fieldState: {error},
+                  }) => (
+                    <TimeLabelWrapper>
+                      <TimeLabel>{t('createDAO.step4.days')}</TimeLabel>
+                      <NumberInput
+                        name={name}
+                        value={value}
+                        onBlur={onBlur}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handleDaysChanged(e, onChange)
+                        }
+                        placeholder={'0'}
+                        min="0"
+                      />
+                      {error?.message && (
+                        <AlertInline
+                          message={error.message}
+                          variant="critical"
+                        />
+                      )}
+                    </TimeLabelWrapper>
+                  )}
+                />
+              </DurationContainer>
+              <Help>{t('createDAO.step4.durationSubtitle')}</Help>
+              {durationDays === MAX_DURATION_DAYS.toString() ? (
+                <AlertInline
+                  message={t('alert.maxDurationAlert') as string}
+                  variant="warning"
+                />
+              ) : durationDays === '0' &&
+                durationHours === MIN_DURATION_HOURS.toString() &&
+                durationMinutes === '0' ? (
+                <AlertInline
+                  message={t('alert.minDurationAlert') as string}
+                  variant="warning"
+                />
+              ) : (
+                <AlertInline
+                  message={t('alert.durationAlert') as string}
+                  variant="info"
+                />
               )}
-            />
-          </FormItem>
+            </FormItem>
 
-          {/* Minimum Participation */}
-          <FormItem>
-            <MinParticipation />
-          </FormItem>
-
-          {/* Min Duration */}
-          <FormItem>
-            <Label
-              label={t('labels.minimumDuration')}
-              helpText={t('createDAO.step4.durationSubtitle')}
-            />
-            <DurationContainer>
-              <Controller
-                name="durationMinutes"
-                control={control}
-                defaultValue="0"
-                rules={{
-                  required: t('errors.emptyDistributionMinutes'),
-                  validate: value =>
-                    value <= 59 && value >= 0
-                      ? true
-                      : t('errors.distributionMinutes'),
-                }}
-                render={({
-                  field: {onBlur, onChange, value, name},
-                  fieldState: {error},
-                }) => (
-                  <TimeLabelWrapper>
-                    <TimeLabel>{t('createDAO.step4.minutes')}</TimeLabel>
-                    <NumberInput
-                      name={name}
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleMinutesChanged(e, onChange)
-                      }
-                      placeholder={'0'}
-                      min="0"
-                      disabled={durationDays === MAX_DURATION_DAYS.toString()}
-                    />
-                    {error?.message && (
-                      <AlertInline message={error.message} variant="critical" />
+            {/* Early execution */}
+            {votingType !== 'gasless' && (
+              <>
+                <FormItem>
+                  <Label label={t('labels.earlyExecution')} />
+                  <Controller
+                    name="earlyExecution"
+                    control={control}
+                    render={({field: {onChange, value}}) => (
+                      <div className="py-4">
+                        <ToggleCheckList
+                          onChange={changeValue =>
+                            handleEarlyExecutionChanged(changeValue, onChange)
+                          }
+                          value={value as boolean}
+                        />
+                      </div>
                     )}
-                  </TimeLabelWrapper>
-                )}
-              />
-
-              <Controller
-                name="durationHours"
-                control={control}
-                defaultValue="0"
-                rules={{required: t('errors.emptyDistributionHours')}}
-                render={({
-                  field: {onBlur, onChange, value, name},
-                  fieldState: {error},
-                }) => (
-                  <TimeLabelWrapper>
-                    <TimeLabel>{t('createDAO.step4.hours')}</TimeLabel>
-                    <NumberInput
-                      name={name}
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleHoursChanged(e, onChange)
-                      }
-                      placeholder={'0'}
-                      min="0"
-                      disabled={durationDays === MAX_DURATION_DAYS.toString()}
-                    />
-                    {error?.message && (
-                      <AlertInline message={error.message} variant="critical" />
+                  />
+                  <Help>{t('labels.earlyExecutionDescription')}</Help>
+                </FormItem>
+                {/* Vote replacement */}
+                <FormItem>
+                  <Label label={t('labels.voteReplacement')} />
+                  <Controller
+                    name="voteReplacement"
+                    control={control}
+                    render={({field: {onChange, value}}) => (
+                      <div className="py-4">
+                        <ToggleCheckList
+                          onChange={onChange}
+                          value={value as boolean}
+                          disabled={earlyExecution}
+                        />
+                      </div>
                     )}
-                  </TimeLabelWrapper>
-                )}
-              />
-
-              <Controller
-                name="durationDays"
-                control={control}
-                defaultValue="1"
-                rules={{
-                  required: t('errors.emptyDistributionDays'),
-                  validate: value =>
-                    value >= 0 ? true : t('errors.distributionDays'),
-                }}
-                render={({
-                  field: {onBlur, onChange, value, name},
-                  fieldState: {error},
-                }) => (
-                  <TimeLabelWrapper>
-                    <TimeLabel>{t('createDAO.step4.days')}</TimeLabel>
-                    <NumberInput
-                      name={name}
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleDaysChanged(e, onChange)
-                      }
-                      placeholder={'0'}
-                      min="0"
-                    />
-                    {error?.message && (
-                      <AlertInline message={error.message} variant="critical" />
-                    )}
-                  </TimeLabelWrapper>
-                )}
-              />
-            </DurationContainer>
-            {durationDays === MAX_DURATION_DAYS.toString() ? (
-              <AlertInline
-                message={t('alert.maxDurationAlert') as string}
-                variant="warning"
-              />
-            ) : durationDays === '0' &&
-              durationHours === MIN_DURATION_HOURS.toString() &&
-              durationMinutes === '0' ? (
-              <AlertInline
-                message={t('alert.minDurationAlert') as string}
-                variant="warning"
-              />
-            ) : (
-              <AlertInline
-                message={t('alert.durationAlert') as string}
-                variant="info"
-              />
+                  />
+                  <Help>{t('labels.voteReplacementDescription')}</Help>
+                </FormItem>
+              </>
             )}
-          </FormItem>
-
-          {/* Early execution */}
-          {votingType !== 'gasless' && (
-            <>
-              <FormItem>
-                <Label
-                  label={t('labels.earlyExecution')}
-                  helpText={t('labels.earlyExecutionDescription')}
-                />
-                <Controller
-                  name="earlyExecution"
-                  control={control}
-                  render={({field: {onChange, value}}) => (
-                    <ToggleCheckList
-                      onChange={changeValue =>
-                        handleEarlyExecutionChanged(changeValue, onChange)
-                      }
-                      value={value as boolean}
-                    />
-                  )}
-                />
-              </FormItem>
-              {/* Vote replacement */}
-              <FormItem>
-                <Label
-                  label={t('labels.voteReplacement')}
-                  helpText={t('labels.voteReplacementDescription')}
-                />
-                <Controller
-                  name="voteReplacement"
-                  control={control}
-                  render={({field: {onChange, value}}) => (
-                    <ToggleCheckList
-                      onChange={onChange}
-                      value={value as boolean}
-                      disabled={earlyExecution}
-                    />
-                  )}
-                />
-              </FormItem>
-            </>
-          )}
-        </>
-      )}
-      <FormItem>
-        <ProposalCreation />
-      </FormItem>
-    </>
+          </>
+        )}
+        <FormItem>
+          <ProposalCreation />
+        </FormItem>
+      </div>
+    </GridLayout>
   );
 };
 
@@ -459,7 +468,7 @@ const FormItem = styled.div.attrs({
 
 const DurationContainer = styled.div.attrs({
   className:
-    'flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 p-6 bg-neutral-0 rounded-xl',
+    'flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 py-4 bg-neutral-0 rounded-xl',
 })``;
 
 const TimeLabelWrapper = styled.div.attrs({
@@ -472,7 +481,7 @@ const TimeLabel = styled.span.attrs({
 
 const ApprovalContainer = styled.div.attrs({
   className:
-    'flex flex-col flex-col-reverse md:flex-row md:items-center p-6 pt-8 md:p-6 space-y-6 space-y-reverse md:space-y-0 md:space-x-6 rounded-xl bg-neutral-0',
+    'flex flex-col flex-col-reverse md:flex-row md:items-center py-4 pt-4 space-y-6 space-y-reverse md:space-y-0 md:space-x-6 rounded-xl bg-neutral-0',
 })``;
 
 const LinearProgressContainer = styled.div.attrs({

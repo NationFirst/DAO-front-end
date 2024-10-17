@@ -37,7 +37,6 @@ const VerificationCard: React.FC<TransferListProps> = ({tokenAddress}) => {
     control: control,
   });
 
-  console.log('tokenType', tokenType);
   const {network} = useNetwork();
 
   const {data: tokenHolders, isLoading: isTotalHoldersLoading} =

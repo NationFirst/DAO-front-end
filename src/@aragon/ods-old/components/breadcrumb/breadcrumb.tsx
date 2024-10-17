@@ -4,7 +4,7 @@ import {Icon, IconType} from '@aragon/ods';
 import {type TagProps} from '../tag';
 import Crumb from './crumb';
 import {shortenAddress} from '../../utils';
-import ButtonBack from 'components/buttons/buttonBack';
+import ButtonHome from 'components/buttons/buttonHome';
 
 export type CrumbType = {
   label: ReactElement | string;
@@ -82,7 +82,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     return (
       <ProcessContainer data-testid="breadcrumbs">
         <ProcessCrumbContainer>
-          <ButtonBack
+          <ButtonHome
             title={getLabel(crumbs?.label)}
             onClick={() => onClick?.(crumbs.path)}
           />

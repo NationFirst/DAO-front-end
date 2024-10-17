@@ -2,18 +2,18 @@ import React, {FC} from 'react';
 
 import Button from './button';
 import Arrow from 'assets/icons/arrow';
-import useMediaQuery from 'hooks/useMediaQuery';
+import useScreen from 'hooks/useScreen';
 
 type Props = {
   onClick: () => void;
 };
 
 const ButtonCreateDao: FC<Props> = ({onClick}) => {
-  const isFullWidth = useMediaQuery('(max-width: 768px)');
+  const {isMobile} = useScreen();
 
   return (
     <Button
-      fullWidth={isFullWidth}
+      fullWidth={isMobile}
       variant="fill"
       onClick={onClick}
       iconRight={<Arrow w={20} h={20} />}

@@ -197,7 +197,7 @@ const DaoWrapper: React.FC = () => {
       {/* <UpdateBanner /> */}
       <StepperProvider>
         <Navbar />
-        <GridLayout className="min-h-[calc(100vh-var(--app-navbar-height))] pb-16">
+        <GridLayout className="min-h-[calc(100vh-var(--app-navbar-height))] pb-16 max-xl:pb-24">
           <Outlet />
           <TransferMenu />
           <DepositModal />

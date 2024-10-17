@@ -7,7 +7,6 @@ import React, {
   useState,
 } from 'react';
 import {Breadcrumb, Wizard} from '@aragon/ods-old';
-import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import cls from 'classnames';
@@ -51,7 +50,6 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
   const skipSteps = children.filter(child => child.props.skipStep !== true);
   const {updateContext: updateStepperContext} = useStepperContext();
 
-  const {t} = useTranslation();
   const navigate = useNavigate();
 
   const [showExitProcessMenu, setShowExitProcessMenu] = useState(false);
@@ -67,8 +65,6 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
     fullWidth,
     customHeader,
     customFooter,
-    backButtonLabel,
-    nextButtonLabel,
     isNextButtonDisabled,
     onBackButtonClicked,
     onNextButtonClicked,
@@ -148,7 +144,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
   return (
     <FullScreenStepperContext.Provider value={value}>
       <Layout>
-        <div className="-mx-4 md:mx-0 md:mt-6">
+        <div className="mt-6">
           {!hideWizard && (
             <Wizard
               includeStepper={includeStepper}
