@@ -8,6 +8,7 @@ import {Progress, AlertInline} from '@aragon/ods';
 
 import {htmlIn} from 'utils/htmlIn';
 import {gTokenSymbol} from 'utils/tokens';
+import {Help} from '@aragon/ods-old/components/help';
 
 export const MinParticipation: FC = () => {
   const {t} = useTranslation();
@@ -126,12 +127,7 @@ export const MinParticipation: FC = () => {
 
   return (
     <>
-      <Label
-        label={t('labels.minimumParticipation')}
-        helpText={t('createDAO.step4.minimumParticipationSubtitle', {
-          gTokenSymbol: govTokenSymbol,
-        })}
-      />
+      <Label label={t('labels.minimumParticipation')} />
       <Controller
         name="minimumParticipation"
         control={control}
@@ -145,16 +141,7 @@ export const MinParticipation: FC = () => {
         }) => (
           <>
             <div>
-              <Container
-                style={
-                  isGovTokenRequiresWrapping
-                    ? {
-                        boxShadow:
-                          '0px 0px 1px 0px hsla(210, 24%, 16%, 0.04), 0px 0px 2px 0px hsla(210, 24%, 16%, 0.06), 0px 4px 8px 0px hsla(210, 24%, 16%, 0.04)',
-                      }
-                    : {}
-                }
-              >
+              <Container>
                 <ApprovalWrapper>
                   <div className="md:w-1/3">
                     <NumberInput
@@ -193,6 +180,11 @@ export const MinParticipation: FC = () => {
                     </ProgressInfo2>
                   </LinearProgressContainer>
                 </ApprovalWrapper>
+                <Help>
+                  {t('createDAO.step4.minimumParticipationSubtitle', {
+                    gTokenSymbol: govTokenSymbol,
+                  })}
+                </Help>
               </Container>
 
               {/* Simulation for existing tokens which require wrapping */}
@@ -332,7 +324,7 @@ export const MinParticipation: FC = () => {
 };
 
 const Container = styled.div.attrs({
-  className: 'pt-8 xl:pt-6 p-6 space-x-6 rounded-xl bg-neutral-0 relative z-10',
+  className: 'mt-4 py-4 relative z-10 space-y-8',
 })``;
 
 const SubContainerWrapper = styled.div.attrs({

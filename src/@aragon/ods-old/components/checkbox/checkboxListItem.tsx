@@ -1,6 +1,7 @@
 import React from 'react';
 import {styled} from 'styled-components';
 import {Icon, IconType} from '@aragon/ods';
+import cls from 'classnames';
 
 export const Icons = {
   multiSelect: {
@@ -56,17 +57,17 @@ type ContainerTypes = {
 };
 
 const Container = styled.div.attrs<ContainerTypes>(({disabled, type}) => ({
-  className: `py-3 px-4 rounded-xl border-2 focus:outline-none focus-visible:ring focus-visible:ring-primary ${
-    disabled
-      ? 'bg-neutral-100 border-neutral-300'
-      : `bg-neutral-0 group hover:border-primary-500 cursor-pointer ${
-          type === 'error'
-            ? 'border-critical-500'
-            : type !== 'default'
-            ? 'border-primary-500'
-            : 'border-neutral-100'
-        }`
-  }`,
+  className: cls(
+    'py-3.5 px-4 rounded-xl border-3',
+    'focus:outline-none focus-visible:ring focus-visible:ring-primary transition-colors',
+    {
+      'bg-neutral-100 border-neutral-300': disabled,
+      'bg-neutral-0 group hover:border-primary-500 cursor-pointer': !disabled,
+      'border-critical-500': !disabled && type === 'error',
+      'border-primary-400': !disabled && type !== 'error' && type !== 'default',
+      'border-primary-50': !disabled && type === 'default',
+    }
+  ),
   tabIndex: disabled ? -1 : 0,
 }))<ContainerTypes>``;
 

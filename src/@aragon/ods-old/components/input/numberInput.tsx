@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import {styled} from 'styled-components';
+import cls from 'classnames';
 
 import {Button, IconType} from '@aragon/ods';
 
@@ -144,31 +145,20 @@ export type StyledContainerProps = Pick<
 >;
 
 const Container = styled.div.attrs<StyledContainerProps>(
-  ({mode, disabled, width}) => {
-    let className = `${
-      disabled ? 'bg-neutral-100' : 'bg-neutral-0'
-    } inline-flex bg-neutral-0 ${
-      width ? '' : 'w-full'
-    } focus:outline-none items-center py-1.5 px-2
-      focus-within:border-primary-500 focus-within:hover:border-primary-500 justify-between
-      rounded-xl hover:border-neutral-300 border-2 active:border-primary-500
-    `;
-
-    if (mode === 'default') {
-      className += 'border-neutral-100';
-    } else if (mode === 'success') {
-      className += 'border-success-600';
-    } else if (mode === 'warning') {
-      className += 'border-warning-600';
-    } else if (mode === 'critical') {
-      className += 'border-critical-600';
-    }
-
-    return {
-      className,
-      ...(width && {style: {width: `${width}px`}}),
-    };
-  }
+  ({mode, disabled, width}) => ({
+    className: cls(
+      {'w-full': !width, 'bg-neutral-100': disabled, 'bg-neutral-0': !disabled},
+      'inline-flex bg-neutral-0 items-center justify-between py-2.5 px-2.5 rounded-xl border-3',
+      'focus:outline-none focus-within:border-primary-400 focus-within:hover:border-primary-400 active:border-primary-400 hover:border-primary-400 transition-colors',
+      {
+        'border-primary-50': mode === 'default',
+        'border-success-600': mode === 'success',
+        'border-warning-600': mode === 'warning',
+        'border-critical-600': mode === 'critical',
+      }
+    ),
+    ...(width && {style: {width}}),
+  })
 )<StyledContainerProps>``;
 const InputWrapper = styled.div.attrs({
   className: 'flex justify-center w-4/5',
