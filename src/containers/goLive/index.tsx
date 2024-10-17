@@ -9,7 +9,6 @@ import Blockchain from './blockchain';
 import DaoMetadata from './daoMetadata';
 import Community from './community';
 import Governance from './governance';
-import goLive from 'assets/images/goLive.svg';
 import {Landing} from 'utils/paths';
 import {useWallet} from 'hooks/useWallet';
 import {useGlobalModalContext} from 'context/globalModals';
@@ -36,16 +35,13 @@ export const GoLiveHeader: React.FC = () => {
           onClick={clickHandler}
         />
       </div>
-      <div className="flex justify-between">
-        <div className="w-full pt-6">
-          <h1 className="text-4xl font-semibold leading-tight text-neutral-800">
-            <span className="font-semibold text-accent">Deploy</span> Your DAO
-          </h1>
-          <p className="mt-4 text-xl leading-normal text-neutral-600">
-            {t('createDAO.review.description')}
-          </p>
-        </div>
-        <img className="hidden w-[200px] md:block" src={goLive} />
+      <div className="w-full pt-6">
+        <h1 className="text-4xl font-semibold leading-tight text-neutral-800">
+          Launch Your <span className="font-semibold text-accent">DAO</span>
+        </h1>
+        <p className="mt-4 text-xl leading-normal text-neutral-600">
+          {t('createDAO.review.description')}
+        </p>
       </div>
     </div>
   );
@@ -78,7 +74,6 @@ const GoLive: React.FC = () => {
 export const GoLiveFooter: React.FC = () => {
   const {watch, setValue, getValues} = useFormContext();
   const {reviewCheck} = watch();
-  const {t} = useTranslation();
   const {open} = useGlobalModalContext();
   const {isConnected, provider, isOnWrongNetwork} = useWallet();
 
@@ -121,7 +116,7 @@ export const GoLiveFooter: React.FC = () => {
           variant="fill"
           disabled={isButtonDisabled}
         >
-          {t('createDAO.review.title')}
+          LAUNCH DAO
         </Button>
         <CreateDaoDialog
           isOpen={isDialogOpen}

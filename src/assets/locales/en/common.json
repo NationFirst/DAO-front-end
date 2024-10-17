@@ -834,7 +834,7 @@
     },
     "review": {
       "title": "Deploy your DAO",
-      "description": "Double-check that everything is correct before deploying your DAO.",
+      "description": "Review all details carefully to ensure accuracy before finalizing and launching your DAO.",
       "network": "{{network}} net",
       "distributionLink": "See {{count}} addresses",
       "days": "{{days}} days",
