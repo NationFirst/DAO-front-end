@@ -133,7 +133,7 @@ export const StyledCarousel = styled(ReactResponsiveCarousel).attrs({})`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px;
+    margin: 0;
   }
 `;
 
