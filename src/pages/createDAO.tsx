@@ -261,12 +261,12 @@ export const CreateDAO: React.FC = () => {
     if (!isL2Network && !daoEnsName) return false;
     if (!daoName || !dirtyFields.daoSummary) return false;
 
-    return errors.daoEnsName ||
+    return !(
+      errors.daoEnsName ||
       errors.daoName ||
       errors.links ||
       errors.daoSummary
-      ? false
-      : true;
+    );
   }, [
     daoEnsName,
     daoName,
@@ -291,7 +291,7 @@ export const CreateDAO: React.FC = () => {
       break;
   }
   const defineCommitteeIsValid = useMemo(() => {
-    if (
+    return !(
       !committee ||
       !committee.length ||
       errors.committee ||
@@ -299,9 +299,7 @@ export const CreateDAO: React.FC = () => {
       errors.executionExpirationMinutes ||
       errors.executionExpirationHours ||
       errors.executionExpirationDays
-    )
-      return false;
-    return true;
+    );
   }, [
     committee,
     errors.committee,
@@ -312,7 +310,7 @@ export const CreateDAO: React.FC = () => {
   ]);
 
   const daoCommunityConfigurationIsValid = useMemo(() => {
-    if (
+    return !(
       errors.minimumApproval ||
       errors.minimumParticipation ||
       errors.support ||
@@ -321,9 +319,7 @@ export const CreateDAO: React.FC = () => {
       errors.durationMinutes ||
       errors.multisigMinimumApprovals ||
       errors.eligibilityTokenAmount
-    )
-      return false;
-    return true;
+    );
   }, [
     errors.durationDays,
     errors.durationHours,
@@ -397,7 +393,14 @@ export const CreateDAO: React.FC = () => {
           <DefineMetadata />
         </Step>
         <Step
-          wizardTitle={t('createDAO.step3.title')}
+          fullWidth
+          wizardTitle={
+            <>
+              Establish{' '}
+              <span className="font-semibold text-accent">Membership</span>{' '}
+              Criteria
+            </>
+          }
           wizardDescription={htmlIn(t)('createDAO.step3.description')}
           wizardDescriptionLink={t('createDAO.step3.descriptionLinkURL')}
           isNextButtonDisabled={!daoCommunitySetupIsValid}
@@ -415,7 +418,13 @@ export const CreateDAO: React.FC = () => {
           <SetupCommunity />
         </Step>
         <Step
-          wizardTitle={t('createDAO.step4.title')}
+          fullWidth
+          wizardTitle={
+            <>
+              Configure Governance{' '}
+              <span className="font-semibold text-accent">Rules</span>
+            </>
+          }
           wizardDescription={htmlIn(t)('createDAO.step4.description')}
           wizardDescriptionLink={t('createDAO.step4.descriptionLinkURL')}
           isNextButtonDisabled={!daoCommunityConfigurationIsValid}

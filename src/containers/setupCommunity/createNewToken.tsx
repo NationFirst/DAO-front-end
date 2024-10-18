@@ -7,6 +7,7 @@ import {alphaNumericValidator} from 'utils/validators';
 import {htmlIn} from 'utils/htmlIn';
 import {Label, TextInput} from '@aragon/ods-old';
 import {AlertInline} from '@aragon/ods';
+import {Help} from '@aragon/ods-old/components/help';
 
 const CreateNewToken: React.FC = () => {
   const {t} = useTranslation();
@@ -23,10 +24,7 @@ const CreateNewToken: React.FC = () => {
         ></Subtitle>
       </DescriptionContainer>
       <FormItem>
-        <Label
-          label={t('labels.tokenName')}
-          helpText={t('createDAO.step3.nameSubtitle')}
-        />
+        <Label label={t('labels.tokenName')} />
 
         <Controller
           name="tokenName"
@@ -48,6 +46,7 @@ const CreateNewToken: React.FC = () => {
                 onBlur={onBlur}
                 onChange={onChange}
               />
+              <Help>{t('createDAO.step3.nameSubtitle')}</Help>
               {error?.message && (
                 <AlertInline message={error.message} variant="critical" />
               )}
@@ -56,10 +55,7 @@ const CreateNewToken: React.FC = () => {
         />
       </FormItem>
       <FormItem>
-        <Label
-          label={t('labels.tokenSymbol')}
-          helpText={t('createDAO.step3.symbolSubtitle')}
-        />
+        <Label label={t('labels.tokenSymbol')} />
 
         <Controller
           name="tokenSymbol"
@@ -81,6 +77,7 @@ const CreateNewToken: React.FC = () => {
                 onBlur={onBlur}
                 onChange={onChange}
               />
+              <Help>{t('createDAO.step3.symbolSubtitle')}</Help>
               {error?.message && (
                 <AlertInline message={error.message} variant="critical" />
               )}
@@ -90,17 +87,15 @@ const CreateNewToken: React.FC = () => {
       </FormItem>
       <FormItem>
         <DescriptionContainer>
-          <Label
-            label={t('labels.distributeTokens')}
-            helpText={htmlIn(t)('createDAO.step3.distributeTokensHelpertext')}
-            renderHtml={true}
-          />
+          <Label label={t('labels.distributeTokens')} />
         </DescriptionContainer>
+
+        <AddWallets />
+        <Help>{t('createDAO.step3.distributeTokensHelpertext')}</Help>
         <AlertInline
           message={t('createDAO.step3.distributionWalletAlertText')}
           variant="info"
         />
-        <AddWallets />
       </FormItem>
     </>
   );

@@ -693,7 +693,7 @@
     "step3": {
       "label": "3",
       "title": "Set up membership criteria",
-      "description": "Decide the type of voting your DAO uses. You can change these settings with a vote.",
+      "description": "Select the voting model your DAO will operate with. These rules can be adjusted in the future through a community decision.",
       "newToken": "No",
       "authorisedWalletsSubtitle": "Add wallets of members who are authorized to participate in governance",
       "warningTitle": "Changing the list",
@@ -834,7 +834,7 @@
     },
     "review": {
       "title": "Deploy your DAO",
-      "description": "Double-check that everything is correct before deploying your DAO.",
+      "description": "Review all details carefully to ensure accuracy before finalizing and launching your DAO.",
       "network": "{{network}} net",
       "distributionLink": "See {{count}} addresses",
       "days": "{{days}} days",
