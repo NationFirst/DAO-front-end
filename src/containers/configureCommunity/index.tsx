@@ -468,7 +468,7 @@ const FormItem = styled.div.attrs({
 
 const DurationContainer = styled.div.attrs({
   className:
-    'flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 py-4 bg-neutral-0 rounded-xl',
+    'flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 py-4 rounded-xl',
 })``;
 
 const TimeLabelWrapper = styled.div.attrs({
@@ -481,7 +481,7 @@ const TimeLabel = styled.span.attrs({
 
 const ApprovalContainer = styled.div.attrs({
   className:
-    'flex flex-col flex-col-reverse md:flex-row md:items-center py-4 pt-4 space-y-6 space-y-reverse md:space-y-0 md:space-x-6 rounded-xl bg-neutral-0',
+    'flex flex-col flex-col-reverse md:flex-row md:items-center py-4 pt-4 space-y-6 space-y-reverse md:space-y-0 md:space-x-6 rounded-xl',
 })``;
 
 const LinearProgressContainer = styled.div.attrs({
