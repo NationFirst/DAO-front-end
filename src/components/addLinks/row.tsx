@@ -200,7 +200,7 @@ const Container = styled.div.attrs<{bgWhite: BgWhite}>(({bgWhite}) => ({
   className: `flex flex-wrap gap-x-4 my-2 gap-y-3 ${
     bgWhite
       ? 'bg-neutral-50 border border-t-0 border-neutral-100 last:rounded-b-xl'
-      : 'bg-neutral-0'
+      : ''
   }`,
 }))<BgWhite>``;
 

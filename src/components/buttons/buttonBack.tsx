@@ -19,7 +19,7 @@ const ButtonBack: FC<Props> = ({onClick, title}) => {
 
 const Button = styled.button.attrs({
   className:
-    'inline-flex items-center gap-3 rounded-xl p-2.5 px-4 text-base border-2 transition-all text-primary-400 border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30',
+    'inline-flex items-center gap-3 rounded-xl p-2.5 px-4 text-base border-2 transition-all bg-white text-primary-400 border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30',
 })``;
 
 export default ButtonBack;

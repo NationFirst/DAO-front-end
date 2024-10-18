@@ -43,7 +43,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>(({variant}) => ({
   className: cls(
     {
       'text-white bg-primary-400 border-primary-50': variant === 'fill',
-      'text-primary-400': variant === 'outline',
+      'text-primary-400 bg-white': variant === 'outline',
     },
     'border-2 relative py-4 w-[325px] rounded-full overflow-hidden disabled:opacity-30'
   ),

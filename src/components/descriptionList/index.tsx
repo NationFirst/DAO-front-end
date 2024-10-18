@@ -88,7 +88,7 @@ export const Dl: React.FC<{children: ReactNode}> = ({children}) => (
 );
 
 const Container = styled.div.attrs({
-  className: 'py-4 space-y-6 bg-neutral-0',
+  className: 'py-4 space-y-6',
 })``;
 
 const TitleText = styled.h1.attrs({
