@@ -34,16 +34,16 @@ const Container = styled.div.attrs({
 })``;
 
 const ImageContainer = styled.div.attrs({
-  className: 'rounded-xl flex justify-center',
+  className: 'flex justify-center overflow-hidden',
 })``;
 
 const VStack = styled.div.attrs({
-  className: 'space-y-4 p-8',
+  className: 'space-y-4 p-8 flex flex-col',
 })``;
 
 const Caption = styled.div.attrs({
   className:
-    'h-14 w-14 rounded-xl bg-primary-50 flex justify-center items-center font-semibold text-primary-400 text-3xl',
+    'h-14 w-14 rounded-xl bg-primary-50 flex max-xl:mx-auto justify-center items-center font-semibold text-primary-400 text-3xl',
 })``;
 
 const Title = styled.div.attrs({

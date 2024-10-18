@@ -27,10 +27,8 @@ const CardImage: FC<Props> = ({type, height = 'h-full'}) => {
       <img
         src={images[type]}
         alt={type}
-        width={90}
-        height={90}
         draggable={false}
-        className="select-none"
+        className="!h-[90px] !w-[90px] select-none"
       />
     </ImageContainer>
   );
