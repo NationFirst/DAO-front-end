@@ -16,7 +16,7 @@ export interface BackdropProps {
   children?: ReactNode;
 }
 
-const togglePageOverflow = (visible: boolean) => {
+export const togglePageOverflow = (visible: boolean) => {
   const html = document.querySelector('html');
 
   if (!html) {
