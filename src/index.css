@@ -21,4 +21,8 @@
   --ods-color-primary-900: #021108 !important;
 
   --app-navbar-height: 96px;
+
+  @media screen and (max-width: 768px) {
+    --app-navbar-height: 80px;
+  }
 }
