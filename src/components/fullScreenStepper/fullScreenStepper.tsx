@@ -17,6 +17,7 @@ import {StepProps} from './step';
 import Button from '../buttons/button';
 import Arrow from '../../assets/icons/arrow';
 import {useStepperContext} from '../../context/stepperContext';
+import useScreen from '../../hooks/useScreen';
 
 export type FullScreenStepperProps = {
   navLabel: string;
@@ -49,6 +50,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
 }) => {
   const skipSteps = children.filter(child => child.props.skipStep !== true);
   const {updateContext: updateStepperContext} = useStepperContext();
+  const {isDesktop} = useScreen();
 
   const navigate = useNavigate();
 
@@ -156,13 +158,18 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
               currentStep={currentFormStep}
               renderHtml
               nav={
-                <Breadcrumb
-                  crumbs={{
-                    label: navLabel,
-                    path: returnPath,
-                  }}
-                  onClick={handleExitButtonClicked}
-                />
+                <div className="flex items-center justify-between">
+                  <Breadcrumb
+                    crumbs={{
+                      label: navLabel,
+                      path: returnPath,
+                    }}
+                    onClick={handleExitButtonClicked}
+                  />
+                  <span className="font-semibold text-black">
+                    Step {currentFormStep} out of {totalSteps}
+                  </span>
+                </div>
               }
             />
           )}
@@ -182,6 +189,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
                 onClick={handleButtonBack}
                 disabled={currentStep === 1}
                 iconLeft={<Arrow className="rotate-180" w={20} h={20} />}
+                isMobile={!isDesktop}
               >
                 BACK
               </Button>
@@ -191,6 +199,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
                   onClick={handleButtonNext}
                   disabled={isNextButtonDisabled}
                   iconRight={<Arrow w={20} h={20} />}
+                  isMobile={!isDesktop}
                 >
                   NEXT
                 </Button>

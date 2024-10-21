@@ -7,6 +7,7 @@ import {
   useLocation,
   useParams,
 } from 'react-router-dom';
+import cls from 'classnames';
 
 import {GridLayout} from 'components/layout';
 import ProtectedRoute from 'components/protectedRoute';
@@ -35,6 +36,7 @@ import {DelegationGatingMenu} from 'containers/delegationGatingMenu';
 import {ActionsProvider} from './context/actions';
 import decorationStyles from 'utils/decorationStyles';
 import {StepperProvider} from './context/stepperContext';
+import useScreen from './hooks/useScreen';
 
 export const App: React.FC = () => {
   // TODO this needs to be inside a Routes component. Will be moved there with
@@ -191,13 +193,18 @@ const DaoWrapper: React.FC = () => {
   // api call is not made on mount regardless of whether the user
   // wants to open the modal
   const {isOpen} = useTransactionDetailContext();
+  const {isDesktop} = useScreen();
+
+  const minHeightClass = isDesktop
+    ? 'min-h-[calc(100svh-var(--app-navbar-height))]'
+    : 'min-h-[100svh]';
 
   return (
     <GovTokensWrappingProvider>
       {/* <UpdateBanner /> */}
       <StepperProvider>
         <Navbar />
-        <GridLayout className="min-h-[calc(100vh-var(--app-navbar-height))] pb-16 max-xl:pb-24">
+        <GridLayout className={cls(minHeightClass, 'pb-16 max-xl:pb-24')}>
           <Outlet />
           <TransferMenu />
           <DepositModal />

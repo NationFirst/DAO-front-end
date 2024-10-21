@@ -26,8 +26,7 @@ export const Wizard: React.FC<WizardProps> = ({
   return (
     <StepCard data-testid="wizard">
       <div className="xl:hidden">{nav}</div>
-
-      {/* Stepper */}
+      {/*Stepper*/}
       {/*{includeStepper && (*/}
       {/*  <Wrapper>*/}
       {/*    <CenteredFlex>*/}
@@ -67,7 +66,7 @@ export const Wizard: React.FC<WizardProps> = ({
 };
 
 const StepCard = styled.div.attrs({
-  className: 'flex flex-col mt-10',
+  className: 'flex flex-col gap-10',
 })``;
 
 const Wrapper = styled.div.attrs({
