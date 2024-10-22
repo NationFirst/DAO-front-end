@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {Breadcrumb, Wizard} from '@aragon/ods-old';
+import {Breadcrumb, togglePageOverflow, Wizard} from '@aragon/ods-old';
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import cls from 'classnames';
@@ -127,6 +127,7 @@ export const FullScreenStepper: React.FC<FullScreenStepperProps> = ({
 
   const exitProcess = useCallback(() => {
     setShowExitProcessMenu(false);
+    togglePageOverflow(false);
     navigate(returnPath);
   }, [navigate, returnPath]);
 

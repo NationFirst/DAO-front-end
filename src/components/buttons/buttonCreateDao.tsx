@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 
 import Button from './button';
 import Arrow from 'assets/icons/arrow';
-import useScreen from 'hooks/useScreen';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 type Props = {
   onClick: () => void;
