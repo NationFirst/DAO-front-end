@@ -94,61 +94,71 @@ export const OverviewDAOStep: React.FC = () => {
         <div className="space-y-4 md:flex md:space-x-4 md:space-y-0">
           {OverviewCards}
         </div>
-        <CreateDaoButtonContainer>
+        <ButtonContainer>
           <ButtonCreateDao onClick={handleSetupClick} />
-        </CreateDaoButtonContainer>
+        </ButtonContainer>
       </div>
     );
   }
+
   return (
-    <MobileCTA>
-      <StyledCarousel
-        swipeable
-        emulateTouch
-        centerMode
-        autoPlay
-        preventMovementUntilSwipeScrollTolerance
-        swipeScrollTolerance={100}
-        interval={4000}
-        showArrows={false}
-        showStatus={false}
-        transitionTime={300}
-        centerSlidePercentage={92}
-        showThumbs={false}
-        infiniteLoop
-        renderIndicator={(onClickHandler, isSelected, index, label) => {
-          if (isSelected) {
+    <>
+      <MobileCTA>
+        <StyledCarousel
+          swipeable
+          emulateTouch
+          centerMode
+          autoPlay
+          preventMovementUntilSwipeScrollTolerance
+          swipeScrollTolerance={100}
+          interval={4000}
+          showArrows={false}
+          showStatus={false}
+          transitionTime={300}
+          centerSlidePercentage={92}
+          showThumbs={false}
+          infiniteLoop
+          renderIndicator={(onClickHandler, isSelected, index, label) => {
+            if (isSelected) {
+              return (
+                <ActiveIndicator
+                  aria-label={`Selected: ${label} ${index + 1}`}
+                  title={`Selected: ${label} ${index + 1}`}
+                />
+              );
+            }
             return (
-              <ActiveIndicator
-                aria-label={`Selected: ${label} ${index + 1}`}
-                title={`Selected: ${label} ${index + 1}`}
+              <Indicator
+                onClick={onClickHandler}
+                onKeyDown={onClickHandler}
+                value={index}
+                key={index}
+                role="button"
+                tabIndex={0}
+                title={`${label} ${index + 1}`}
+                aria-label={`${label} ${index + 1}`}
               />
             );
-          }
-          return (
-            <Indicator
-              onClick={onClickHandler}
-              onKeyDown={onClickHandler}
-              value={index}
-              key={index}
-              role="button"
-              tabIndex={0}
-              title={`${label} ${index + 1}`}
-              aria-label={`${label} ${index + 1}`}
-            />
-          );
-        }}
-      >
-        {OverviewCards}
-      </StyledCarousel>
-    </MobileCTA>
+          }}
+        >
+          {OverviewCards}
+        </StyledCarousel>
+      </MobileCTA>
+      <ButtonMobileContainer>
+        <ButtonCreateDao onClick={handleSetupClick} />
+      </ButtonMobileContainer>
+    </>
   );
 };
 
 const MobileCTA = styled.div.attrs({
-  className: 'mb-10 -mx-4 md:-mx-6 xl:mx-0',
+  className: '-mx-4 md:-mx-6 xl:mx-0',
 })``;
 
-const CreateDaoButtonContainer = styled.div.attrs({
+const ButtonContainer = styled.div.attrs({
   className: 'mt-20 self-end',
+})``;
+
+const ButtonMobileContainer = styled.div.attrs({
+  className: 'flex justify-center',
 })``;
