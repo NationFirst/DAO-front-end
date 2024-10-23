@@ -196,8 +196,8 @@ const DaoWrapper: React.FC = () => {
   const {isDesktop} = useScreen();
 
   const minHeightClass = isDesktop
-    ? 'min-h-[calc(100svh-var(--app-navbar-height))]'
-    : 'min-h-[100svh]';
+    ? 'min-h-[calc(100dvh-var(--app-navbar-height))]'
+    : 'min-h-[100dvh]';
 
   return (
     <GovTokensWrappingProvider>
