@@ -116,7 +116,7 @@ export const CHAIN_METADATA: Record<SupportedNetworks, ChainData> = {
     id: 0xa868,
     name: 'Nationsfirst',
     domain: 'L1 Blockchain',
-    logo: 'https://explorer-dev.nationsfirst.io/assets/favicon/favicon-32x32.png',
+    logo: '/network_icon.png',
     explorer: 'https://explorer-dev.nationsfirst.io/',
     explorerName: 'Nationsfirst',
     isTestnet: true,

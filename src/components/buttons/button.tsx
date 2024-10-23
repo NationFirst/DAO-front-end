@@ -73,9 +73,16 @@ const StyledButton = styled.button.attrs<StyledButtonProps>(
     transition: opacity 150ms;
   }
 
-  &:not([disabled])&:hover&:active,
-  &:not([disabled])&:hover&::after {
-    opacity: 1;
+  @media (hover: none) {
+    &:not([disabled])&:active::after {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: hover) {
+    &:not([disabled])&:hover::after {
+      opacity: 1;
+    }
   }
 `;
 
