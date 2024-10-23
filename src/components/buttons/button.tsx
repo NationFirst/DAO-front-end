@@ -10,6 +10,7 @@ type Props = {
   onClick: (e: React.MouseEvent) => void;
   disabled?: boolean;
   fullWidth?: boolean;
+  isMobile?: boolean;
 };
 
 const Button: FC<Props> = ({
@@ -20,6 +21,7 @@ const Button: FC<Props> = ({
   onClick,
   disabled = false,
   fullWidth = false,
+  isMobile = false,
 }) => {
   const handleClick = (e: React.MouseEvent) => {
     !disabled && onClick(e);
@@ -27,6 +29,7 @@ const Button: FC<Props> = ({
 
   return (
     <StyledButton
+      isMobile={isMobile}
       fullWidth={fullWidth}
       variant={variant}
       disabled={disabled}
@@ -44,16 +47,17 @@ type IconProps = {
   right?: boolean;
 };
 
-type StyledButtonProps = Pick<Props, 'variant' | 'fullWidth'>;
+type StyledButtonProps = Pick<Props, 'variant' | 'fullWidth' | 'isMobile'>;
 
 const StyledButton = styled.button.attrs<StyledButtonProps>(
-  ({variant, fullWidth}) => ({
+  ({variant, fullWidth, isMobile}) => ({
     className: cls(
       {
         'text-white bg-primary-400 border-primary-50': variant === 'fill',
         'text-primary-400 bg-white': variant === 'outline',
         'w-full': fullWidth,
-        'w-[325px]': !fullWidth,
+        'w-[325px]': !fullWidth && !isMobile,
+        'w-[150px]': !fullWidth && isMobile,
       },
       'border-2 relative py-4 rounded-full overflow-hidden disabled:opacity-30'
     ),
@@ -69,9 +73,16 @@ const StyledButton = styled.button.attrs<StyledButtonProps>(
     transition: opacity 150ms;
   }
 
-  &:not([disabled])&:hover&:active,
-  &:not([disabled])&:hover&::after {
-    opacity: 1;
+  @media (hover: none) {
+    &:not([disabled])&:active::after {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: hover) {
+    &:not([disabled])&:hover::after {
+      opacity: 1;
+    }
   }
 `;
 
