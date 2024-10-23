@@ -2,8 +2,8 @@ import React, {useMemo} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
 
-import {Link} from '@aragon/ods-old';
-import {IconType, Tag} from '@aragon/ods';
+import {Link, Tag} from '@aragon/ods-old';
+import {IconType} from '@aragon/ods';
 
 import {Dd, DescriptionListContainer, Dl, Dt} from 'components/descriptionList';
 import {useFormStep} from 'components/fullScreenStepper';
@@ -138,13 +138,13 @@ const Community: React.FC = () => {
                     {/* TODO: check the owner for token contract, if it belongs to
                     dao add this */}
                     {isCustomToken && (
-                      <Tag label={t('labels.new')} variant="info" />
+                      <Tag label={t('labels.new')} colorScheme="info" />
                     )}
 
                     {isGovTokenRequiresWrapping && (
                       <Tag
                         label={t('labels.review.tokenWrapped')}
-                        variant="info"
+                        colorScheme="info"
                       />
                     )}
                   </div>
@@ -159,7 +159,10 @@ const Community: React.FC = () => {
                         {formattedTotalSupply} {tokenSymbol}
                       </p>
                       {isCustomToken && (
-                        <Tag label={t('labels.mintable')} variant="neutral" />
+                        <Tag
+                          label={t('labels.mintable')}
+                          colorScheme="neutral"
+                        />
                       )}
                     </div>
                   </Dd>
@@ -190,9 +193,7 @@ const Community: React.FC = () => {
                   </Dd>
                 </Dl>
               )}
-              {(isCustomToken ||
-                (network !== 'zksyncMainnet' &&
-                  network !== 'zksyncSepolia')) && (
+              {isCustomToken && (
                 <Dl>
                   <Dt>{t('labels.review.distribution')}</Dt>
                   <Dd>

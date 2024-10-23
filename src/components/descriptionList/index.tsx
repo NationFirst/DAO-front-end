@@ -2,8 +2,9 @@ import React, {ReactNode} from 'react';
 import {useTranslation} from 'react-i18next';
 import styled from 'styled-components';
 
-import {CheckboxListItem, CheckboxListItemProps} from '@aragon/ods-old';
-import {Button, Tag, AlertInline} from '@aragon/ods';
+import {CheckboxListItem, CheckboxListItemProps, Tag} from '@aragon/ods-old';
+import {AlertInline} from '@aragon/ods';
+import ButtonForm from '../buttons/buttonForm';
 
 export type DescriptionListProps = {
   title: string;
@@ -42,14 +43,14 @@ export const DescriptionListContainer: React.FC<DescriptionListProps> = ({
           <TitleText>{title}</TitleText>
           {badgeLabel && (
             <div>
-              <Tag label={badgeLabel || ''} variant="info" />
+              <Tag label={badgeLabel || ''} colorScheme="info" />
             </div>
           )}
         </TitleContainer>
         {onEditClick && (
-          <Button variant="tertiary" size="lg" onClick={onEditClick}>
+          <ButtonForm onClick={onEditClick}>
             {editLabel || t('labels.edit')}
-          </Button>
+          </ButtonForm>
         )}
       </HStack>
       <DlContainer>{children}</DlContainer>
@@ -87,7 +88,7 @@ export const Dl: React.FC<{children: ReactNode}> = ({children}) => (
 );
 
 const Container = styled.div.attrs({
-  className: 'p-4 md:p-6 space-y-6 rounded-xl bg-neutral-0',
+  className: 'py-4 space-y-6',
 })``;
 
 const TitleText = styled.h1.attrs({
@@ -95,7 +96,7 @@ const TitleText = styled.h1.attrs({
 })``;
 
 const TitleContainer = styled.div.attrs({
-  className: 'flex space-x-4',
+  className: 'flex space-x-4 items-center',
 })``;
 
 const DlContainer = styled.dl.attrs({

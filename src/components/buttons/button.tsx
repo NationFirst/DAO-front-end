@@ -7,7 +7,7 @@ type Props = {
   children: string;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
   disabled?: boolean;
   fullWidth?: boolean;
   isMobile?: boolean;
@@ -23,8 +23,8 @@ const Button: FC<Props> = ({
   fullWidth = false,
   isMobile = false,
 }) => {
-  const handleClick = () => {
-    !disabled && onClick();
+  const handleClick = (e: React.MouseEvent) => {
+    !disabled && onClick(e);
   };
 
   return (
@@ -54,7 +54,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>(
     className: cls(
       {
         'text-white bg-primary-400 border-primary-50': variant === 'fill',
-        'text-primary-400': variant === 'outline',
+        'text-primary-400 bg-white': variant === 'outline',
         'w-full': fullWidth,
         'w-[325px]': !fullWidth && !isMobile,
         'w-[150px]': !fullWidth && isMobile,
@@ -66,7 +66,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>(
   &:not([disabled])&::after {
     content: '';
     position: absolute;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.15);
     inset: 0;
     opacity: 0;
     pointer-events: none;

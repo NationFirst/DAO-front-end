@@ -63,7 +63,7 @@ const StyledButton = styled.button.attrs<StyledButtonProp>(
       {
         'text-neutral-0 border-white/10 hover:border-white/30 active:border-white/30':
           theme === 'light',
-        'text-primary-400 border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30':
+        'text-primary-400 bg-white border-primary-400/10 hover:border-primary-400/30 active:border-primary-400/30':
           theme === 'dark',
       },
       'flex items-center gap-x-3 transition-colors rounded-xl border-2 p-2.5 px-4'
