@@ -46,7 +46,7 @@ const AddLinks: React.FC<AddLinks> = ({
     <Container data-testid="add-links">
       {fields.length > 0 && (
         <ListGroup>
-          <Header bgWhite={bgWhite} />
+          <Header />
           {controlledLinks.map((field, index) => (
             <Row
               key={field.id}
@@ -56,7 +56,6 @@ const AddLinks: React.FC<AddLinks> = ({
                 alert(t('alert.chip.removedLink') as string);
               }}
               arrayName={arrayName}
-              bgWhite={bgWhite}
             />
           ))}
         </ListGroup>

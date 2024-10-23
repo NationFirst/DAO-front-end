@@ -20,7 +20,7 @@ const ButtonForm = forwardRef<HTMLButtonElement, Props>((props, ref) => {
 
 const StyledButton = styled.button.attrs({
   className:
-    'h-14 px-6 rounded-xl shadow-card disabled:opacity-40 relative overflow-hidden',
+    'h-14 px-6 rounded-xl bg-white shadow-card disabled:opacity-40 relative overflow-hidden',
 })`
   &:not([disabled])&::after {
     content: '';

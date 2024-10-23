@@ -51,7 +51,7 @@ const StyledButton = styled.button.attrs<StyledButtonProps>(
     className: cls(
       {
         'text-white bg-primary-400 border-primary-50': variant === 'fill',
-        'text-primary-400': variant === 'outline',
+        'text-primary-400 bg-white': variant === 'outline',
         'w-full': fullWidth,
         'w-[325px]': !fullWidth,
       },
