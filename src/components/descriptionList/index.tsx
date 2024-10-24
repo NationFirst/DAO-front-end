@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {CheckboxListItem, CheckboxListItemProps, Tag} from '@aragon/ods-old';
 import {AlertInline} from '@aragon/ods';
 import ButtonForm from '../buttons/buttonForm';
+import useScreen from '../../hooks/useScreen';
 
 export type DescriptionListProps = {
   title: string;
@@ -35,9 +36,15 @@ export const DescriptionListContainer: React.FC<DescriptionListProps> = ({
   tagLabel: badgeLabel,
 }) => {
   const {t} = useTranslation();
+  const {isMobile} = useScreen();
 
   return (
     <Container>
+      {isMobile && onEditClick && (
+        <ButtonForm onClick={onEditClick}>
+          {editLabel || t('labels.edit')}
+        </ButtonForm>
+      )}
       <HStack>
         <TitleContainer>
           <TitleText>{title}</TitleText>
@@ -47,7 +54,7 @@ export const DescriptionListContainer: React.FC<DescriptionListProps> = ({
             </div>
           )}
         </TitleContainer>
-        {onEditClick && (
+        {!isMobile && onEditClick && (
           <ButtonForm onClick={onEditClick}>
             {editLabel || t('labels.edit')}
           </ButtonForm>
@@ -96,7 +103,7 @@ const TitleText = styled.h1.attrs({
 })``;
 
 const TitleContainer = styled.div.attrs({
-  className: 'flex space-x-4 items-center',
+  className: 'flex gap-4 items-center',
 })``;
 
 const DlContainer = styled.dl.attrs({
@@ -118,7 +125,7 @@ const DdContainer = styled.dd.attrs({
 `;
 
 const HStack = styled.div.attrs({
-  className: 'flex justify-between items-center',
+  className: 'flex justify-between items-center gap-4',
 })``;
 
 export const ActionCardDlContainer = styled.div.attrs({

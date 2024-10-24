@@ -28,18 +28,18 @@ export const GoLiveHeader: React.FC = () => {
   };
 
   return (
-    <div className="pb-6 pt-4 md:rounded-xl xl:pt-6">
+    <div className="md:rounded-xl">
       <div className="xl:hidden">
         <Breadcrumb
           crumbs={{label: t('createDAO.title'), path: Landing}}
           onClick={clickHandler}
         />
       </div>
-      <div className="w-full pt-6">
+      <div className="w-full max-xl:pt-10">
         <h1 className="text-4xl font-semibold leading-tight text-neutral-800">
           Launch Your <span className="font-semibold text-accent">DAO</span>
         </h1>
-        <p className="mt-4 text-xl leading-normal text-neutral-600">
+        <p className="mt-2 text-xl leading-normal text-neutral-600">
           {t('createDAO.review.description')}
         </p>
       </div>
